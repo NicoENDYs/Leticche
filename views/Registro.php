@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #1e1e2f;
+            background-color:rgb(255, 248, 168);
             color: #fff;
             font-family: 'Segoe UI', sans-serif;
         }
@@ -14,13 +14,13 @@
             max-width: 450px;
             margin: auto;
             margin-top: 50px;
-            background-color: #2a2a3c;
+            background-color:rgb(113, 165, 109);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
         .form-control, .form-check-label {
-            background-color: #1e1e2f;
+            background-color:rgb(55, 77, 53);
             border: 1px solid #555;
             color: #fff;
         }
@@ -29,7 +29,7 @@
             box-shadow: none;
         }
         .btn-primary {
-            background-color: #2979ff;
+            background-color:rgb(55, 77, 53);
             border: none;
         }
         .btn-primary:hover {
@@ -53,7 +53,7 @@
         <i class="bi bi-twitter"></i>
     </div>
 
-    <form action="procesar.php" method="POST">
+    <form action="procesarRegistro.php" method="POST">
     <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre completo</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -81,13 +81,19 @@
             <label class="form-check-label" for="terminos">
                 acepto terminios y condiciones
             </label>
+        
+
         </div>
-        <button type="submit" class="btn btn-primary w-100">SIGN IN</button>
+        <button type="submit" class="btn btn-primary w-100">REGISTRAR</button>
+
+
+        <div class="text-center mt-3">
+            <p>¿Ya tienes una cuenta? <a href="login.php" class="text-primary">Iniciar sesión</a></p>
+        </div>
     </form>
 </div>
 
 <!-- Bootstrap Icons CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
