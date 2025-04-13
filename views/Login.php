@@ -29,7 +29,7 @@
                 <label for="contrasena" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="contrasena" name="contrasena" required>
             </div>
-        <button type="submit" class="btn btn-primary w-100">REGISTRAR</button>
+        <button type="submit" name="Enviar" id="Enviar"  class="btn btn-primary w-100">REGISTRAR</button>
 
 
         <div class="text-center mt-3">
