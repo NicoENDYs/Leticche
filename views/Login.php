@@ -4,44 +4,7 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color:rgb(255, 248, 168);
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .form-container {
-            max-width: 450px;
-            margin: auto;
-            margin-top: 50px;
-            background-color:rgb(113, 165, 109);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        }
-        .form-control, .form-check-label {
-            background-color:rgb(55, 77, 53);
-            border: 1px solid #555;
-            color: #fff;
-        }
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: none;
-        }
-        .btn-primary {
-            background-color:rgb(55, 77, 53);
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #2962ff;
-        }
-        .social-icons i {
-            font-size: 1.5rem;
-            margin: 0 10px;
-            color: #bbb;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/LoginRegis.css">
 </head>
 <body>
 
