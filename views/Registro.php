@@ -16,7 +16,7 @@
         <i class="bi bi-twitter"></i>
     </div>
 
-    <form action="procesarRegistro.php" method="POST">
+    <form action="../controllers/procesarRegistro.php" method="POST">
     <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre completo</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -47,7 +47,7 @@
         
 
         </div>
-        <button type="submit" class="btn btn-primary w-100">REGISTRAR</button>
+        <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">REGISTRAR</button>
 
 
         <div class="text-center mt-3">
