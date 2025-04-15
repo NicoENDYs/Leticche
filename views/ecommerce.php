@@ -18,7 +18,7 @@ session_start()
 
 <body>
     
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<nav class="navbar navbar-expand-lg navbar-light bg-custom">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-light" href="#">
                 <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">

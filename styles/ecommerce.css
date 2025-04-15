@@ -1,0 +1,42 @@
+/* Color principal del navbar */
+.bg-custom {
+    background-color: rgb(55, 77, 53) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #f4a460 !important; /* Color naranja suave al pasar el mouse */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar {
+    padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        padding-top: 15px;
+    }
+    .nav-item {
+        margin-bottom: 5px;
+    }
+}
