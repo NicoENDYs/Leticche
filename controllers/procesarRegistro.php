@@ -81,7 +81,7 @@
             ('$nombre', '$correo', '$telefono', 'user', '$contrasena')"; 
 
             $mysql->efectuarConsulta($consulta);
-            echo "Empleado creado con exito";        
+            echo "Usuario creado con exito";        
 
             $mysql->desconectar();
                             

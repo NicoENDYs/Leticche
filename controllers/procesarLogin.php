@@ -63,7 +63,7 @@ if (
     header("Location: ../views/login.php?error=1");
     exit();
 }
-echo "Empleado creado con exito";
+echo "Usuario Ingresado Exitosamente";
 
 
 $mysql->desconectar();
