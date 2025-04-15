@@ -50,7 +50,7 @@ if (
             $_SESSION['cargo'] = $usuario['cargo'];
             $mysql->desconectar();
             if ($usuario['cargo'] === 'ADMIN') {
-                header("refresh:3;url= ../views/admin_dashboard.php");
+                header("refresh:3;url= ../admin/admin_index.php");
             } else {
                 header("refresh:3;url= ../views/ecommerce.php");
             }

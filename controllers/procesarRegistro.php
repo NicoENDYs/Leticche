@@ -81,11 +81,12 @@
             ('$nombre', '$correo', '$telefono', 'user', '$contrasena')"; 
 
             $mysql->efectuarConsulta($consulta);
-            echo "Usuario creado con exito";        
+            echo "Usuario creado con exito, ahora iniciando sesion...";
+            // Iniciar sesión y redirigir al usuario a la página de inicio        
 
             $mysql->desconectar();
                             
-            header("refresh:3;url= ../views/ecommerce.php");
+            header("refresh:3;url= ../views/login.php");
             exit();
 
 
