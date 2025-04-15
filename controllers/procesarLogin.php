@@ -35,10 +35,8 @@ if (
     }
 
 
-    $resultado = $mysql->efectuarConsulta("SELECT
-    id, Correo,cargo,pass 
-    FROM usuarios 
-    WHERE correo = '$correo' 
+    $resultado = $mysql->efectuarConsulta("SELECT id, Correo, cargo, pass 
+    FROM usuarios WHERE correo = '$correo' 
     and telefono = '$telefono'");
 
     $hash = password_hash($contrasena, PASSWORD_BCRYPT);
@@ -49,8 +47,16 @@ if (
             // Si la contraseña es correcta, se inicia la sesión
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['correo'] = $usuario['Correo'];
+            $_SESSION['cargo'] = $usuario['cargo'];
             $mysql->desconectar();
-            header("refresh:3;url= ../views/ecomers.php");
+            if ($usuario['cargo'] === 'ADMIN') {
+                header("refresh:3;url= ../views/admin_dashboard.php");
+            } else {
+                header("refresh:3;url= ../views/ecommerce.php");
+            }
+            exit();
+        } else {
+            header("Location: ../views/login.php?error=1");
             exit();
         }
     }
