@@ -11,12 +11,6 @@
 <body>
     <div class="form-container">
         <h2 class="text-center mb-3">Login</h2>
-        
-        <div class="text-center mb-3 social-icons">
-            <i class="bi bi-google"></i>
-            <i class="bi bi-twitter"></i>
-        </div>
-
         <form action="../controllers/procesarLogin.php" method="POST">            
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
