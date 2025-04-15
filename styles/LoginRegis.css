@@ -34,3 +34,25 @@ body {
     color: #bbb;
     cursor: pointer;
 }
+
+
+
+
+@media (max-width: 580px) {
+    .form-container {
+        padding: 20px;
+        margin-top: 10px;
+    }
+    
+    body {
+        padding: 20px;
+    }
+
+    .social-icons i {
+        font-size: 1.2rem;
+    }
+
+    .btn-primary, .form-control {
+        padding: 8px;
+    }
+}   
