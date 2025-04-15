@@ -41,8 +41,8 @@ $mysql->conectar();
                     </div>
 
                     <div class="col-md-4">
-                        <a href="./admin_dashboard.php">
-                            <button type="button" class="btn btn-info w-100 fw-bold text-light">Usuarios Registrados</button>
+                        <a href="./admin_productos.php">
+                            <button type="button" class="btn btn-info w-100 fw-bold text-light">Productos</button>
                         </a>
                     </div>
                     <div class="col-md-4">
