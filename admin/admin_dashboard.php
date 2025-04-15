@@ -6,7 +6,7 @@ $mysql->conectar();
 
 
 $resultado = $mysql->efectuarConsulta("
-SELECT id, nombre, correo, telefono, cargo 
+SELECT id, nombre, correo, telefono, cargo, Estado 
 FROM usuarios 
 WHERE cargo = 'USER'");
 
@@ -45,6 +45,7 @@ $mysql->desconectar();
                                 <th>Correo</th>
                                 <th>Telefono</th>
                                 <th>Cargo</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,10 +55,11 @@ $mysql->desconectar();
                                     <td><?php echo $usuarios['nombre']; ?></td>
                                     <td><?php echo $usuarios['correo']; ?></td>
                                     <td><?php echo $usuarios['telefono']; ?></td>
-                                    <td><?php echo $usuarios['cargo']; ?></td>
+                                    <td><?php echo $usuarios['cargo']; ?></td>                                    
+                                    <td><?php echo $usuarios['Estado']; ?></td>
                                     <td>
-                                        <a href="editar_empleado.php?id=<?php echo $empleado['id']; ?>">Editar</a> |
-                                        <a href="../controllers/eliminar_empleado.php?id=<?php echo $empleado['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">Eliminar</a>
+                                        <a href="editar_empleado.php?id=<?php echo $usuarios['id']; ?>">Editar</a> |
+                                        <a href="../controllers/eliminarUsuario.php?id=<?php echo $usuarios['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
                                     </td>
                                 </tr>
 
