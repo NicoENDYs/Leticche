@@ -85,7 +85,7 @@
 
             $mysql->desconectar();
                             
-            header("refresh:3;url= ../views/ecomers.php");
+            header("refresh:3;url= ../views/ecommerce.php");
             exit();
 
 

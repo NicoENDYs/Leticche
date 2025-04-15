@@ -68,5 +68,5 @@ echo "Empleado creado con exito";
 
 $mysql->desconectar();
 
-header("refresh:3;url= ../views/ecomers.php");
+header("refresh:3;url= ../views/ecommerce.php");
 exit();
