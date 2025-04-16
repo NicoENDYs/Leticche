@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../controllers/check_session.php';
 require_once '../models/MySQL.php';
 $mysql = new MySQL;
 $mysql->conectar();

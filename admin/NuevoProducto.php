@@ -1,3 +1,7 @@
+<?php
+require_once '../controllers/check_session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 

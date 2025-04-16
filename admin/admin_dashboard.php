@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../controllers/check_session.php';
 require_once '../models/MySQL.php';
 $mysql = new MySQL;
 $mysql->conectar();
@@ -32,6 +32,9 @@ $mysql->desconectar();
             </div>
         </div>
         <div class="row">
+        <h3 class="mt-5 text-black">
+                    Bienvenido  <?php echo $_SESSION['cargo']; ?>
+                </h3>
             <div class="col-md-12">
                 <h3 class="text-center mt-5 text-black">
                     Usuarios Registrados

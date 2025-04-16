@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../controllers/check_session.php';
 require_once '../models/MySQL.php';
 $mysql = new MySQL;
 $mysql->conectar();
@@ -72,7 +72,7 @@ $mysql->desconectar();
                 <?php else: ?>
                     <p class="text-center mt-5 text-black">No hay productos registrados.</p>
                 <?php endif; ?>
-                <a href="../admin/NuevoProduco.php">
+                <a href="../admin/NuevoProducto.php">
                     <button type="button" class="btn btn-info w-100 fw-bold text-light">Añadir Prodcto</button>
                 </a>
             </div>
