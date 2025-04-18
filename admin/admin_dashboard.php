@@ -63,7 +63,6 @@ $mysql->desconectar();
                                     <td><?php echo $usuarios['cargo']; ?></td>                                    
                                     <td><?php echo $usuarios['Estado']; ?></td>
                                     <td>
-                                        <a href="editar_empleado.php?id=<?php echo $usuarios['id']; ?>">Editar</a> |
                                         <a href="../controllers/eliminarUsuario.php?id=<?php echo $usuarios['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
                                     </td>
                                 </tr>
