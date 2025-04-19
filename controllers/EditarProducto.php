@@ -23,6 +23,10 @@ if (
         exit;
     }
 
+
+
+
+
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
         $permitidos = ['image/jpeg' => '.jpg', 'image/png' => '.png'];
         $tipo = mime_content_type($_FILES['imagen']['tmp_name']);
@@ -35,20 +39,24 @@ if (
         $nombreImagen = uniqid('producto_') . '.' . $extension;
         $rutaDestino = '../img/' . $nombreImagen;
 
-
         if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
 
-            $consulta = "INSERT INTO productos 
-            (nombre, descripcion, precio, stock, Estado, imagen)
-            VALUES 
-            ('$nombre', '$descripcion', '$precio', '$stock', '$estado', '$nombreImagen')";
+            $consulta = "UPDATE productos SET 
+            nombre = '$nombre', 
+            descripcion = '$descripcion', 
+            precio = '$precio', 
+            stock = '$stock', 
+            Estado = '$estado', 
+            imagen = '$nombreImagen' 
+            WHERE id = {$_POST['id']}";
+
             $mysql->efectuarConsulta($consulta);
-            echo "producto creado con exito";
+            echo "producto editado con exito";
 
             //insertar en base de datos 
 
             $mysql->desconectar();
-            header("refresh:3;url= ../admin/admin_productos.php");
+            header("Location: ../admin/admin_productos.php");
             exit();
         } else {
             echo "Error al guardar la imagen.";

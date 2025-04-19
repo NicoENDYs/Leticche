@@ -32,7 +32,7 @@ $mysql->desconectar();
         <div class="row">
             <div class="col-md-12">
                 <h3 class="text-center mt-5 text-black">
-                    Usuarios Registrados
+                    Productos
                 </h3>
 
                 <?php if (mysqli_num_rows($resultado) > 0): ?>
@@ -60,7 +60,7 @@ $mysql->desconectar();
                                     <td><?php echo $productos['Estado']; ?></td>
                                     <td><img src="../img/<?php echo $productos['imagen']; ?>" width="100" height="80"></td>
                                     <td>
-                                        <a href="editar_empleado.php?id=<?php echo $productos['id']; ?>">Editar</a> |
+                                        <a href="EditarProducto.php?id=<?php echo $productos['id']; ?>">Editar</a> |
                                         <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');">Eliminar</a>
                                     </td>
                                 </tr>
@@ -71,7 +71,7 @@ $mysql->desconectar();
                 <?php else: ?>
                     <p class="text-center mt-5 text-black">No hay productos registrados.</p>
                 <?php endif; ?>
-                <a href="../admin/admin_NuevoProducto.php">
+                <a href="../admin/NuevoProducto.php">
                     <button type="button" class="btn btn-info w-100 fw-bold text-light">Añadir Prodcto</button>
                 </a>
             </div>
