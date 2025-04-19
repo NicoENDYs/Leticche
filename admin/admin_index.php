@@ -61,6 +61,18 @@ $mysql->conectar();
                     <div class="col-md-4">
                     </div>
                 </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <a href="../controllers/procesarLogout.php">
+                            <button type="button" class="btn btn-danger w-25 fw-bold text-light mt-5 ">Cerrar Sesion</button>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
