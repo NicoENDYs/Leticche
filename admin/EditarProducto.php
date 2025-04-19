@@ -48,21 +48,33 @@ if (!$producto) {
                 <label for="nombre" class="form-label">Nombre del Producto</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $producto['nombre']; ?>" required>
             </div>
+
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <input type="text" class="form-control" id="descripcion" name="descripcion" value="<?php echo $producto['descripcion']; ?>" required>
             </div>
+
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
                 <input type="number" class="form-control" id="precio" name="precio" value="<?php echo $producto['precio']; ?>" required>
             </div>
+
             <div class="mb-3">
                 <label for="stock" class="form-label">Stock</label>
                 <input type="number" class="form-control" id="stock" name="stock" value="<?php echo $producto['stock']; ?>" required>
             </div>
+            
+            <div class="mb-3">            
+            <label for="stock" class="form-label">Estado</label> <br>
+            <label for="stock" class="form-label">Activo</label>
+            <input type="radio" class="form-check-input" id="Estado" name="Estado" value="ACTIVO"   <?php if ($producto['Estado'] === 'ACTIVO') echo 'checked'; ?> required>
+            <label for="stock" class="form-label">Inactivo</label>  
+            <input type="radio" class="form-check-input" id="Estado" name="Estado" value="INACTIVO" <?php if ($producto['Estado'] === 'INACTIVO') echo 'checked'; ?> required>
+            </div>
+
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label> <br>
-                <input type="file" class="form-control" id="imagen" name="imagen"  required>
+                <input type="file" class="form-control" id="imagen" name="imagen" >
                 imagen actual: <br>
                 <img src="../img/<?php echo $producto['imagen']; ?>" alt="" width="40%"> <br>
             </div>

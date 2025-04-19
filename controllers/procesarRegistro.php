@@ -50,21 +50,21 @@
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
         
         if ($resultado && $resultado->num_rows > 0) {
-            echo "El correo electrónico ya está registrado por otro empleado.";
+            echo "El correo electrónico ya está registrado por otro usuario.";
             exit;
         }
         //////////////////////////////////VALIDACION CORREO NO SE REPITA/////////////////////////////////////////////////
 
-        //////////////////////////////////VALIDACION documento NO SE REPITA/////////////////////////////////////////////////
+        //////////////////////////////////VALIDACION telefono NO SE REPITA/////////////////////////////////////////////////
         $consulta_verificacion = "SELECT id FROM usuarios WHERE telefono = '$telefono'";
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
 
         if ($resultado && $resultado->num_rows > 0) {
-            echo "El documento ya está registrado por otro empleado.";  
+            echo "El documento ya está registrado por otro usuario.";  
         
         exit;
         }
-        //////////////////////////////////VALIDACION documento NO SE REPITA/////////////////////////////////////////////////    
+        //////////////////////////////////VALIDACION telefono NO SE REPITA/////////////////////////////////////////////////    
         //validamos el nombre
         if (strlen($nombre) < 5 || strlen($nombre) > 50) {
             echo "El nombre no es valido.";
