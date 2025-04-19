@@ -40,10 +40,11 @@ if (!$producto) {
 <body>
     <div class="form-container">
         <h2 class="text-center mb-3">Editar producto</h2>
+
         <form action="../controllers/EditarProducto.php" method="POST" enctype="multipart/form-data">
-            
+
             <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
-        
+
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Producto</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $producto['nombre']; ?>" required>
@@ -63,25 +64,29 @@ if (!$producto) {
                 <label for="stock" class="form-label">Stock</label>
                 <input type="number" class="form-control" id="stock" name="stock" value="<?php echo $producto['stock']; ?>" required>
             </div>
-            
-            <div class="mb-3">            
-            <label for="stock" class="form-label">Estado</label> <br>
-            <label for="stock" class="form-label">Activo</label>
-            <input type="radio" class="form-check-input" id="Estado" name="Estado" value="ACTIVO"   <?php if ($producto['Estado'] === 'ACTIVO') echo 'checked'; ?> required>
-            <label for="stock" class="form-label">Inactivo</label>  
-            <input type="radio" class="form-check-input" id="Estado" name="Estado" value="INACTIVO" <?php if ($producto['Estado'] === 'INACTIVO') echo 'checked'; ?> required>
+
+            <div class="mb-3">
+                <label for="stock" class="form-label">Estado</label> <br>
+                <label for="stock" class="form-label">Activo</label>
+                <input type="radio" class="form-check-input" id="Estado" name="Estado" value="ACTIVO" <?php if ($producto['Estado'] === 'ACTIVO') echo 'checked'; ?> required>
+                <label for="stock" class="form-label">Inactivo</label>
+                <input type="radio" class="form-check-input" id="Estado" name="Estado" value="INACTIVO" <?php if ($producto['Estado'] === 'INACTIVO') echo 'checked'; ?> required>
             </div>
 
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label> <br>
-                <input type="file" class="form-control" id="imagen" name="imagen" >
+                <input type="file" class="form-control" id="imagen" name="imagen">
                 imagen actual: <br>
                 <img src="../img/<?php echo $producto['imagen']; ?>" alt="" width="40%"> <br>
             </div>
-            
-            <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">Añadir Producto</button>
 
+            <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">Añadir Producto</button>
+            
         </form>
+        <br>
+            <a href="../admin/admin_productos.php">
+                <button type="button" class="btn btn-danger  fw-bold text-light">Volver</button>
+            </a>
     </div>
 </body>
 

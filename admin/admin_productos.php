@@ -76,6 +76,10 @@ $mysql->desconectar();
                 </a>
             </div>
         </div>
+        <br>
+        <a href="../admin/admin_index.php">
+            <button type="button" class="btn btn-danger w-100 fw-bold text-light">Volver</button>
+        </a>
     </div>
 
 </body>

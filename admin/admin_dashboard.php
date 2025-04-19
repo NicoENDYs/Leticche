@@ -35,6 +35,11 @@ $mysql->desconectar();
         <h3 class="mt-5 text-black">
                     Bienvenido  <?php echo $_SESSION['cargo']; ?>
                 </h3>
+                
+        <br>
+        <a href="../admin/admin_index.php">
+            <button type="button" class="btn btn-danger  fw-bold text-light">Volver</button>
+        </a>
             <div class="col-md-12">
                 <h3 class="text-center mt-5 text-black">
                     Usuarios Registrados

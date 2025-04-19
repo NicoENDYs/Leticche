@@ -42,6 +42,10 @@ require_once '../controllers/check_session.php';
             <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">Añadir Producto</button>
 
         </form>
+        <br>
+            <a href="../admin/admin_productos.php">
+                <button type="button" class="btn btn-danger  fw-bold text-light">Volver</button>
+            </a>
     </div>
 </body>
 
