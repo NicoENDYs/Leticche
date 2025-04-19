@@ -17,7 +17,7 @@ if ($id === false || $id <= 0) {
 }
 // Construir la consulta SQL para """"ELIMINAR"""" el empleado
 
-$consulta = "Update Productos set Estado = 'INACTIVO' where id = '$id'";
+$consulta = "Update productos set Estado = 'INACTIVO' where id = '$id'";
 // Ejecutar la consulta
 $mysql-> efectuarConsulta($consulta);
 
