@@ -4,9 +4,6 @@ require_once '../models/MySQL.php';
 $mysql = new MySQL;
 $mysql->conectar();
 
-
-
-
 if (
     $_SERVER['REQUEST_METHOD'] == 'POST'
     && isset($_POST['Enviar'])

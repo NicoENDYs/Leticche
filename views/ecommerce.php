@@ -1,8 +1,5 @@
 <?php
 session_start()
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +11,7 @@ session_start()
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/ecommerce.css">
     <title>Nuestros Productos</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -46,8 +44,5 @@ session_start()
             </div>
         </div>
     </nav>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
