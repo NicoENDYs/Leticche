@@ -11,7 +11,7 @@
 
     //obtenemos los datos del formulario
     $nombre = trim(filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-    $correo = trim(filter_input(INPUT_POST, 'correo', FILTER_VALIDATE_EMAIL));//$_POST['correo'];
+    $correo = trim(filter_input(INPUT_POST, 'correo', FILTER_VALIDATE_EMAIL) ? $_POST['correo'] : "El correo es invalido");//$_POST['correo'];
     $telefono = trim(filter_input(INPUT_POST, 'telefono', FILTER_VALIDATE_INT));//$_POST['telefono'];
     $contrasena = $_POST['contrasena'];
     $confirmar_contrasena = $_POST['confirmar_contrasena'];
@@ -22,7 +22,6 @@
         empty($telefono) || empty($contrasena) || 
         empty($confirmar_contrasena)) {
             echo "Por favor, complete todos los campos.";
-            
             exit;
         }
         
@@ -40,8 +39,8 @@
             exit;
         }
         //validamos el correo
-        if (filter_var($correo, FILTER_VALIDATE_EMAIL) === false) {
-            echo "El correo no es valido.";
+        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            echo $correo;
             exit;
         }   
 
