@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
             exit;
         }
 
-        function validar($nombreCampo, $campo){
-            if($campo === "invalido"){
+        function validar($nombreCampo, $valorCampo, $validar){
+            if($validar === "invalido"){
                 echo "$nombreCampo es invalido";
                 exit;
             }
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $patronValidoTelefono = '/^[0-9]+$/'; //permite los numeros del 0 al 9
 
         //validaciones
-        $nombre = preg_match($patronValidoTexto, $nombre) ? $nombre : validar("nombre", "invalido");
-        $correo = filter_var($correo, FILTER_SANITIZE_EMAIL) ? $correo : validar("correo", "invalido");
-        $telefono = preg_match($patronValidoTexto, $telefono) ? $telefono : validar("telefono", "invalido");
+        $nombre = preg_match($patronValidoTexto, $nombre) ? $nombre : validar("nombre", $nombre, "invalido");
+        $correo = filter_var($correo, FILTER_SANITIZE_EMAIL) ? $correo : validar("correo", $correo, "invalido");
+        $telefono = preg_match($patronValidoTexto, $telefono) ? $telefono : validar("telefono", $telefono, "invalido");
         $contrasena = $_POST['contrasena'];
         $confirmar_contrasena = $_POST['confirmar_contrasena'];
 
