@@ -11,72 +11,72 @@ $mysql->conectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/admin.css">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles/adminIndex.css">
     <title>Admin Panel</title>
 </head>
 
 <body>
 
-    <h1 class="text-center mt-5 fw-bold text-black">ADMIN PANEL</h1>
-    <br>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="./admin_dashboard.php">
-                            <button type="button" class="btn btn-info w-100 fw-bold text-light">Usuarios Registrados</button>
+<div class="container py-5">
+        <h1 class="text-center fw-bold animate-card">ADMIN PANEL</h1>
+        
+        <div class="admin-container animate-card">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="menu-option">
+                        <i class="fas fa-users"></i>
+                        <h4>Usuarios Registrados</h4>
+                        <p>Gestiona los usuarios del sistema</p>
+                        <a href="./admin_dashboard.php" class="mt-3 w-100">
+                            <button type="button" class="btn btn-menu w-100">Acceder</button>
                         </a>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="./admin_productos.php">
-                            <button type="button" class="btn btn-info w-100 fw-bold text-light">Productos</button>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="./admin_dashboard.php">
-                            <button type="button" class="btn btn-info w-100 fw-bold text-light">Usuarios Registrados</button>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                        <a href="../controllers/procesarLogout.php">
-                            <button type="button" class="btn btn-danger w-25 fw-bold text-light mt-5 ">Cerrar Sesion</button>
+                <div class="col-md-4 mb-4">
+                    <div class="menu-option">
+                        <i class="fas fa-box-open"></i>
+                        <h4>Productos</h4>
+                        <p>Administra el catálogo de productos</p>
+                        <a href="./admin_productos.php" class="mt-3 w-100">
+                            <button type="button" class="btn btn-menu w-100">Acceder</button>
                         </a>
                     </div>
-                    <div class="col-md-4">
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="menu-option">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Estadísticas</h4>
+                        <p>Visualiza el rendimiento del sistema</p>
+                        <a href="javascript:void(0)" class="mt-3 w-100">
+                            <button type="button" class="btn btn-menu w-100">Acceder</button>
+                        </a>
                     </div>
                 </div>
+            </div>
+            
+            <div class="logout-section">
+                <a href="../controllers/procesarLogout.php">
+                    <button type="button" class="btn btn-danger fw-bold">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                    </button>
+                </a>
             </div>
         </div>
     </div>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 
