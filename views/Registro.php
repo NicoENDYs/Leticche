@@ -40,7 +40,7 @@
             <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">REGISTRAR</button>
 
             <div class="text-center mt-3">
-                <p>¿Ya tienes una cuenta? <a href="login.php" class="text-primary">Iniciar sesión</a></p>
+                <p>¿Ya tienes una cuenta? <a href="Login.php" class="text-primary">Iniciar sesión</a></p>
             </div>
         </form>
     </div>
