@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         // Iniciar sesión y redirigir al usuario a la página de inicio         
         $mysql->desconectar();
 
-        header("refresh:3;url= ../views/login.php");
+        header("refresh:3;url= ../views/Login.php");
         exit();
     } else {
         echo "Algún campo es inexistente";
