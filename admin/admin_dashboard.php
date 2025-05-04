@@ -49,7 +49,6 @@ $mysql->desconectar();
                     <span>Inicio</span>
                 </a>
             </li>
-                <!-- Mostrar solo una vez -->
                 <li class="nav-item" data-title="Usuarios">
                 <a href="./admin_dashboard.php" class="nav-link active">
                     <i class="fas fa-users"></i>

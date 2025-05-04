@@ -76,8 +76,8 @@ $mysql->desconectar();
     <!-- Navbar para móvil -->
     <nav class="navbar navbar-expand-lg navbar-light bg-custom d-lg-none">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-light" href="javascript:void(0)">
-                <img src="https://cdn.pixabay.com/photo/2013/07/13/01/22/vegetables-155616_640.png" width="40" height="40" class="d-inline-block align-top" alt="">
+            <a class="navbar-brand fw-bold text-light" href="#">
+                <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
                 Leticche
             </a>
 
@@ -88,19 +88,19 @@ $mysql->desconectar();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link">
+                        <a href="./admin_index.php" class="nav-link">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link">
+                        <a href="./admin_dashboard.php" class="nav-link">
                             <i class="fas fa-users"></i>
                             <span>Usuarios</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link active">
+                        <a href="./admin_productos.php" class="nav-link active">
                             <i class="fas fa-box"></i>
                             <span>Productos</span>
                         </a>

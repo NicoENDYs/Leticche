@@ -37,7 +37,7 @@ $mysql->conectar();
                         <h4>Usuarios Registrados</h4>
                         <p>Gestiona los usuarios del sistema</p>
                         <a href="./admin_dashboard.php" class="mt-3 w-100">
-                            <button type="button" class="btn btn-menu w-100">Acceder</button>
+                            <button type="button" class="btn btn-menu w-100 text-light">Acceder</button>
                         </a>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ $mysql->conectar();
                         <h4>Productos</h4>
                         <p>Administra el catálogo de productos</p>
                         <a href="./admin_productos.php" class="mt-3 w-100">
-                            <button type="button" class="btn btn-menu w-100">Acceder</button>
+                            <button type="button" class="btn btn-menu w-100 text-light">Acceder</button>
                         </a>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ $mysql->conectar();
                         <h4>Estadísticas</h4>
                         <p>Visualiza el rendimiento del sistema</p>
                         <a href="javascript:void(0)" class="mt-3 w-100">
-                            <button type="button" class="btn btn-menu w-100">Acceder</button>
+                            <button type="button" class="btn btn-menu w-100 text-light">Acceder</button>
                         </a>
                     </div>
                 </div>
