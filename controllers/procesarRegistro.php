@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 require_once '../models/MySQL.php';
 
 $mysql = new MySQL;
@@ -25,19 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
 
         function validar($nombreCampo, $valorCampo, $validar){
             if($validar === "invalido"){
-                echo "$nombreCampo es invalido";
+            echo "El $nombreCampo '$valorCampo' es invalido";
                 exit;
             }
         }
 
         //patrones validos 
         $patronValidoTexto = '/^[\p{L} ]+$/u'; //permite caracteres de diferentes idiomas y acentos
-        $patronValidoTelefono = '/^[0-9]+$/'; //permite los numeros del 0 al 9
+        $patronValidoTelefono = '/^\d{10}$/'; //permite los numeros del 0 al 9 con un limite de 10 digitos
 
         //validaciones
         $nombre = preg_match($patronValidoTexto, $nombre) ? $nombre : validar("nombre", $nombre, "invalido");
-        $correo = filter_var($correo, FILTER_SANITIZE_EMAIL) ? $correo : validar("correo", $correo, "invalido");
-        $telefono = preg_match($patronValidoTexto, $telefono) ? $telefono : validar("telefono", $telefono, "invalido");
+        $correo = filter_var($correo, FILTER_VALIDATE_EMAIL) ? $correo : validar("correo", $correo, "invalido");
+        $telefono = preg_match($patronValidoTelefono, $telefono) ? $telefono : validar("telefono", $telefono, "invalido");
         $contrasena = $_POST['contrasena'];
         $confirmar_contrasena = $_POST['confirmar_contrasena'];
 
@@ -47,17 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         } else {
             $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
         }
-        //validamos el telefono
-        if (strlen($telefono) < 10 || strlen($telefono) > 15) {
-            echo "El telefono no es valido.";
-            exit;
-        }
-        //validamos el correo
-        if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-            echo $correo;
-            exit;
-        }
-
+        
         //////////////////////////////////VALIDACION CORREO NO SE REPITA/////////////////////////////////////////////////
         $consulta_verificacion = "SELECT id FROM usuarios WHERE Correo = '$correo'";
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
@@ -89,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
 
         //insertar en base de datos 
         $consulta = "INSERT INTO usuarios 
-            (nombre, correo, telefono, cargo, pass)
+            (nombre, correo, telefono, cargo, pass,direccion)
             VALUES 
-            ('$nombre', '$correo', '$telefono', 'user', '$contrasena')";
+            ('$nombre', '$correo', '$telefono', 'user', '$contrasena','')";
         $mysql->efectuarConsulta($consulta);
         echo "Usuario creado con exito, ahora iniciando sesion...";
         // Iniciar sesión y redirigir al usuario a la página de inicio         
@@ -99,7 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
 
         header("refresh:3;url= ../views/Login.php");
         exit();
-    } else {
+    } else {ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        
         echo "Algún campo es inexistente";
     }
 } else {
