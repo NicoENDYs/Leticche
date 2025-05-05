@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2025 a las 23:30:50
+-- Tiempo de generación: 06-05-2025 a las 00:22:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -78,6 +78,27 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imag
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recuperacion`
+--
+
+CREATE TABLE `recuperacion` (
+  `id` int(11) NOT NULL,
+  `correo` varchar(255) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `recuperacion`
+--
+
+INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
+(3, 'baloncest7oentablon@gmail.com', '58c66ae022db8d736c3d', '2025-05-05 22:05:00'),
+(4, 'baloncestoentablon@gmail.com', '2fc7d0a6d35868dcb7e3', '2025-05-05 22:06:03');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -130,6 +151,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `recuperacion`
+--
+ALTER TABLE `recuperacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -158,6 +185,12 @@ ALTER TABLE `pedidos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `recuperacion`
+--
+ALTER TABLE `recuperacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
