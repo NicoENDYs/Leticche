@@ -55,17 +55,17 @@ if (
             }
             exit();
         } else {
-            header("Location: ../views/login.php?error=1");
+            header("Location: ../views/Login.php?error=1");
             exit();
         }
     }
     // Si el login falla, se redirige nuevamente al formulario
     $mysql->desconectar();
-    header("Location: ../views/login.php?error=1");
+    header("Location: ../views/Login.php?error=1");
     exit();
 } else {
     // Si los campos están vacíos, también se redirige
-    header("Location: ../views/login.php?error=1");
+    header("Location: ../views/Login.php?error=1");
     exit();
 }
 echo "Usuario Ingresado Exitosamente";
