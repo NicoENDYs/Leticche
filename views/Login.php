@@ -30,6 +30,9 @@
             <div class="text-center mt-3">
                 <p>¿No tienes cuenta? <a href="Registro.php" class="text-primary">Registrarse</a></p>
             </div>
+            <div class="text-center mt-3">
+                <p><a href="recuperarContrasena.php" class="text-danger">Olvide mi contraseña</a></p>
+            </div>
         </form>
     </div>
 </body>
