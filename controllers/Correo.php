@@ -91,7 +91,7 @@ class Correo
 
 
         // Crear el enlace con el código de recuperación
-        $enlace = "http://localhost/Email_ejemplo/recuperar.php?codigo=" . $codigo . "&correo=" . urlencode($correo);
+        $enlace = "http://localhost/leticche/controllers/recuperar.php?codigo=" . $codigo . "&correo=" . urlencode($correo);
 
         // Enviar el correo con el enlace de recuperación
         $asunto = 'Recuperación de Contraseña';

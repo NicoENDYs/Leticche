@@ -27,7 +27,7 @@ if (isset($_GET['codigo']) && isset($_GET['correo'])) {
             if (!empty($nueva_contraseña)) {
                 // Actualizar la contraseña en la base de datos (esto debe ser una operación segura, usando hash)
                 $nueva_contraseña_hash = password_hash($nueva_contraseña, PASSWORD_BCRYPT);
-                $stmt = $mysqli->prepare("UPDATE personas SET password = ? WHERE correo = ?");
+                $stmt = $mysqli->prepare("UPDATE usuarios SET pass = ? WHERE correo = ?");
                 $stmt->bind_param("ss", $nueva_contraseña_hash, $correo);
                 $stmt->execute();
 
