@@ -1,6 +1,6 @@
 <?php
 // Conectar a la base de datos
-$mysqli = new mysqli('localhost', 'root', '', 'prueba_email');
+$mysqli = new mysqli('localhost', 'root', '', 'lettiche');
 
 if ($mysqli->connect_error) {
     die('Conexión fallida: ' . $mysqli->connect_error);

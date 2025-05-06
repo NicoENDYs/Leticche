@@ -1,4 +1,5 @@
 <?php
+require '../models/MySQL.php';
 require '../vendor/autoload.php';  // Incluye PHPMailer si usas Composer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -23,6 +24,9 @@ class Correo
     public function enviarCorreo($destinatario, $asunto, $mensaje)
     {
         try {
+            $mysql = new MySQL;
+            $mysql->conectar();
+
             // Configuración del servidor SMTP de Gmail
             $this->mail->isSMTP();
             $this->mail->Host = 'smtp.gmail.com';  // Dirección SMTP de Gmail
@@ -31,6 +35,15 @@ class Correo
             $this->mail->Password = 'ublm atgk aawz vlbn';  // Contraseña de la aplicación para Gmail
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $this->mail->Port = 587;
+
+            //verificar si el correo está registrado
+            $consulta_verificacion = "SELECT id FROM usuarios WHERE Correo = '$destinatario'";
+            $resultado = $mysql->efectuarConsulta($consulta_verificacion);
+
+            if ($resultado && $resultado->num_rows == 0) {
+                echo "El correo '$destinatario' no se encuentra registrado";
+                exit;
+            }
 
             // Remitente
             $this->mail->setFrom('jadiazosorio1@gmail.com', 'Prueba de correo');
