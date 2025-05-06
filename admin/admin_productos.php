@@ -26,7 +26,7 @@ $mysql->desconectar();
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles/adminProductos.css">
+    <link rel="stylesheet" href="../styles/adminDashboardProductos.css">
     <title>Admin Productos</title>
 </head>
 
