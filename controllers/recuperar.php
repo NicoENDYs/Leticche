@@ -37,6 +37,7 @@ if (isset($_GET['codigo']) && isset($_GET['correo'])) {
                 $stmt->execute();
 
                 // Mostrar un mensaje de éxito y evitar que se muestre el formulario nuevamente
+                header('refresh:3;url=../views/Login.php');
                 echo 'Contraseña cambiada con éxito.';
             } else {
                 echo 'Por favor, ingrese una nueva contraseña.';

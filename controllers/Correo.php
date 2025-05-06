@@ -58,6 +58,7 @@ class Correo
             // Enviar el correo
             $this->mail->send();
             echo 'El mensaje ha sido enviado.';
+            header('refresh:3;url=../views/Login.php');
         } catch (Exception $e) {
             echo "Error al enviar el correo: {$this->mail->ErrorInfo}";
         }
