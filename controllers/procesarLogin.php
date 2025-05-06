@@ -73,5 +73,5 @@ echo "Usuario Ingresado Exitosamente";
 
 $mysql->desconectar();
 
-header("refresh:3;url= ../views/ecommerce.php");
+header("refresh:3;url= ../views/index.php");
 exit();

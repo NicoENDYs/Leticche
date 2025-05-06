@@ -4,5 +4,5 @@ $_SESSION = array();
 
 session_destroy();
 
-header("Location: ../views/Login.php");
+header("Location: ../views/index.php");
 exit();

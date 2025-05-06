@@ -1,16 +1,16 @@
 <?php
 require_once '../controllers/check_session.php';
-require_once '../models/MySQL.php';
-$mysql = new MySQL;
-$mysql->conectar();
+    require_once '../models/MySQL.php';
+    $mysql = new MySQL;
+    $mysql->conectar();
 
 
-$resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
-FROM usuarios 
-WHERE cargo = 'USER'");
+    $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
+    FROM usuarios 
+    WHERE cargo = 'USER'");
 
 
-$mysql->desconectar();
+    $mysql->desconectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
