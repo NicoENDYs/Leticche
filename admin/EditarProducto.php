@@ -43,6 +43,7 @@ if (!$producto) {
 
 <body>
     <div class="form-container">
+    
         <h2 class="text-center mb-3">Editar producto</h2>
 
         <form action="../controllers/EditarProducto.php" method="POST" enctype="multipart/form-data">
@@ -92,7 +93,7 @@ if (!$producto) {
                 
             </div>
 
-            <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">Añadir Producto</button>
+            <button type="submit" name="Enviar" id="Enviar" class="btn btn-primary w-100">Editar Producto</button>
             
         </form>
         <br>

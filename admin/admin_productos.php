@@ -18,11 +18,15 @@ $mysql->desconectar();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
+    
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
@@ -70,6 +74,12 @@ $mysql->desconectar();
                     <span>Reportes</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="../views/index.php" class="nav-link">
+                    <i class="fa fa-cutlery"></i>
+                    <span>Ver Articulos</span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -111,6 +121,12 @@ $mysql->desconectar();
                             <span>Pedidos</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="../views/index.php" class="nav-link">
+                            <i class="fa fa-cutlery"></i>
+                            <span>Ver Articulos</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -118,7 +134,14 @@ $mysql->desconectar();
 
 
     <!-- Main Content -->
+
+
     <div class="main-content" id="mainContent">
+        <?php if (isset($_GET['exito']) && $_GET['exito'] == '100'): ?>
+            <div class="alert alert-success mt-3" role="alert">
+                Producto Creado Con Éxito
+            </div>
+        <?php endif; ?>
         <!-- Top Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -133,7 +156,7 @@ $mysql->desconectar();
                     <h2>Gestión de Productos</h2>
                     <p class="text-muted mb-0">Administre los productos disponibles en el sistema.</p>
                 </div>
-                
+
                 <div class="col-md-6 text-md-end">
                     <a href="./admin_index.php" class="btn btn-outline-secondary me-2">
                         <i class="fas fa-arrow-left me-1"></i> Volver
@@ -143,7 +166,7 @@ $mysql->desconectar();
                 <div class="col-md-12 text-md-end">
                     <a href="../admin/NuevoProducto.php" class="btn btn-outline-secondary me-2">
                         <i class="fas fa-plus me-1"></i> Agregar Producto
-                </a>
+                    </a>
                 </div>
             </div>
         </div>
@@ -250,7 +273,7 @@ $mysql->desconectar();
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="../js/adminProductos.js"></script>
+    <script src="../js/adminProductos.js"></script>
 </body>
 
 </html>

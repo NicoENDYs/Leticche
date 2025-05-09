@@ -1,4 +1,7 @@
     <?php
+
+    session_start();
+
     require_once '../models/MySQL.php';
     $mysql = new MySQL;
     $mysql->conectar();
@@ -36,18 +39,34 @@
             <nav class="navbar">
                 <a href="javascript:void(0)" class="logo">Letti<span>che</span></a>
                 <div class="nav-links">
-                    <a href="javascript:void(0)" class="nav-item">
-                        <span class="nav-item-text">Iniciar Sesión</span>
-                        <i class="fas fa-user-circle d-inline d-md-none"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="nav-item">
-                        <span class="nav-item-text">Crear Cuenta</span>
-                        <i class="fas fa-user-plus d-inline d-md-none"></i>
-                    </a>
+                    <?php
+                    if (
+                        empty($_SESSION['usuario_id']) &&
+                        empty($_SESSION['cargo']) &&
+                        empty($_SESSION['correo'])
+                    ) {
+                        echo '
+                            <a href="./Login.php" class="nav-item">
+                                <span class="nav-item-text">Iniciar Sesión</span>
+                                <i class="fas fa-user-circle d-inline d-md-none"></i>
+                            </a>
+                        ';
+                    } else {
+                        echo '<span class="nav-item-text">Hola, ' . htmlspecialchars(strtok($_SESSION['correo'], '@')) . '</span>
+                        <a href="../controllers/procesarLogout.php" class="nav-item">
+                                <span class="nav-item-text">Cerrar sesión </span>
+                                <i class="fa fa-sign-out d-inline d-md-none"></i>
+                            </a>
+                        ';
+                        
+                    }
+                    ?>
+
                     <a href="javascript:void(0)" class="nav-item cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
+
                 </div>
             </nav>
         </header>
@@ -73,10 +92,23 @@
                                 </div>
                                 <div class="product-footer">
                                     <div class="rating">
-                                        <div class="stars">★★★★☆</div>
+                                        <!--<div class="stars">★★★★☆</div>
                                         <span class="rating-count">(45)</span>
+                                        -->
                                     </div>
+                                    <?php if( empty($_SESSION['usuario_id']) &&
+                                        empty($_SESSION['cargo']) &&
+                                        empty($_SESSION['correo'])): ?>                                       
+                                        
+                                            <a href="./Login.php?info=10" class="nav-item">
+                                                <span class="nav-item-text">
+                                                <button class="add-login btn ">Añadir</button></span>
+                                            </a>
+                                        
+                                        <?php else: ?>
+                                            
                                     <button class="add-to-cart">Añadir</button>
+                                        <?php endif; ?>
                                 </div>
                             </div>
                         </div>

@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
 
         function validar($nombreCampo, $valorCampo, $validar){
             if($validar === "invalido"){
-            echo "El $nombreCampo '$valorCampo' es invalido";
-                exit;
+                $errorCode = "120_" . urlencode($nombreCampo) . "_" . urlencode($valorCampo);
+                header("Location: ../views/Registro.php?error=$errorCode");
+                exit();
             }
         }
 
@@ -47,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $confirmar_contrasena = $_POST['confirmar_contrasena'];
 
         if ($contrasena !== $confirmar_contrasena) {
-            echo "Las contraseñas no coinciden.";
-            exit;
+            header("Location: ../views/Registro.php?error=99");
+            exit();
         } else {
             $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
         }
@@ -58,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
 
         if ($resultado && $resultado->num_rows > 0) {
-            echo "El correo electrónico ya está registrado por otro usuario.";
-            exit;
+            header("Location: ../views/Registro.php?error=100");
+            exit();
         }
         //////////////////////////////////VALIDACION CORREO NO SE REPITA/////////////////////////////////////////////////
 
@@ -68,16 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
 
         if ($resultado && $resultado->num_rows > 0) {
-            echo "El documento ya está registrado por otro usuario.";
-
-            exit;
+            header("Location: ../views/Registro.php?error=101");
+            exit();
         }
         //////////////////////////////////VALIDACION telefono NO SE REPITA/////////////////////////////////////////////////    
-        //validamos el nombre
-        if (strlen($nombre) < 5 || strlen($nombre) > 50) {
-            echo "El nombre no es valido.";
-            exit;
-        }
+        
 
 
 
@@ -88,17 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
             VALUES 
             ('$nombre', '$correo', '$telefono', 'user', '$contrasena','')";
         $mysql->efectuarConsulta($consulta);
-        echo "Usuario creado con exito, ahora iniciando sesion...";
+        
         // Iniciar sesión y redirigir al usuario a la página de inicio         
         $mysql->desconectar();
-
-        header("refresh:3;url= ../views/Login.php");
+        header("Location: ../views/Login.php?info=111");
         exit();
-    } else {ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-        
-        echo "Algún campo es inexistente";
+    } else {
+        header("Location: ../views/Registro.php?error=102");
+            exit();
     }
 } else {
     echo "Metodo de envio invalido";

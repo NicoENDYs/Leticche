@@ -16,8 +16,8 @@ if (
     $estado = 'ACTIVO';
 
     if (empty($nombre) || empty($descripcion) || empty($precio) || empty($stock)) {
-        echo "Por favor, complete todos los campos.";
-        exit;
+        header("Location: ../admin/NuevoProducto.php?error=99");
+        exit();
     }
 
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
@@ -25,7 +25,8 @@ if (
         $tipo = mime_content_type($_FILES['imagen']['tmp_name']);
 
         if (!array_key_exists($tipo, $permitidos)) {
-            die("Solo se permiten imágenes JPG y PNG.");
+            header("Location: ../admin/NuevoProducto.php?error=88");
+            exit();
         }
         
         $extension = $permitidos[$tipo];
@@ -45,13 +46,16 @@ if (
             //insertar en base de datos 
 
             $mysql->desconectar();
-            header("refresh:3;url= ../admin/admin_productos.php");
+            header("Location: ../admin/admin_productos.php?exito=100");
             exit();
+
         } else {
-            echo "Error al guardar la imagen.";
+            header("Location: ../admin/NuevoProducto.php?error=87");
+            exit();
         }
     } else {
-        echo "No se seleccionó una imagen válida.";
+        header("Location: ../admin/NuevoProducto.php?error=86");
+            exit();
     }
 
 } else {

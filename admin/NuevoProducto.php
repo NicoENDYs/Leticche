@@ -19,8 +19,15 @@ require_once '../controllers/check_session.php';
 </head>
 
 <body>
+
     <div class="form-container">
+    
         <h2 class="text-center mb-3">añadir producto</h2>
+        <?php if (isset($_GET['error']) && $_GET['error'] == '99'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Rellene todos los campos
+            </div>
+        <?php endif; ?>
         <form id="productoForm" action="../controllers/NuevoProducto.php" method="POST" enctype="multipart/form-data" novalidate>
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Producto</label>
@@ -54,6 +61,23 @@ require_once '../controllers/check_session.php';
                 </div>
             </div>
 
+            <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Solo imagenes JPG y PNG
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                error al guardar la imagen, veifique la imagen
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Imagen invalida, asegurese de que sea JPG o PNG
+            </div>
+        <?php endif; ?>
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
@@ -70,7 +94,7 @@ require_once '../controllers/check_session.php';
 
             <button type="submit" id="submitBtn" name="Enviar" id="Enviar"  class="btn btn-primary w-100 mb-3">
                 <span id="btnText">Añadir Producto</span>
-                <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                <span id="btnSpinner" class="" role="status" aria-hidden="true"></span>
             </button>
         </form>
         <a href="./admin_productos.php" class="btn btn-outline-secondary me-2">

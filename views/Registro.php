@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,55 @@
     <link rel="stylesheet" href="../styles/LoginRegis.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="form-container">
+        <?php if (isset($_GET['error']) && $_GET['error'] == '99'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Las contaseñas no coinciden
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '100'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                El correo ya esta registrado por otro usuario
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '101'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                El telefono ya esta registrado por otro usuario
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '102'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Algo salio mal, revise los datos
+            </div>
+        <?php endif; ?>
+
+        <?php
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            $mensaje = '';
+
+            if ($error === '99') {
+                $mensaje = "Las contraseñas no coinciden";
+            } elseif (preg_match('/^120_([^_]+)_(.+)$/', $error, $matches)) {
+                // Extraemos nombreCampo y valorCampo del error
+                $nombreCampo = urldecode($matches[1]);
+                $valorCampo = urldecode($matches[2]);
+                $mensaje = "El campo <strong>" . htmlspecialchars($nombreCampo) . "</strong> con valor <strong>" . htmlspecialchars($valorCampo) . "</strong> es inválido.";
+            } else {
+                $mensaje = "Error desconocido.";
+            }
+        ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                <?= $mensaje ?>
+            </div>
+        <?php } ?>
+
+
         <h2 class="text-center mb-3">Registro</h2>
         <form action="../controllers/procesarRegistro.php" method="POST">
             <div class="mb-3">
@@ -19,7 +67,7 @@
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo electrónico</label>
                 <input type="email" class="form-control" id="correo" name="correo" required>
-            </div>            
+            </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input type="tel" class="form-control" id="telefono" name="telefono" required>
@@ -45,4 +93,5 @@
         </form>
     </div>
 </body>
+
 </html>

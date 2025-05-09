@@ -28,15 +28,17 @@ require_once '../controllers/check_session.php';
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
+    
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+    <link rel="stylesheet" href="../styles/adminDashboardProductos.css">
     <title>Admin Dashboard</title>
 </head>
 
 <body>
 
-    <!-- Sidebar -->
+<!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="brand">
             <img src="../images/Logo_Lenteja.png" alt="Lenticche Logo">
@@ -49,14 +51,14 @@ require_once '../controllers/check_session.php';
                     <span>Inicio</span>
                 </a>
             </li>
-                <li class="nav-item" data-title="Usuarios">
-                <a href="./admin_dashboard.php" class="nav-link active">
+            <li class="nav-item" data-title="Usuarios">
+                <a href="./admin_dashboard.php" class="nav-link active" >
                     <i class="fas fa-users"></i>
                     <span>Usuarios</span>
                 </a>
             </li>
             <li class="nav-item" data-title="Productos">
-                <a href="./admin_productos.php" class="nav-link">
+                <a href="./admin_productos.php" class="nav-link ">
                     <i class="fas fa-box"></i>
                     <span>Productos</span>
                 </a>
@@ -73,8 +75,11 @@ require_once '../controllers/check_session.php';
                     <span>Reportes</span>
                 </a>
             </li>
-            <li class="nav-item mt-5" data-title="Cerrar Sesión">
-                
+            <li class="nav-item">
+                <a href="../views/index.php" class="nav-link">
+                    <i class="fa fa-cutlery"></i>
+                    <span>Ver Articulos</span>
+                </a>
             </li>
         </ul>
     </div>
@@ -117,6 +122,12 @@ require_once '../controllers/check_session.php';
                     <span>Pedidos</span>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="../views/index.php" class="nav-link">
+                    <i class="fa fa-cutlery"></i>
+                    <span>Ver Articulos</span>
+                </a>
+            </li>
             </ul>
         </div>
     </div>

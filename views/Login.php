@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/LoginRegis.css">
 </head>
+
 <body>
     <div class="form-container">
+        <?php if (isset($_GET['info']) && $_GET['info'] == '10'): ?>
+            <div class="alert alert-success mt-3" role="alert">
+                Inicie Sesión para Añadir Productos
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['info']) && $_GET['info'] == '111'): ?>
+            <div class="alert alert-success mt-3" role="alert">
+                Usuario creado con Exito. <br>
+                Ahora inicia sesión
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '1'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Revise sus datos, algo esta mal
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '101'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                El telefono no es valido, debe tener 10 Digitos
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '102'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                El Correo no es valido
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == '99'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                Rellene todos los datos
+            </div>
+        <?php endif; ?>
+
         <h2 class="text-center mb-3">Login</h2>
-        <form action="../controllers/procesarLogin.php" method="POST">            
+            
+        <form action="../controllers/procesarLogin.php" method="POST">
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input type="tel" class="form-control" id="telefono" name="telefono" required>
@@ -36,4 +76,5 @@
         </form>
     </div>
 </body>
+
 </html>
