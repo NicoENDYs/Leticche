@@ -19,7 +19,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FastFood - Tu Comida Rápida Favorita</title>
+        <title>Lettiche - Tu Comida Rápida Favorita</title>
         <!-- TailwindCSS -->
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Font Awesome -->
@@ -80,7 +80,7 @@
                     <!-- Producto 1 -->
 
                     <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
-                        <div class="product-card">
+                        <div class="product-card" id='<?php echo $producto['id']?>'>
                             <div class="product-image">
                                 <img src="../img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
                             </div>
