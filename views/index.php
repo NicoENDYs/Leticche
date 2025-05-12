@@ -62,7 +62,7 @@
                     }
                     ?>
 
-                    <a href="javascript:void(0)" class="nav-item cart-icon">
+                    <a href="carrito.php" class="nav-item cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
