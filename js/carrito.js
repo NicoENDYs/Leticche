@@ -12,7 +12,6 @@ function cargarCarrito() {
     let carritoHTML = '';
     let total = 0;
 
-    // Simulando productos del localStorage para este ejemplo visual
     let productos = Object.values(localStorage);
 
     if (productos.length === 0) {
