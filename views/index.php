@@ -30,7 +30,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../styles/ecommerce.css">
 
-        <script defer src="../js/ecommerce.js"></script>
+        <script defer src="../js/productosStorage.js"></script>
     </head>
 
     <body>
@@ -102,12 +102,12 @@
                                         
                                             <a href="./Login.php?info=10" class="nav-item">
                                                 <span class="nav-item-text">
-                                                <button class="add-login btn ">Añadir</button></span>
+                                                <button class="add-login btn">Añadir</button></span>
                                             </a>
                                         
                                         <?php else: ?>
                                             
-                                    <button class="add-to-cart">Añadir</button>
+                                    <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1; echo json_encode($producto);?>)'>Añadir</button>
                                         <?php endif; ?>
                                 </div>
                             </div>
