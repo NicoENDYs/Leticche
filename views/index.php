@@ -8,7 +8,7 @@
 
 
     $resultado = $mysql->efectuarConsulta("SELECT id, nombre, descripcion, precio, stock, imagen, estado
-    FROM productos");
+    FROM productos WHERE Estado = 'ACTIVO'");
 
 
     $mysql->desconectar();
