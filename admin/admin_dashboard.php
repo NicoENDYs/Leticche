@@ -76,7 +76,7 @@ require_once '../controllers/check_session.php';
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../views/index.php" class="nav-link">
+                <a href="../index.php" class="nav-link">
                     <i class="fa fa-cutlery"></i>
                     <span>Ver Articulos</span>
                 </a>
@@ -130,7 +130,7 @@ require_once '../controllers/check_session.php';
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../views/index.php" class="nav-link">
+                <a href="../index.php" class="nav-link">
                     <i class="fa fa-cutlery"></i>
                     <span>Ver Articulos</span>
                 </a>

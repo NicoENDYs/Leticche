@@ -37,10 +37,11 @@
             <nav class="navbar">
                 <a href="javascript:void(0)" class="logo">Letti<span>che</span></a>
                 <div class="nav-links">
-                    <?php
+                <?php
                     if (
-                        empty($_SESSION['usuario_id']) &&
-                        empty($_SESSION['cargo']) &&
+                        empty($_SESSION['usuario_id']) ||
+                        empty($_SESSION['nombre']) ||
+                        empty($_SESSION['cargo']) ||
                         empty($_SESSION['correo'])
                     ) {
                         echo '
@@ -49,17 +50,17 @@
                                 <i class="fas fa-user-circle d-inline d-md-none"></i>
                             </a>
                         ';
-                    } else {
-                        echo '<span class="nav-item-text">Hola, ' . htmlspecialchars(strtok($_SESSION['correo'], '@')) . '</span>
-                        <a href="./controllers/procesarLogout.php" class="nav-item">
-                                <span class="nav-item-text">Cerrar sesión </span>
+                    } else {    
+                        $nombre = isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : 'Usuario';
+                        echo '
+                            <span class="nav-item-text">Hola, ' . $nombre . '</span>
+                            <a href="./controllers/procesarLogout.php" class="nav-item">
+                                <span class="nav-item-text">Cerrar sesión</span>
                                 <i class="fa fa-sign-out d-inline d-md-none"></i>
                             </a>
                         ';
-                        
                     }
                     ?>
-
                     <a href="./views/carrito.php" class="nav-item cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
@@ -94,7 +95,9 @@
                                         <span class="rating-count">(45)</span>
                                         -->
                                     </div>
-                                    <?php if( empty($_SESSION['usuario_id']) &&
+                                    <?php if( 
+                                        empty($_SESSION['usuario_id']) &&
+                                        empty($_SESSION['nombre']) &&
                                         empty($_SESSION['cargo']) &&
                                         empty($_SESSION['correo'])): ?>                                       
                                         
