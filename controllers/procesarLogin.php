@@ -27,7 +27,7 @@ if (
     }
 
 
-    $resultado = $mysql->efectuarConsulta("SELECT id, Correo, cargo, pass 
+    $resultado = $mysql->efectuarConsulta("SELECT id, nombre ,Correo, cargo, pass 
     FROM usuarios WHERE correo = '$correo' and estado = 'ACTIVO'");
 
     $hash = password_hash($contrasena, PASSWORD_BCRYPT);
@@ -37,6 +37,7 @@ if (
         if (password_verify($contrasena, $usuario['pass'])) {
             // Si la contraseña es correcta, se inicia la sesión
             $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['correo'] = $usuario['Correo'];
             $_SESSION['cargo'] = $usuario['cargo'];
             $mysql->desconectar();
@@ -161,5 +162,5 @@ echo "Usuario Ingresado Exitosamente";
 
 $mysql->desconectar();
 
-header("refresh:3;url= ../views/index.php");
+header("refresh:3;url= ../index.php");
 exit();

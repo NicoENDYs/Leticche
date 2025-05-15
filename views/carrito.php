@@ -21,7 +21,7 @@
                 <span id="total-carrito">$0.00</span>
             </div>
             <button class="btn-comprar">Finalizar Compra</button>
-            <a href="index.php"><button class="btn-seguir-comprando">Seguir Comprando</button></a>
+            <a href="../index.php"><button class="btn-seguir-comprando">Seguir Comprando</button></a>
         </div>
     </div>
 </body>

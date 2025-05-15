@@ -2,7 +2,7 @@
 
     session_start();
 
-    require_once '../models/MySQL.php';
+    require_once './models/MySQL.php';
     $mysql = new MySQL;
     $mysql->conectar();
 
@@ -20,17 +20,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lettiche - Tu Comida Rápida Favorita</title>
-        <!-- TailwindCSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../styles/ecommerce.css">
+        <link rel="stylesheet" href="./styles/ecommerce.css">
 
-        <script defer src="../js/productosStorage.js"></script>
+        <script defer src="./js/productosStorage.js"></script>
     </head>
 
     <body>
@@ -39,30 +37,31 @@
             <nav class="navbar">
                 <a href="javascript:void(0)" class="logo">Letti<span>che</span></a>
                 <div class="nav-links">
-                    <?php
+                <?php
                     if (
-                        empty($_SESSION['usuario_id']) &&
-                        empty($_SESSION['cargo']) &&
+                        empty($_SESSION['usuario_id']) ||
+                        empty($_SESSION['nombre']) ||
+                        empty($_SESSION['cargo']) ||
                         empty($_SESSION['correo'])
                     ) {
                         echo '
-                            <a href="./Login.php" class="nav-item">
+                            <a href="./views/Login.php" class="nav-item">
                                 <span class="nav-item-text">Iniciar Sesión</span>
                                 <i class="fas fa-user-circle d-inline d-md-none"></i>
                             </a>
                         ';
-                    } else {
-                        echo '<span class="nav-item-text">Hola, ' . htmlspecialchars(strtok($_SESSION['correo'], '@')) . '</span>
-                        <a href="../controllers/procesarLogout.php" class="nav-item">
-                                <span class="nav-item-text">Cerrar sesión </span>
+                    } else {    
+                        $nombre = isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : 'Usuario';
+                        echo '
+                            <span class="nav-item-text">Hola, ' . $nombre . '</span>
+                            <a href="./controllers/procesarLogout.php" class="nav-item">
+                                <span class="nav-item-text">Cerrar sesión</span>
                                 <i class="fa fa-sign-out d-inline d-md-none"></i>
                             </a>
                         ';
-                        
                     }
                     ?>
-
-                    <a href="carrito.php" class="nav-item cart-icon">
+                    <a href="./views/carrito.php" class="nav-item cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </a>
@@ -82,7 +81,7 @@
                     <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
                         <div class="product-card" id='<?php echo $producto['id']?>'>
                             <div class="product-image">
-                                <img src="../img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
+                                <img src="./img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
                             </div>
                             <div class="product-info">
                                 <h3 class="product-title"><?php echo $producto['nombre']; ?></h3>
@@ -96,11 +95,13 @@
                                         <span class="rating-count">(45)</span>
                                         -->
                                     </div>
-                                    <?php if( empty($_SESSION['usuario_id']) &&
+                                    <?php if( 
+                                        empty($_SESSION['usuario_id']) &&
+                                        empty($_SESSION['nombre']) &&
                                         empty($_SESSION['cargo']) &&
                                         empty($_SESSION['correo'])): ?>                                       
                                         
-                                            <a href="./Login.php?info=10" class="nav-item">
+                                            <a href="./views/Login.php?info=10" class="nav-item">
                                                 <span class="nav-item-text">
                                                 <button class="add-login btn">Añadir</button></span>
                                             </a>
