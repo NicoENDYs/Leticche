@@ -54,10 +54,6 @@
             
         <form action="../controllers/procesarLogin.php" method="POST">
             <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
-            </div>
-            <div class="mb-3">
                 <label for="correo" class="form-label">Correo electrónico</label>
                 <input type="email" class="form-control" id="correo" name="correo" required>
             </div>

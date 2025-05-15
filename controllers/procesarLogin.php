@@ -11,21 +11,15 @@ if (
 ) {
 
     //obtenemos los datos del formulario
-    $telefono = trim(filter_input(INPUT_POST, 'telefono', FILTER_VALIDATE_INT)); //$_POST['telefono'];
     $correo = trim(filter_input(INPUT_POST, 'correo', FILTER_VALIDATE_EMAIL)); //$_POST['correo'];
     $contrasena = $_POST['contrasena'];
 
 
-    if (empty($correo) && empty($telefono) && empty($contrasena)) {
+    if (empty($correo) && empty($contrasena)) {
         header("Location: ../views/Login.php?error=99");
         exit();
     }
 
-    //validamos el telefono
-    if (strlen($telefono) < 10 || strlen($telefono) > 15) {
-        header("Location: ../views/Login.php?error=101");
-        exit();
-    }
     //validamos el correo
     if (filter_var($correo, FILTER_VALIDATE_EMAIL) === false) {
         header("Location: ../views/Login.php?error=102");
@@ -34,8 +28,7 @@ if (
 
 
     $resultado = $mysql->efectuarConsulta("SELECT id, Correo, cargo, pass 
-    FROM usuarios WHERE correo = '$correo' 
-    and telefono = '$telefono' and estado = 'ACTIVO'");
+    FROM usuarios WHERE correo = '$correo' and estado = 'ACTIVO'");
 
     $hash = password_hash($contrasena, PASSWORD_BCRYPT);
 
