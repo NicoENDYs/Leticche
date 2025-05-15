@@ -61,10 +61,24 @@
                         ';
                     }
                     ?>
-                    <a href="./views/carrito.php" class="nav-item cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
+                    <?php if( 
+                        empty($_SESSION['usuario_id']) &&
+                        empty($_SESSION['nombre']) &&
+                        empty($_SESSION['cargo']) &&
+                        empty($_SESSION['correo'])): ?>                                       
+                        
+                            <a href="./views/Login.php?info=10"class="nav-item cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        
+                    <?php else: ?>
+                                
+                        <a href="./views/carrito.php" class="nav-item cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>                                        
+                    <?php endif; ?>
 
                 </div>
             </nav>
@@ -106,7 +120,7 @@
                                                 <button class="add-login btn">Añadir</button></span>
                                             </a>
                                         
-                                        <?php else: ?>
+                                    <?php else: ?>
                                             
                                     <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1; echo json_encode($producto);?>)'>Añadir</button>
                                         <?php endif; ?>
