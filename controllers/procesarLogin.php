@@ -161,5 +161,5 @@ echo "Usuario Ingresado Exitosamente";
 
 $mysql->desconectar();
 
-header("refresh:3;url= ../views/index.php");
+header("refresh:3;url= ../index.php");
 exit();

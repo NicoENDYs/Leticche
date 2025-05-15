@@ -81,6 +81,13 @@ require_once '../controllers/check_session.php';
                     <span>Ver Articulos</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="../controllers/procesarLogout.php">
+                    <button type="button" class="btn btn-danger fw-bold">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                    </button>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -121,11 +128,18 @@ require_once '../controllers/check_session.php';
                     <i class="fas fa-shopping-cart"></i>
                     <span>Pedidos</span>
                 </a>
-                </li>
-                <li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a href="../views/index.php" class="nav-link">
                     <i class="fa fa-cutlery"></i>
                     <span>Ver Articulos</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../controllers/procesarLogout.php">
+                    <button type="button" class="btn btn-danger fw-bold">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                    </button>
                 </a>
             </li>
             </ul>

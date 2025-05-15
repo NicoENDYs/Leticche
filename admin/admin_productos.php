@@ -80,6 +80,13 @@ $mysql->desconectar();
                     <span>Ver Articulos</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="../controllers/procesarLogout.php">
+                    <button type="button" class="btn btn-danger fw-bold">
+                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                    </button>
+                </a>
+            </li>
         </ul>
     </div>
 
