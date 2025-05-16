@@ -19,7 +19,7 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lettiche - Tu Comida Rápida Favorita</title>
+    <title>Lettiche</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -43,8 +43,6 @@ $mysql->desconectar();
                 span.innerText = nomenclaturaPrecio(rawPrecio);
             });
         });
-
-    </script>
 
     </script>
 
@@ -144,7 +142,4 @@ $mysql->desconectar();
         </div>
     </div>
 </body>
-<script>
-
-
-</html >
+</html>
