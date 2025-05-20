@@ -45,8 +45,6 @@ $mysql->desconectar();
         });
 
     </script>
-
-
 </head>
 
 <body>
