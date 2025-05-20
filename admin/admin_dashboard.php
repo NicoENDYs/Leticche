@@ -70,7 +70,7 @@ require_once '../controllers/check_session.php';
                 </a>
             </li>
             <li class="nav-item" data-title="Reportes">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="./admin_reportes.php" class="nav-link">
                     <i class="fas fa-chart-line"></i>
                     <span>Reportes</span>
                 </a>
@@ -127,6 +127,12 @@ require_once '../controllers/check_session.php';
                 <a href="javascript:void(0)" class="nav-link">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Pedidos</span>
+                </a>
+            </li>
+            <li class="nav-item" data-title="Reportes">
+                <a href="./admin_reportes.php" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reportes</span>
                 </a>
             </li>
             <li class="nav-item">

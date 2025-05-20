@@ -57,7 +57,7 @@ h1:after {
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+    background: linear-gradient(to right, var(--primary-light), var(--primary-light));
     border-radius: 3px;
 }
 
@@ -82,7 +82,7 @@ h1:after {
 }
 
 .btn-menu {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     border: none;
     color: white;
     margin-bottom: 1.5rem;

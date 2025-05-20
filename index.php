@@ -66,8 +66,8 @@ $mysql->desconectar();
                                 <i class="fas fa-user-circle d-inline d-md-none"></i>
                             </a>
                             <a href="./views/Login.php" class="nav-item cart-icon">
-                              <i class="fas fa-shopping-cart"></i>
-                              <span class="cart-count">0</span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
                             </a>
                         ';
                 } else {
@@ -79,8 +79,8 @@ $mysql->desconectar();
                                 <i class="fa fa-sign-out d-inline d-md-none"></i>
                             </a>
                             <a href="./views/carrito.php" class="nav-item cart-icon">
-                              <i class="fas fa-shopping-cart"></i>
-                              <span class="cart-count">0</span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
                             </a>
                         ';
                 }
@@ -139,7 +139,7 @@ $mysql->desconectar();
 
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="text-center mt-5 text-black">No hay Usuarios registrados.</p>
+                <p class="text-center mt-5 text-black">No hay Productos registrados.</p>
             <?php endif; ?>
         </div>
     </div>
