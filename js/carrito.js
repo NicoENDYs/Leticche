@@ -144,9 +144,8 @@ function nomenclaturaPrecio(precio) {
 }
 
 function finalizarCompra(){
-    // Set the address in the hidden field
+    const direccionCliente = document.getElementById('direccionCliente').value.trim();
     document.getElementById('direccion_envio').value = direccionCliente;
-    const direccionCliente = document.getElementById('DireccionCliente').value.trim();
     
     if (!direccionCliente) {
         Swal.fire({
