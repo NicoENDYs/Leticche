@@ -1,4 +1,5 @@
 let totalCarrito = document.querySelector("#total-carrito");
+let totalOculto = document.querySelector("#totalOculto");
 document.addEventListener("DOMContentLoaded", function () {
     cargarCarrito();
     document
@@ -142,8 +143,8 @@ function nomenclaturaPrecio(precio) {
 }
 
 function finalizarCompra(){
-    let idProductos = Object.keys(localStorage);
-    console.log(idProductos);
+    localStorage.clear();
+    document.querySelector("#formFactura").submit();
 }
 
 // Función para formatear números como moneda
@@ -182,6 +183,8 @@ function cargarProductosFactura() {
 
     const impuesto = subtotal * 0.19;
     const total = subtotal + impuesto;
+
+    totalOculto.value = total;
 
     document.getElementById('facturaSubtotal').textContent = formatoPrecio(subtotal);
     document.getElementById('facturaImpuesto').textContent = formatoPrecio(impuesto);

@@ -7,7 +7,7 @@ if (
     empty($_SESSION['nombre']) ||
     empty($_SESSION['cargo']) ||
     empty($_SESSION['correo'])
-){
+) {
     header("Location: ./Login.php");
     exit;
 }
@@ -96,11 +96,16 @@ if (
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="volverBtn">Volver al carrito</button>
-                <button class="btn btn-primary" id="confirmarBtn">Confirmar y pagar</button>
+                <button class="btn btn-primary" id="confirmarBtn" data-id-usuario="<?php echo $_SESSION['usuario_id'] ?>">Confirmar y pagar</button>
             </div>
         </div>
     </div>
 
+    <!-- Formulario oculto para procesar los datos -->
+    <form id="formFactura" action="../controllers/procesarCompra.php" method="POST" style="display: none;">
+        <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?>">
+        <input type="hidden" name="total_pedido" id="totalOculto">
+    </form>
 </body>
 
 </html>
