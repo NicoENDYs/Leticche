@@ -140,7 +140,7 @@ if (
             if ($usuario['cargo'] === 'ADMIN') {
                 header("refresh:3;url= ../admin/admin_index.php");
             } else {
-                header("refresh:3;url= ../views/index.php");
+                header("refresh:3;url= ../index.php");
             }
             exit();
         } else {
