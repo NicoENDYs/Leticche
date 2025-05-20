@@ -20,6 +20,8 @@ if (
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compra</title>
     <link rel="stylesheet" href="../styles/carrito.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="../js/carrito.js"></script>
 </head>
 
@@ -58,6 +60,13 @@ if (
                 <div class="factura-cliente">
                     <h3>Información del Cliente</h3>
                     <p id="nombreCliente">Cliente: <?php echo $_SESSION['nombre'] ?></p>
+                    <label for="" class="form-label">Direccion a enviar:</label>
+                    <input type="text"
+                        name="direccion"
+                        id="DireccionCliente"
+                        placeholder="Ingrese Dirección"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
                 </div>
 
                 <table class="factura-tabla" id="tablaFactura">
@@ -107,6 +116,7 @@ if (
     <form id="formFactura" action="../controllers/procesarCompra.php" method="POST" style="display: none;">
         <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?>">
         <input type="hidden" name="productos_ocultos" id="productos_ocultos" value="">
+        <input type="hidden" name="direccion_envio" id="direccion_envio" value="">	    
         <input type=" hidden" name="total_pedido" id="totalOculto">
     </form>
 </body>

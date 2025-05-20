@@ -40,6 +40,8 @@ if (
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['correo'] = $usuario['Correo'];
             $_SESSION['cargo'] = $usuario['cargo'];
+            $_SESSION['direccion'] = $usuario['direccion'];
+            $_SESSION['telefono'] = $usuario['telefono'];
             $mysql->desconectar();
 
             echo '

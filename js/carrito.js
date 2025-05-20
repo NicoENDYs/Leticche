@@ -145,6 +145,18 @@ function nomenclaturaPrecio(precio) {
 }
 
 function finalizarCompra(){
+    // Set the address in the hidden field
+    document.getElementById('direccion_envio').value = direccionCliente;
+    const direccionCliente = document.getElementById('DireccionCliente').value.trim();
+    
+    if (!direccionCliente) {
+        Swal.fire({
+        title: "Falta un campo!",
+        text: "Llena el campo de dirección",
+        icon: "error"
+        });
+        return;
+    }
     localStorage.clear();
     document.querySelector("#formFactura").submit();
 }
