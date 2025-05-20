@@ -1,5 +1,7 @@
 let totalCarrito = document.querySelector("#total-carrito");
 let totalOculto = document.querySelector("#totalOculto");
+let inputProductosOcultos = document.querySelector("#productos_ocultos");
+let productosOcultos = [];
 document.addEventListener("DOMContentLoaded", function () {
     cargarCarrito();
     document
@@ -168,7 +170,8 @@ function cargarProductosFactura() {
     productosCarrito.forEach(producto => {
         producto = JSON.parse(producto);
         const tr = document.createElement('tr');
-        if(producto.cantidad > 0){
+        if (producto.cantidad > 0) {
+            productosOcultos.push(producto);
             tr.innerHTML = `
                     <td><img src="../img/${producto.imagen}" alt="${producto.nombre}" class="producto-imagen"></td>
                     <td class="producto-nombre">${producto.nombre}</td>
@@ -180,6 +183,9 @@ function cargarProductosFactura() {
         subtotal += producto.precio * producto.cantidad;
         }
     });
+    console.log(JSON.stringify(productosOcultos));
+    inputProductosOcultos.value = JSON.stringify(productosOcultos);
+    productosOcultos = [];
 
     const impuesto = subtotal * 0.19;
     const total = subtotal + impuesto;

@@ -51,5 +51,20 @@ class MySQL
 
         return $resultado;
     }
+
+    public function traerUltimoId($consulta)
+    {
+        //verificar la codificacion sea utf8
+        mysqli_query($this->conexion, "SET NAMES 'utf8'");
+        mysqli_query($this->conexion, "SET CHARACTER SET 'utf8'");
+
+        $resultado = mysqli_query($this->conexion, $consulta);
+
+        if (!$resultado) {
+            echo "Error en la consulta: " . mysqli_error($this->conexion);
+        }
+
+        return $resultado;
+    }
 }
 ?>
