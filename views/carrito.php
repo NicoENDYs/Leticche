@@ -60,17 +60,14 @@ if (
                 <div class="factura-cliente">
                     <h3>Información del Cliente</h3>
                     <p id="nombreCliente">Cliente: <?php echo $_SESSION['nombre'] ?></p>
-                    <label for="" class="form-label">Direccion a enviar:</label>
-                    <input type="text" name="direccion" id="DireccionCliente" placeholder="Ingrese Dirección"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
+                    <div class="direccion-container">
+                        <label for="direccionCliente" class="form-label">Direccion a enviar:</label>
+                        <input type="text" name="direccion" id="direccionCliente" placeholder="Ingrese Dirección"
+                            class="direccion-input py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                    </div>
                 </div>
-                <div class="direccion-container">
-                    <label for="DireccionCliente" class="form-label">Direccion a enviar:</label>
-                    <input type="text" name="direccion" id="DireccionCliente" placeholder="Ingrese Dirección"
-                        class="direccion-input py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
-                </div>
+
 
                 <table class="factura-tabla" id="tablaFactura">
                     <thead>
