@@ -93,7 +93,6 @@ function aumentarCantidad(producto) {
 }
 
 function disminuirCantidad(producto) {
-    let btnDisminuir = document.querySelector(`#btnDisminuir${producto.id}`);
     let cantidadProducto = document.querySelector(
         `#cantidadProducto${producto.id}`
     );
@@ -195,7 +194,6 @@ function cargarProductosFactura() {
         subtotal += producto.precio * producto.cantidad;
         }
     });
-    console.log(JSON.stringify(productosOcultos));
     inputProductosOcultos.value = JSON.stringify(productosOcultos);
     productosOcultos = [];
 

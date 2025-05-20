@@ -38,7 +38,7 @@ if (
                 <span>Total:</span>
                 <span id="total-carrito">$0.00</span>
             </div>
-            <button class="open-modal-btn btn-comprar" id="verFacturaBtn">Pagar</button>
+            <button class="open-modal-btn btn-comprar" id="verFacturaBtn">Resumen De Compra</button>
             <a href="../index.php"><button class="btn-seguir-comprando">Seguir Comprando</button></a>
         </div>
     </div>
@@ -61,10 +61,7 @@ if (
                     <h3>Información del Cliente</h3>
                     <p id="nombreCliente">Cliente: <?php echo $_SESSION['nombre'] ?></p>
                     <label for="" class="form-label">Direccion a enviar:</label>
-                    <input type="text"
-                        name="direccion"
-                        id="DireccionCliente"
-                        placeholder="Ingrese Dirección"
+                    <input type="text" name="direccion" id="DireccionCliente" placeholder="Ingrese Dirección"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required>
                 </div>
@@ -116,7 +113,7 @@ if (
     <form id="formFactura" action="../controllers/procesarCompra.php" method="POST" style="display: none;">
         <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?>">
         <input type="hidden" name="productos_ocultos" id="productos_ocultos" value="">
-        <input type="hidden" name="direccion_envio" id="direccion_envio" value="">	    
+        <input type="hidden" name="direccion_envio" id="direccion_envio" value="">
         <input type=" hidden" name="total_pedido" id="totalOculto">
     </form>
 </body>
