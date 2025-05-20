@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2025 a las 00:22:53
+-- Tiempo de generación: 20-05-2025 a las 23:09:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -35,6 +35,15 @@ CREATE TABLE `detalles_pedido` (
   `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detalles_pedido`
+--
+
+INSERT INTO `detalles_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio_unitario`) VALUES
+(8, 74, 3, 1, 3000.00),
+(9, 74, 2, 1, 12000.00),
+(10, 75, 1, 1, 10000.00);
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +57,14 @@ CREATE TABLE `pedidos` (
   `total` decimal(10,2) NOT NULL,
   `estado` enum('pendiente','procesando','enviado','entregado') DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `estado`) VALUES
+(74, 29, '2025-05-20 15:35:24', 17850.00, 'pendiente'),
+(75, 29, '2025-05-20 16:03:05', 11900.00, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -94,7 +111,14 @@ CREATE TABLE `recuperacion` (
 
 INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
 (3, 'baloncest7oentablon@gmail.com', '58c66ae022db8d736c3d', '2025-05-05 22:05:00'),
-(4, 'baloncestoentablon@gmail.com', '2fc7d0a6d35868dcb7e3', '2025-05-05 22:06:03');
+(7, 'baloncest8oentablon@gmail.com', 'e5885421c9f081893eb0', '2025-05-06 21:03:47'),
+(9, 'baloncest\'8\'oentablon@gmail.com', '2445e0a733e5561efa34', '2025-05-06 21:10:11'),
+(10, 'baloncestoentablon8@gmail.com', '58e0b0d8ec9fb5fe1d72', '2025-05-06 21:10:22'),
+(14, 'baloncestoentablon\'\'@gmail.com', 'b23cfe89f5703f98aea1', '2025-05-06 21:12:14'),
+(16, 'baloncestoentablon\'\'8@gmail.com', '5e1b808238bd718e97eb', '2025-05-06 21:13:06'),
+(19, 'baloncestoentablon\'8\'@gmail.com', '31983361a6b1b71009e1', '2025-05-06 21:15:40'),
+(21, 'baloncestoentablon@gmail.com', '6452dcf5937dfc78da18', '2025-05-06 21:20:54'),
+(23, 'baloncestoentablon1@gmail.com', 'f43e78b51cd0d149ebaa', '2025-05-06 21:21:06');
 
 -- --------------------------------------------------------
 
@@ -123,7 +147,10 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Carg
 (3, 'Maria', 'mari@gmail.com', '', '3110957284', 'user', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'ACTIVO'),
 (4, 'ENDYs', 'END@gmail.com', 'Administrador', '3100000000', 'ADMIN', '$2y$10$BFXqhejEmvdBkOnQY5Sc6urCU01YgrnRbGmwB77zjgMTZZSmYXAT.', 'ACTIVO'),
 (5, 'Jhonny', 'andres@gmail.com', '', '1234567899', 'user', '$2y$10$.gYVUWLrNOOH2onFZmJE8.m749HA4UPg0W20cueBhHAqXFw3SIszm', 'ACTIVO'),
-(6, 'Jhonny', 'user@domain.com', '', '1234567898', 'user', '$2y$10$SL2iCOQmVOBJm3SItbFm5OzE2tIGcVFdlo4ERZZqX4PcvtxSgy2B.', 'ACTIVO');
+(6, 'Jhonny', 'user@domain.com', '', '1234567898', 'user', '$2y$10$SL2iCOQmVOBJm3SItbFm5OzE2tIGcVFdlo4ERZZqX4PcvtxSgy2B.', 'ACTIVO'),
+(25, 'gaychocho', 'baloncestoentablon@gmail.com', 'la sexta', '3103849526', 'User', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'ACTIVO'),
+(28, 'Jhonny', 'jadiaz@iegabo.edu.co', '', '3103561843', 'user', '$2y$10$HRQ1F55ujPNjCaCMYz0Y4.OQSmgpVW1LUjuabuc5a6wAUu1jQolLe', 'ACTIVO'),
+(29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', '', '9846164615', 'user', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
 
 --
 -- Índices para tablas volcadas
@@ -172,13 +199,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -190,13 +217,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `recuperacion`
 --
 ALTER TABLE `recuperacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
