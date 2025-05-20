@@ -51,7 +51,7 @@ $mysql->desconectar();
     <!-- Header con navegación -->
     <header class="header">
         <nav class="navbar">
-            <a href="javascript:void(0)" class="logo">Letti<span>che</span></a>
+            <a href="#" class="logo">Letti<span>che</span></a>
             <div class="nav-links">
                 <?php
                 if (
@@ -62,8 +62,12 @@ $mysql->desconectar();
                 ) {
                     echo '
                             <a href="./views/Login.php" class="nav-item">
-                                <span class="nav-item-text">Iniciar Sesión</span>
+                                <span class="nav-item-text" id="iniciarSesion">Iniciar Sesión</span>
                                 <i class="fas fa-user-circle d-inline d-md-none"></i>
+                            </a>
+                            <a href="./views/Login.php" class="nav-item cart-icon">
+                              <i class="fas fa-shopping-cart"></i>
+                              <span class="cart-count">0</span>
                             </a>
                         ';
                 } else {
@@ -74,13 +78,13 @@ $mysql->desconectar();
                                 <span class="nav-item-text">Cerrar sesión</span>
                                 <i class="fa fa-sign-out d-inline d-md-none"></i>
                             </a>
+                            <a href="./views/carrito.php" class="nav-item cart-icon">
+                              <i class="fas fa-shopping-cart"></i>
+                              <span class="cart-count">0</span>
+                            </a>
                         ';
                 }
                 ?>
-                <a href="./views/carrito.php" class="nav-item cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
 
             </div>
         </nav>

@@ -1,11 +1,21 @@
 //obtenemos las llaves de los productos comprados para obtener el total del carrito
 let productosComprados = Object.keys(localStorage);
 let totalCarrito = 0;
+let iniciarSesion = document.querySelector("#iniciarSesion") ?? null;
 
 totalCarrito = productosComprados.length;
 
 let contadorCarrito = document.querySelector(".cart-count");
-contadorCarrito.textContent = totalCarrito;
+if (iniciarSesion != null) {
+  if (iniciarSesion.textContent == "Iniciar Sesión") {
+    contadorCarrito.textContent = 0;
+    localStorage.clear();
+  }
+}
+else {
+  contadorCarrito.textContent =  totalCarrito;
+}
+
 
 // obtenemos el producto en formato de objeto
 function almacenarProductoStorage(producto) {
