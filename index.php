@@ -70,7 +70,7 @@ $mysql->desconectar();
                             </a>
                         ';
                 } else {
-                    $nombre = isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : 'Usuario';
+                    $nombre = isset($_SESSION['nombre']) ? htmlspecialchars(strtolower($_SESSION['nombre'])) : 'Usuario';
                     echo '
                             <span class="nav-item-text">Hola, ' . $nombre . '</span>
                             <a href="./controllers/procesarLogout.php" class="nav-item">
