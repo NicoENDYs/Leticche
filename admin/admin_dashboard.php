@@ -1,16 +1,16 @@
 <?php
 require_once '../controllers/check_session.php';
-    require_once '../models/MySQL.php';
-    $mysql = new MySQL;
-    $mysql->conectar();
+require_once '../models/MySQL.php';
+$mysql = new MySQL;
+$mysql->conectar();
 
 
-    $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
+$resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
     FROM usuarios 
     WHERE cargo = 'USER'");
 
 
-    $mysql->desconectar();
+$mysql->desconectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,7 +28,7 @@ require_once '../controllers/check_session.php';
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
-    
+
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
@@ -38,7 +38,7 @@ require_once '../controllers/check_session.php';
 
 <body>
 
-<!-- Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="brand">
             <img src="../images/Logo_Lenteja.png" alt="Lenticche Logo">
@@ -52,7 +52,7 @@ require_once '../controllers/check_session.php';
                 </a>
             </li>
             <li class="nav-item" data-title="Usuarios">
-                <a href="./admin_dashboard.php" class="nav-link active" >
+                <a href="./admin_dashboard.php" class="nav-link active">
                     <i class="fas fa-users"></i>
                     <span>Usuarios</span>
                 </a>
@@ -70,7 +70,7 @@ require_once '../controllers/check_session.php';
                 </a>
             </li>
             <li class="nav-item" data-title="Reportes">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="./admin_reportes.php" class="nav-link">
                     <i class="fas fa-chart-line"></i>
                     <span>Reportes</span>
                 </a>
@@ -93,59 +93,65 @@ require_once '../controllers/check_session.php';
 
     <!-- aparece en movil -->
     <nav class="navbar navbar-expand-lg navbar-light bg-custom d-lg-none">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-light" href="#">
-            <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
-            Leticche
-        </a>
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-light" href="#">
+                <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
+                Leticche
+            </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a href="./admin_index.php" class="nav-link">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Inicio</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a href="./admin_dashboard.php" class="nav-link active">
-                    <i class="fas fa-users"></i>
-                    <span>Usuarios</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a href="./admin_productos.php" class="nav-link">
-                    <i class="fas fa-box"></i>
-                    <span>Productos</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Pedidos</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="../index.php" class="nav-link">
-                    <i class="fa fa-cutlery"></i>
-                    <span>Ver Articulos</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="../controllers/procesarLogout.php">
-                    <button type="button" class="btn btn-danger fw-bold">
-                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
-                    </button>
-                </a>
-            </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="./admin_index.php" class="nav-link">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./admin_dashboard.php" class="nav-link active">
+                            <i class="fas fa-users"></i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./admin_productos.php" class="nav-link">
+                            <i class="fas fa-box"></i>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-title="Reportes">
+                        <a href="./admin_reportes.php" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../index.php" class="nav-link">
+                            <i class="fa fa-cutlery"></i>
+                            <span>Ver Articulos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../controllers/procesarLogout.php">
+                            <button type="button" class="btn btn-danger fw-bold">
+                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
 

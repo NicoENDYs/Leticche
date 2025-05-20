@@ -26,7 +26,7 @@ $mysql->desconectar();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
-    
+
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
@@ -69,7 +69,7 @@ $mysql->desconectar();
                 </a>
             </li>
             <li class="nav-item" data-title="Reportes">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="./admin_reportes.php" class="nav-link">
                     <i class="fas fa-chart-line"></i>
                     <span>Reportes</span>
                 </a>
@@ -126,6 +126,12 @@ $mysql->desconectar();
                         <a href="javascript:void(0)" class="nav-link">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-title="Reportes">
+                        <a href="./admin_reportes.php" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Reportes</span>
                         </a>
                     </li>
                     <li class="nav-item">
