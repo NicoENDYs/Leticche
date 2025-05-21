@@ -1,14 +1,14 @@
 :root {
-    --primary-color: #4e7a02;
-    --primary-light: #6ca72a;
-    --primary-dark: #3e5f02;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --primary-color: #415824; /* Woodland - replacing the original green */
+    --primary-light: #5a7836; /* Lighter shade of Woodland */
+    --primary-dark: #2d3f18; /* Darker shade of Woodland */
+    --secondary-color: #9A9B9B; /* Pewter */
+    --success-color: #CD8E56; /* Tussock - for successful actions */
+    --danger-color: #6F411B; /* Walnut - for dangerous actions */
+    --warning-color: #CD8E56; /* Tussock - for warnings */
+    --info-color: #9A9B9B; /* Pewter - for info */
+    --light-color: #F5E9D5; /* Albescent White */
+    --dark-color: #282317; /* Zeus */
     --sidebar-width: 250px;
     --sidebar-collapsed-width: 70px;
     --border-radius: 10px;
@@ -17,9 +17,9 @@
 }
 
 body {
-    background-color: #f5f9fc;
+    background-color: #f5f4ef; /* Lighter version of Albescent White */
     font-family: 'Poppins', sans-serif;
-    color: #495057;
+    color: #282317; /* Zeus - for main text */
     overflow-x: hidden;
     transition: all var(--transition-speed) ease;
 }
@@ -31,17 +31,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #F5E9D5; /* Albescent White */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #9A9B9B; /* Pewter */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #7a7b7b; /* Darker Pewter */
 }
 
 /* Sidebar Styles */
@@ -146,7 +146,7 @@ body {
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(40, 35, 23, 0.8); /* Zeus with opacity */
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -194,7 +194,7 @@ body {
 }
 
 .navbar .dropdown-item:hover {
-    background-color: #f8f9fa;
+    background-color: #F5E9D5; /* Albescent White */
     color: var(--primary-color);
 }
 
@@ -215,7 +215,7 @@ body {
 }
 
 .sidebar-toggle:hover {
-    background-color: #f1f1f1;
+    background-color: #F5E9D5; /* Albescent White */
 }
 
 .user-dropdown {
@@ -248,7 +248,7 @@ body {
     right: 0;
     width: 150px;
     height: 100%;
-    background: linear-gradient(135deg, rgba(78, 122, 2, 0.05), rgba(78, 122, 2, 0.1));
+    background: linear-gradient(135deg, rgba(65, 88, 36, 0.05), rgba(65, 88, 36, 0.1)); /* Woodland with opacity */
     clip-path: polygon(100% 0, 0 0, 100% 100%);
 }
 
@@ -276,15 +276,15 @@ body {
 }
 
 .stat-card.users {
-    border-left-color: var(--primary-color);
+    border-left-color: var(--primary-color); /* Woodland */
 }
 
 .stat-card.active {
-    border-left-color: var(--success-color);
+    border-left-color: var(--success-color); /* Tussock */
 }
 
 .stat-card.inactive {
-    border-left-color: var(--warning-color);
+    border-left-color: var(--warning-color); /* Tussock */
 }
 
 .stat-card .icon {
@@ -297,17 +297,17 @@ body {
 }
 
 .stat-card.users .icon {
-    background-color: rgba(78, 122, 2, 0.1);
+    background-color: rgba(65, 88, 36, 0.1); /* Woodland with opacity */
     color: var(--primary-color);
 }
 
 .stat-card.active .icon {
-    background-color: rgba(40, 167, 69, 0.1);
+    background-color: rgba(205, 142, 86, 0.1); /* Tussock with opacity */
     color: var(--success-color);
 }
 
 .stat-card.inactive .icon {
-    background-color: rgba(255, 193, 7, 0.1);
+    background-color: rgba(205, 142, 86, 0.1); /* Tussock with opacity */
     color: var(--warning-color);
 }
 
@@ -358,7 +358,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: #f8f9fa; /* Asegura que el fondo del encabezado sea visible */
+    background-color: #F5E9D5; /* Albescent White - para el encabezado de la tabla */
 }
 
 /* Estilos para la barra de desplazamiento */
@@ -371,15 +371,13 @@ body {
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #9A9B9B; /* Pewter */
     border-radius: 10px;
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #7a7b7b; /* Darker Pewter */
 }
-
-
 
 .data-card .table {
     margin-bottom: 0;
@@ -387,8 +385,8 @@ body {
 
 .data-card .table th {
     font-weight: 600;
-    color: #495057;
-    background-color: #f8f9fa;
+    color: #282317; /* Zeus */
+    background-color: #F5E9D5; /* Albescent White */
     border-top: none;
     padding: 15px 25px;
 }
@@ -407,13 +405,13 @@ body {
     justify-content: center;
     font-weight: bold;
     color: white;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Woodland */
     margin-right: 12px;
 }
 
 .user-name {
     font-weight: 500;
-    color: var(--dark-color);
+    color: var(--dark-color); /* Zeus */
 }
 
 .status-badge {
@@ -426,13 +424,13 @@ body {
 }
 
 .status-active {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: var(--success-color);
+    background-color: rgba(205, 142, 86, 0.1); /* Tussock with opacity */
+    color: var(--success-color); /* Tussock */
 }
 
 .status-inactive {
-    background-color: rgba(255, 193, 7, 0.1);
-    color: var(--warning-color);
+    background-color: rgba(205, 142, 86, 0.1); /* Tussock with opacity */
+    color: var(--warning-color); /* Tussock */
 }
 
 .status-badge i {
@@ -458,7 +456,7 @@ body {
 }
 
 .btn-edit {
-    color: var(--info-color);
+    color: var(--info-color); /* Pewter */
     border: 1px solid var(--info-color);
 }
 
@@ -468,7 +466,7 @@ body {
 }
 
 .btn-activate {
-    color: var(--success-color);
+    color: var(--success-color); /* Tussock */
     border: 1px solid var(--success-color);
 }
 
@@ -478,7 +476,7 @@ body {
 }
 
 .btn-deactivate {
-    color: var(--warning-color);
+    color: var(--warning-color); /* Tussock */
     border: 1px solid var(--warning-color);
 }
 
@@ -488,7 +486,7 @@ body {
 }
 
 .btn-delete {
-    color: var(--danger-color);
+    color: var(--danger-color); /* Walnut */
     border: 1px solid var(--danger-color);
 }
 
@@ -496,7 +494,6 @@ body {
     background-color: var(--danger-color);
     color: white;
 }
-
 
 /* Empty State */
 .empty-state {
@@ -506,7 +503,7 @@ body {
 
 .empty-state i {
     font-size: 3rem;
-    color: #dee2e6;
+    color: #9A9B9B; /* Pewter */
     margin-bottom: 20px;
 }
 
@@ -542,7 +539,7 @@ body {
     height: 1.5rem;
     border: 0.2rem solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    border-top-color: var(--primary-color);
+    border-top-color: var(--primary-color); /* Woodland */
     animation: spin 0.8s linear infinite;
 }
 
@@ -569,7 +566,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 10px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(40, 35, 23, 0.8); /* Zeus with opacity */
     color: white;
     border-radius: 4px;
     font-size: 0.75rem;
@@ -655,14 +652,13 @@ body {
     }
 }
 
-
 .sidebar-overlay.active {
     display: block;
 }
 
 /* Color principal del navbar */
 .bg-custom {
-    background-color: rgb(55, 77, 53) !important;
+    background-color: #415824 !important; /* Woodland */
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -672,9 +668,8 @@ body {
     transition: color 0.3s ease;
 }
 
-
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: #f4a460 !important; /* Color naranja suave al pasar el mouse */
+    color: #CD8E56 !important; /* Tussock - reemplazando el naranja suave */
 }
 
 .navbar-dark .navbar-toggler {
@@ -692,9 +687,6 @@ body {
     padding: 12px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 @media (max-width: 991.98px) {
     .navbar-collapse {

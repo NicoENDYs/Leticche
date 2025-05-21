@@ -1,23 +1,23 @@
 :root {
-    --primary-color: #4e7a02;
-    --primary-light: #6ca72a;
-    --primary-dark: #3e5f02;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --primary-color: #415824; /* Woodland - replacing the original green */
+    --primary-light: #5a7836; /* Lighter shade of Woodland */
+    --primary-dark: #2d3f18; /* Darker shade of Woodland */
+    --secondary-color: #9A9B9B; /* Pewter */
+    --success-color: #CD8E56; /* Tussock - for successful actions */
+    --danger-color: #6F411B; /* Walnut - for dangerous actions */
+    --warning-color: #CD8E56; /* Tussock - for warnings */
+    --info-color: #9A9B9B; /* Pewter - for info */
+    --light-color: #F5E9D5; /* Albescent White */
+    --dark-color: #282317; /* Zeus */
     --border-radius: 10px;
     --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     --transition-speed: 0.3s;
 }
 
 body {
-    background-color: #f5f9fc;
+    background-color: #f5f4ef; /* Lighter version of Albescent White */
     font-family: 'Poppins', sans-serif;
-    color: #495057;
+    color: #282317; /* Zeus - for main text */
     overflow-x: hidden;
     transition: all var(--transition-speed) ease;
 }
@@ -29,17 +29,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #F5E9D5; /* Albescent White */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: #9A9B9B; /* Pewter */
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: #7a7b7b; /* Darker Pewter */
 }
 
 h1 {
@@ -108,12 +108,12 @@ h1:after {
 }
 
 .btn-danger {
-    background-color: var(--danger-color);
+    background-color: var(--danger-color); /* Now Walnut */
     border: none;
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #5a3415; /* Darker Walnut */
 }
 
 .menu-option {
@@ -137,17 +137,17 @@ h1:after {
 .menu-option i {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Woodland */
 }
 
 .menu-option h4 {
     font-weight: 600;
-    color: var(--dark-color);
+    color: var(--dark-color); /* Zeus */
     margin-bottom: 0.5rem;
 }
 
 .menu-option p {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Pewter */
     text-align: center;
 }
 

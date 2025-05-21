@@ -20,6 +20,8 @@ $mysql->desconectar();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lettiche</title>
+    
+    <link rel="stylesheet" href="./styles/ecommerce.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -27,22 +29,21 @@ $mysql->desconectar();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./styles/ecommerce.css">
 
     <script defer src="./js/productosStorage.js"></script>
     <script>
-    function nomenclaturaPrecio(precio) {
-        return `$${parseFloat(precio).toLocaleString("es-CL")}`;
-    }
+        function nomenclaturaPrecio(precio) {
+            return `$${parseFloat(precio).toLocaleString("es-CL")}`;
+        }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const precios = document.querySelectorAll('.current-price');
+        document.addEventListener("DOMContentLoaded", function() {
+            const precios = document.querySelectorAll('.current-price');
 
-        precios.forEach(span => {
-            const rawPrecio = span.dataset.precio;
-            span.innerText = nomenclaturaPrecio(rawPrecio);
+            precios.forEach(span => {
+                const rawPrecio = span.dataset.precio;
+                span.innerText = nomenclaturaPrecio(rawPrecio);
+            });
         });
-    });
     </script>
 </head>
 
@@ -50,7 +51,11 @@ $mysql->desconectar();
     <!-- Header con navegación -->
     <header class="header">
         <nav class="navbar">
-            <a href="#" class="logo">Letti<span>che</span></a>
+            <div class="brand">
+                <img src="./images/Logo_Lenteja.png" alt="Lenticche Logo">
+                <a href="#" class="logo">Lenti<span>cche</span></a>
+            </div>
+
             <div class="nav-links">
                 <?php
                 if (
@@ -65,8 +70,8 @@ $mysql->desconectar();
                                 <i class="fas fa-user-circle d-inline d-md-none"></i>
                             </a>
                             <a href="./views/Login.php?info=10" class="nav-item cart-icon">
-                              <i class="fas fa-shopping-cart"></i>
-                              <span class="cart-count">0</span>
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
                             </a>
                         ';
                 } else {
@@ -95,49 +100,49 @@ $mysql->desconectar();
 
 
             <?php if (mysqli_num_rows($resultado) > 0): ?>
-            <!-- Producto 1 -->
+                <!-- Producto 1 -->
 
-            <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
-            <div class="product-card" id='<?php echo $producto['id'] ?>'>
-                <div class="product-image">
-                    <img src="./img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title"><?php echo $producto['nombre']; ?></h3>
-                    <p class="product-description"><?php echo $producto['descripcion']; ?></p>
-                    <div class="product-price">
-                        <span class="current-price" data-precio="<?php echo $producto['precio']; ?>"></span>
-                    </div>
-                    <div class="product-footer">
-                        <div class="rating">
-                            <!--<div class="stars">★★★★☆</div>
+                <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
+                    <div class="product-card" id='<?php echo $producto['id'] ?>'>
+                        <div class="product-image">
+                            <img src="./img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title"><?php echo $producto['nombre']; ?></h3>
+                            <p class="product-description"><?php echo $producto['descripcion']; ?></p>
+                            <div class="product-price">
+                                <span class="current-price" data-precio="<?php echo $producto['precio']; ?>"></span>
+                            </div>
+                            <div class="product-footer">
+                                <div class="rating">
+                                    <!--<div class="stars">★★★★☆</div>
                                         <span class="rating-count">(45)</span>
                                         -->
-                        </div>
-                        <?php if (
+                                </div>
+                                <?php if (
                                     empty($_SESSION['usuario_id']) &&
                                     empty($_SESSION['nombre']) &&
                                     empty($_SESSION['cargo']) &&
                                     empty($_SESSION['correo'])
                                 ): ?>
 
-                        <a href="./views/Login.php?info=10" class="nav-item">
-                            <span class="nav-item-text">
-                                <button class="add-login btn">Añadir</button></span>
-                        </a>
+                                    <a href="./views/Login.php?info=10" class="nav-item">
+                                        <span class="nav-item-text">
+                                            <button class="add-login btn">Añadir</button></span>
+                                    </a>
 
-                        <?php else: ?>
+                                <?php else: ?>
 
-                        <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1;
+                                    <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1;
                                     echo json_encode($producto); ?>)'>Añadir</button>
-                        <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <?php endwhile; ?>
+                <?php endwhile; ?>
             <?php else: ?>
-            <p class="text-center mt-5 text-black">No hay Usuarios registrados.</p>
+                <p class="text-center mt-5 text-black">No hay Usuarios registrados.</p>
             <?php endif; ?>
         </div>
     </div>

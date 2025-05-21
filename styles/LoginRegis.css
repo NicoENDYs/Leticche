@@ -1,21 +1,21 @@
 :root {
-    --primary-color: #4e7a02;
-    --primary-light: #6ca72a;
-    --primary-dark: #3e5f02;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #17a2b8;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --primary-color: #415824; /* Woodland - replacing the original green */
+    --primary-light: #5a7836; /* Lighter shade of Woodland */
+    --primary-dark: #2d3f18; /* Darker shade of Woodland */
+    --secondary-color: #9A9B9B; /* Pewter */
+    --success-color: #CD8E56; /* Tussock - for successful actions */
+    --danger-color: #6F411B; /* Walnut - for dangerous actions */
+    --warning-color: #CD8E56; /* Tussock - for warnings */
+    --info-color: #9A9B9B; /* Pewter - for info */
+    --light-color: #F5E9D5; /* Albescent White */
+    --dark-color: #282317; /* Zeus */
     --border-radius: 10px;
     --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     --transition-speed: 0.3s;
 }
 
 body {
-    background-color: #f5f9fc;
+    background-color: #f5f4ef;
     font-family: 'Poppins', sans-serif;
     color: #495057;
     overflow-x: hidden;
@@ -94,12 +94,12 @@ h2:after {
 
 .form-control:focus {
     border-color: var(--primary-light);
-    box-shadow: 0 0 0 0.2rem rgba(78, 122, 2, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(65, 88, 36, 0.25);
 }
 
 .form-control.is-invalid {
     border-color: var(--danger-color);
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%236F411B'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%236F411B' stroke='none'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right calc(0.375em + 0.1875rem) center;
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
@@ -155,7 +155,7 @@ h2:after {
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #5a3516;
 }
 
 .spinner-wrapper {
