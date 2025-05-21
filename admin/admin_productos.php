@@ -271,9 +271,16 @@ $mysql->desconectar();
                                             <a href="EditarProducto.php?id=<?php echo $productos['id']; ?>" class="btn btn-sm btn-outline-info btn-action" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');" class="btn btn-sm btn-outline-danger btn-action" title="Eliminar">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
+                                            <?php if ($productos['Estado'] == 'ACTIVO'): ?>
+                                                <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');" class="btn btn-sm btn-outline-danger btn-action" title="Eliminar">
+                                                  <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            <?php else: ?>
+                                                <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Eliminar">
+                                                  <i class="fas fa-plus"></i>
+                                                </a>
+                                            <?php endif; ?>
+                                            
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
