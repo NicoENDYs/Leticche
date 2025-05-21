@@ -312,8 +312,5 @@ $mysql->desconectar();
     <!-- CountUp.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
     <!-- Custom JS -->
-    <script src="../scripts/admin_dashboard.js"></script>
-
-
-
+    <script src="../js/adminDashboard.js"></script>
 </html>

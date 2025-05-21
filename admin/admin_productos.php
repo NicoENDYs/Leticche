@@ -14,6 +14,7 @@ $consulta = "SELECT COUNT(*) AS productos_activos FROM productos WHERE Estado = 
 $resultadoProductos = $mysql -> efectuarConsulta($consulta);
 $cantidadProductosActivos = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_activos'] : "Error de extracción";
 
+//contar productos sin stock
 $consulta = "SELECT COUNT(*) AS productos_sin_stock FROM productos WHERE stock <= 0";
 $resultadoProductos = $mysql -> efectuarConsulta($consulta);
 $cantidadProductosSinStock = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_sin_stock'] : "Error de extracción";
