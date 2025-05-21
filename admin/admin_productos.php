@@ -251,7 +251,7 @@ $mysql->desconectar();
                                         <td><?php echo $productos['id']; ?></td>
                                         <td><?php echo $productos['nombre']; ?></td>
                                         <td><?php echo $productos['descripcion']; ?></td>
-                                        <td><?php echo $productos['precio']; ?></td>
+                                        <td><?php echo '$' . number_format($productos['precio'], 0, ',', '.'); ?></td>
                                         <td><?php echo $productos['stock']; ?></td>
                                         <td>
                                             <?php if ($productos['Estado'] == 'ACTIVO'): ?>
