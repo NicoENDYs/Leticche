@@ -56,7 +56,7 @@ class PDF extends FPDF
             $this->Cell($w[4], 6, $row['stock'], 'LR', 0, 'C', $fill);
 
             // Estado como texto
-            $estado = ($row['Estado'] == 1) ? 'Activo' : 'Inactivo';
+            $estado = ($row['Estado'] == 'ACTIVO') ? 'Activo' : 'Inactivo';
             $this->Cell($w[5], 6, $estado, 'LR', 0, 'C', $fill);
 
 
