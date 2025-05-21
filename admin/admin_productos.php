@@ -276,7 +276,7 @@ $mysql->desconectar();
                                                   <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             <?php else: ?>
-                                                <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Eliminar">
+                                                <a href="../controllers/restaurarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Eliminar">
                                                   <i class="fas fa-plus"></i>
                                                 </a>
                                             <?php endif; ?>
