@@ -9,16 +9,14 @@ $resultado = $mysql->efectuarConsulta("
 SELECT id, nombre, descripcion, precio,stock, Estado, imagen
 FROM productos");
 
+//contar productos activos
 $consulta = "SELECT COUNT(*) AS productos_activos FROM productos WHERE Estado = 'ACTIVO'";
 $resultadoProductos = $mysql -> efectuarConsulta($consulta);
-$cantidadProductosActivos;
+$cantidadProductosActivos = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_activos'] : "Error de extracción";
 
-if($fila = mysqli_fetch_assoc($resultadoProductos)){
-    $cantidadProductosActivos = $fila['productos_activos'];
-}
-else{
-    $cantidadProductosActivos = "Error de extracción";
-}
+$consulta = "SELECT COUNT(*) AS productos_sin_stock FROM productos WHERE stock <= 0";
+$resultadoProductos = $mysql -> efectuarConsulta($consulta);
+$cantidadProductosSinStock = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_sin_stock'] : "Error de extracción";
 $mysql->desconectar();
 ?>
 <!DOCTYPE html>
@@ -214,7 +212,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Sin Stock</div>
-                            <h3 class="counter-value">27</h3>
+                            <h3 class="counter-value"><?php echo $cantidadProductosSinStock?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-exclamation-circle fa-2x"></i>
