@@ -9,6 +9,16 @@ $resultado = $mysql->efectuarConsulta("
 SELECT id, nombre, descripcion, precio,stock, Estado, imagen
 FROM productos");
 
+$consulta = "SELECT COUNT(*) AS productos_activos FROM productos WHERE Estado = 'ACTIVO'";
+$resultadoProductos = $mysql -> efectuarConsulta($consulta);
+$cantidadProductosActivos;
+
+if($fila = mysqli_fetch_assoc($resultadoProductos)){
+    $cantidadProductosActivos = $fila['productos_activos'];
+}
+else{
+    $cantidadProductosActivos = "Error de extracción";
+}
 $mysql->desconectar();
 ?>
 <!DOCTYPE html>
@@ -191,7 +201,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Productos Activos</div>
-                            <h3 class="counter-value">98</h3>
+                            <h3 class="counter-value"><?php echo $cantidadProductosActivos?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-check-circle fa-2x"></i>
