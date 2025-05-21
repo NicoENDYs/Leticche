@@ -27,7 +27,7 @@ if (
     }
 
 
-    $resultado = $mysql->efectuarConsulta("SELECT id, nombre ,Correo, cargo, pass 
+    $resultado = $mysql->efectuarConsulta("SELECT id, nombre, Correo, direccion, telefono, cargo, pass 
     FROM usuarios WHERE correo = '$correo' and estado = 'ACTIVO'");
 
     $hash = password_hash($contrasena, PASSWORD_BCRYPT);
