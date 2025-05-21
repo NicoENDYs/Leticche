@@ -6,8 +6,7 @@ $mysql->conectar();
 
 
 $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
-    FROM usuarios 
-    WHERE cargo = 'USER'");
+    FROM usuarios");
 
 //total usuarios
 $consulta = "SELECT COUNT(*) AS total_usuarios FROM usuarios";
