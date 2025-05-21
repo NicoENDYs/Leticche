@@ -10,17 +10,17 @@ $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, carg
 
 //total usuarios
 $consulta = "SELECT COUNT(*) AS total_usuarios FROM usuarios";
-$resultadoUsuarios = $mysql -> efectuarConsulta($consulta);
+$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
 $totalUsuarios = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios'] : "Error de extracción";
 
 //total usuarios activo
 $consulta = "SELECT COUNT(*) AS total_usuarios_activos FROM usuarios WHERE Estado = 'ACTIVO'";
-$resultadoUsuarios = $mysql -> efectuarConsulta($consulta);
+$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
 $totalUsuariosActivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios_activos'] : "Error de extracción";
 
 //total usuarios inactivo
 $consulta = "SELECT COUNT(*) AS total_usuarios_inactivos FROM usuarios WHERE Estado = 'INACTIVO'";
-$resultadoUsuarios = $mysql -> efectuarConsulta($consulta);
+$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
 $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios_inactivos'] : "Error de extracción";
 
 $mysql->desconectar();
@@ -202,7 +202,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Total Usuarios</div>
-                            <h3 class="counter-value"><?php echo $totalUsuarios?></h3>
+                            <h3 class="counter-value"><?php echo $totalUsuarios ?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-users fa-2x"></i>
@@ -215,7 +215,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Usuarios Activos</div>
-                            <h3 class="counter-value"><?php echo $totalUsuariosActivos?></h3>
+                            <h3 class="counter-value"><?php echo $totalUsuariosActivos ?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-user-check fa-2x"></i>
@@ -228,7 +228,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Usuarios Inactivos</div>
-                            <h3 class="counter-value"><?php echo $totalUsuariosInactivos?></h3>
+                            <h3 class="counter-value"><?php echo $totalUsuariosInactivos ?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-user-slash fa-2x"></i>
@@ -270,7 +270,16 @@ $mysql->desconectar();
                                             </div>
                                         </td>
                                         <td><?php echo $usuarios['correo']; ?> </td>
-                                        <td><?php echo $usuarios['telefono']; ?></td>
+                                        <td>
+                                            <?php
+                                            $tel = preg_replace('/\D/', '', $usuarios['telefono']); 
+                                            if (strlen($tel) === 10) {
+                                                echo substr($tel, 0, 3) . '-' . substr($tel, 3, 3) . '-' . substr($tel, 6);
+                                            } else {
+                                                echo $usuarios['telefono']; 
+                                            }
+                                            ?>
+                                        </td>
                                         <td><?php echo $usuarios['cargo']; ?></td>
                                         <td>
                                             <?php if ($usuarios['Estado'] == 'ACTIVO'): ?>
