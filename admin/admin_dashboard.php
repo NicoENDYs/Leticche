@@ -77,7 +77,7 @@ $mysql->desconectar();
                 </a>
             </li>
             <li class="nav-item" data-title="Pedidos">
-                <a href="javascript:void(0)" class="nav-link">
+                <a href="./admin_pedidos.php" class="nav-link">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Pedidos</span>
                 </a>
@@ -137,7 +137,7 @@ $mysql->desconectar();
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link">
+                        <a href="./admin_pedidos.php" class="nav-link">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Pedidos</span>
                         </a>
