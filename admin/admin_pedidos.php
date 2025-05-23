@@ -255,13 +255,17 @@ $mysql->desconectar();
                                 <option value="cancelled">Cancelado</option>
                             </select>
                         </div>
+                        <div class="col-md-3">
+                            <label for="dateFilter" class="form-label">Fecha</label>
+                            <input type="date" class="form-control" id="dateFilter">
+                        </div>
                         <div class="col-md-2">
                             <label class="form-label d-none d-md-block">&nbsp;</label>
                             <button type="button" class="btn btn-primary w-100">
                                 <i class="fas fa-filter me-2"></i>Filtrar
                             </button>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div class="text-center mb-5">
