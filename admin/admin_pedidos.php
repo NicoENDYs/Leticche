@@ -48,7 +48,7 @@ $mysql->desconectar();
     <div class="sidebar" id="sidebar">
         <div class="brand">
             <img src="../images/Logo_Lenteja.png" alt="Lenteja Logo">
-            <span class="d-block">Lenticche</span>
+            <span class="d-block">Lenticchie</span>
         </div>
         <ul class="nav flex-column px-3">
             <li class="nav-item" data-title="Inicio">
