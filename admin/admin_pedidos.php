@@ -8,10 +8,9 @@ $mysql->conectar();
 $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
     FROM usuarios");
 
-//total usuarios
-$consulta = "SELECT COUNT(*) AS total_usuarios FROM usuarios";
-$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
-$totalUsuarios = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios'] : "Error de extracción";
+//todos los pedidos
+$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos";
+$traerPedidos = $mysql->efectuarConsulta($consulta);
 
 //total usuarios activo
 $consulta = "SELECT COUNT(*) AS total_usuarios_activos FROM usuarios WHERE Estado = 'ACTIVO'";
@@ -23,7 +22,6 @@ $consulta = "SELECT COUNT(*) AS total_usuarios_inactivos FROM usuarios WHERE Est
 $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
 $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios_inactivos'] : "Error de extracción";
 
-$mysql->desconectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -169,7 +167,7 @@ $mysql->desconectar();
                 </button>
                 <span class="navbar-brand d-none d-md-block">Panel de Control</span>
                 <div class="ms-auto d-flex align-items-center">
-                    
+
                 </div>
             </div>
         </nav>
@@ -265,7 +263,7 @@ $mysql->desconectar();
                                 <i class="fas fa-filter me-2"></i>Filtrar
                             </button>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             <div class="text-center mb-5">
@@ -276,39 +274,79 @@ $mysql->desconectar();
             <!-- Cards Container -->
             <div id="ordersContainer">
                 <div class="row" id="orderCards">
+                    <?php
+                    while ($pedido = mysqli_fetch_assoc($traerPedidos)) {
+                        //modificar formato de fecha
+                        $nombreMeses = [
+                            1 => 'Enero',
+                            2 => 'Febrero',
+                            3 => 'Marzo',
+                            4 => 'Abril',
+                            5 => 'Mayo',
+                            6 => 'Junio',
+                            7 => 'Julio',
+                            8 => 'Agosto',
+                            9 => 'Septiembre',
+                            10 => 'Octubre',
+                            11 => 'Noviembre',
+                            12 => 'Diciembre'
+                        ];
+                        $traerFecha = $pedido["fecha"];
+                        $dateTime = new DateTime($traerFecha);
+                        $partesFecha = date_parse($pedido["fecha"]);
+                        $año = $partesFecha["year"];
+                        $mes = $nombreMeses[$partesFecha["month"]];
+                        $dia = $partesFecha["day"];
+                        $hora = $dateTime->format('g:i A');
+
+                        $fechaPedido = "$mes-$dia-$año ($hora)";
+
+                        //traer información del cliente
+                        $consulta = "SELECT nombre FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
+                        $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
+                        $nombreUsuario = mysqli_fetch_assoc($resultadoUsuarios);
+
+                        //todos los productos pedidos
+                        $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
+                        $traerProductos = $mysql->efectuarConsulta($consulta);
+
+                        echo '
+
                     <!-- Card 1 -->
                     <div class="col-md-6 col-lg-4 mb-4 animate-card">
                         <div class="order-card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>ID Pedido: 001</div>
-                                <span class="order-badge badge-pending">Pendiente</span>
+                                <div>ID Pedido: ' . $pedido["id"] . '</div>
+                                <span class="order-badge badge-pending">' . $pedido["estado"] . '</span>
                             </div>
                             <div class="card-body">
                                 <div class="order-info">
                                     <div class="label">Nombre del Cliente:</div>
-                                    <div class="value">Ioni</div>
+                                    <div class="value">' . $nombreUsuario["nombre"] . '</div>
                                 </div>
                                 <div class="order-info">
                                     <div class="label">Fecha del Pedido:</div>
-                                    <div class="value">14 de Mayo</div>
+                                    <div class="value">' . $fechaPedido . '</div>
                                 </div>
-                                <div class="order-items">
+                                <div class="order-info">
                                     <div class="label">Resumen de Artículos:</div>
+                              ';
+                              while($producto = mysqli_fetch_assoc($traerProductos)){
+                                //Traer nombre del producto
+                                $consulta = "SELECT nombre FROM productos WHERE id = '" . $producto["producto_id"] . "'";
+                                $traerNombreProducto = $mysql->efectuarConsulta($consulta);
+                                $nombreProducto = mysqli_fetch_assoc($traerNombreProducto);
+                                echo '
                                     <div class="order-item">
-                                        <span>Ensalada de Lentejas</span>
-                                        <span>x2</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Hamburguesa Vegetariana</span>
-                                        <span>x1</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Jugo Natural</span>
-                                        <span>x3</span>
-                                    </div>
+                                        <span>' . $nombreProducto["nombre"] . '</span>
+                                        <span>$' . number_format($producto["precio_unitario"], 0, ",", ".") . '</span>
+                                        <span>X' . $producto["cantidad"] . '</span>
+                                    </div>';
+                              };
+                                echo '
                                 </div>
                                 <div class="order-total">
-                                    Total: $45.90
+                                    Total: $' . number_format($pedido["total"], 0, ",", ".") . '
                                 </div>
                                 <div class="order-actions">
                                     <button class="btn btn-order-action btn-view">
@@ -321,103 +359,20 @@ $mysql->desconectar();
                             </div>
                         </div>
                     </div>
+                
+                ';
+                    }
 
-                    <!-- Card 2 -->
-                    <div class="col-md-6 col-lg-4 mb-4 animate-card">
-                        <div class="order-card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>ID Pedido: 002 </div>
-                                <span class="order-badge badge-processing">Procesando</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="order-info">
-                                    <div class="label">Nombre del Cliente:</div>
-                                    <div class="value">Uari</div>
-                                </div>
-                                <div class="order-info">
-                                    <div class="label">Fecha del Pedido:</div>
-                                    <div class="value">14 de Mayo</div>
-                                </div>
-                                <div class="order-items">
-                                    <div class="label">Resumen de Artículos:</div>
-                                    <div class="order-item">
-                                        <span>Sopa de Lentejas</span>
-                                        <span>x2</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Ensalada César</span>
-                                        <span>x1</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Refresco</span>
-                                        <span>x2</span>
-                                    </div>
-                                </div>
-                                <div class="order-total">
-                                    Total: $38.75
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-order-action btn-view">
-                                        <i class="fas fa-eye me-1"></i> Ver
-                                    </button>
-                                    <button class="btn btn-order-action btn-cancel">
-                                        <i class="fas fa-times me-1"></i> Cancelar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="col-md-6 col-lg-4 mb-4 animate-card">
-                        <div class="order-card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>ID Pedido: 003</div>
-                                <span class="order-badge badge-completed">Completado</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="order-info">
-                                    <div class="label">Nombre del Cliente:</div>
-                                    <div class="value">Ruí</div>
-                                </div>
-                                <div class="order-info">
-                                    <div class="label">Fecha del Pedido:</div>
-                                    <div class="value">14 de Mayo</div>
-                                </div>
-                                <div class="order-items">
-                                    <div class="label">Resumen de Artículos:</div>
-                                    <div class="order-item">
-                                        <span>Plato del Día</span>
-                                        <span>x3</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Postre Casero</span>
-                                        <span>x3</span>
-                                    </div>
-                                    <div class="order-item">
-                                        <span>Café</span>
-                                        <span>x3</span>
-                                    </div>
-                                </div>
-                                <div class="order-total">
-                                    Total: $62.50
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-order-action btn-view">
-                                        <i class="fas fa-eye me-1"></i> Ver
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    $mysql->desconectar();
+                    ?>
                 </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 
