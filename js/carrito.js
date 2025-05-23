@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             window.location.href = "productos.html";
         });
+        localStorage.removeItem("Console")
 });
 
 function cargarCarrito() {

@@ -37,7 +37,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
     <!-- Google Fonts - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../styles/adminDashboardProductos.css">
+    <link rel="stylesheet" href="../styles/pedidos.css">
 
 </head>
 
@@ -45,8 +45,8 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="brand">
-            <img src="../images/Logo_Lenteja.png" alt="Lenteja Logo">
-            <span class="d-block">Lenticchie</span>
+            <img src="../images/Logo_Lenteja.png" alt="Lenticche Logo">
+            <span class="d-block">Lenticche</span>
         </div>
         <ul class="nav flex-column px-3">
             <li class="nav-item" data-title="Inicio">
@@ -62,13 +62,13 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                 </a>
             </li>
             <li class="nav-item" data-title="Productos">
-                <a href="./admin_productos.php" class="nav-link">
+                <a href="./admin_productos.php" class="nav-link active">
                     <i class="fas fa-box"></i>
                     <span>Productos</span>
                 </a>
             </li>
             <li class="nav-item" data-title="Pedidos">
-                <a href="javascript:void(0)" class="nav-link active">
+                <a href="./admin_pedidos.php" class="nav-link">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Pedidos</span>
                 </a>
@@ -82,7 +82,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
             <li class="nav-item">
                 <a href="../index.php" class="nav-link">
                     <i class="fa fa-cutlery"></i>
-                    <span>Ver Artículos</span>
+                    <span>Ver Articulos</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -95,10 +95,10 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
         </ul>
     </div>
 
-    <!-- aparece en movil -->
+    <!-- Navbar para móvil -->
     <nav class="navbar navbar-expand-lg navbar-light bg-custom d-lg-none">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-light" href="javascript:void(0)">
+            <a class="navbar-brand fw-bold text-light" href="#">
                 <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
                 Lenticche
             </a>
@@ -109,26 +109,26 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" data-title="Inicio">
+                    <li class="nav-item">
                         <a href="./admin_index.php" class="nav-link">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Inicio</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-title="Usuarios">
+                    <li class="nav-item">
                         <a href="./admin_dashboard.php" class="nav-link">
                             <i class="fas fa-users"></i>
                             <span>Usuarios</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-title="Productos">
-                        <a href="./admin_productos.php" class="nav-link">
+                    <li class="nav-item">
+                        <a href="./admin_productos.php" class="nav-link active">
                             <i class="fas fa-box"></i>
                             <span>Productos</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-title="Pedidos">
-                        <a href="javascript:void(0)" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="./admin_pedidos.php" class="nav-link">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Pedidos</span>
                         </a>
@@ -142,14 +142,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                     <li class="nav-item">
                         <a href="../index.php" class="nav-link">
                             <i class="fa fa-cutlery"></i>
-                            <span>Ver Artículos</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../controllers/procesarLogout.php">
-                            <button type="button" class="btn btn-danger fw-bold">
-                                <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
-                            </button>
+                            <span>Ver Articulos</span>
                         </a>
                     </li>
                 </ul>
@@ -157,14 +150,12 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
         </div>
     </nav>
 
+
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <!-- Top Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <button class="sidebar-toggle d-none d-lg-block" id="sidebarToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
                 <span class="navbar-brand d-none d-md-block">Panel de Control</span>
                 <div class="ms-auto d-flex align-items-center">
 
@@ -241,9 +232,10 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
 
             <!-- Filtros -->
             <div class="data-card mb-4">
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-3 ml-5">
+                <div class="card-body px-4">
+                    <div class="row g-3 align-items-end mb-4">
+                        <!-- Filtro Estado -->
+                        <div class="col-md-4">
                             <label for="statusFilter" class="form-label">Estado</label>
                             <select class="form-select" id="statusFilter">
                                 <option value="">Todos</option>
@@ -253,19 +245,22 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                                 <option value="cancelled">Cancelado</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <!-- Filtro Fecha -->
+                        <div class="col-md-4">
                             <label for="dateFilter" class="form-label">Fecha</label>
                             <input type="date" class="form-control" id="dateFilter">
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label d-none d-md-block">&nbsp;</label>
-                            <button type="button" class="btn btn-primary w-100">
+                        <!-- Botón Filtrar -->
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary w-100 mt-md-2">
                                 <i class="fas fa-filter me-2"></i>Filtrar
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="text-center mb-5">
                 <button id="startOverBtn" class="btn btn-primary">
                     <i class="fas fa-redo-alt me-2"></i>Recargar
@@ -309,58 +304,73 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                         //todos los productos pedidos
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
                         $traerProductos = $mysql->efectuarConsulta($consulta);
+                        ///////////////////////////////Colores//////////////////////////////////////////////
+                        //badge-success  ///// ES PARA Entregado (VERDE CLARITO,FONDO GREEN GRISASEO)    ///
+                        //badge-pending  ///// ES PARA PENDIENTE (NARANJA CLARITO,FONDO "YELLOW")//      ///
+                        //badge-info       ///// ES PARA PROCESANDO (AZUL CLARITO,FONDO "LIGHTBLUE")     ///
+                        ////////////////////////////////////////////////////////////////////////////////////
+                        echo '
+    <!-- Card -->
+    <div class="col-md-6 col-lg-4 mb-4 animate-card">
+        <div class="order-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>ID Pedido: ' . $pedido["id"] . '</div>
+                <span class="order-badge badge-pending  ">' . $pedido["estado"] . '</span>
+            </div>
+            <div class="card-body">
+                <!-- Contenedor para todo el contenido excepto las acciones -->
+                <div class="order-content">
+                    <div class="order-info">
+                        <div><strong>Nombre del Cliente:</strong> ' . $nombreUsuario["nombre"] . '</div>
+                    </div>
+                    <div class="order-info">
+                        <div><strong>Fecha Pedido:</strong> ' . $fechaPedido . '</div>
+                    </div>
+                    <div class="order-info">
+                        <div class="label">Resumen de Artículos:</div>
+                        <div class="order-items">
+';
+
+                        while ($producto = mysqli_fetch_assoc($traerProductos)) {
+                            // Traer nombre del producto
+                            $consulta = "SELECT nombre FROM productos WHERE id = '" . $producto["producto_id"] . "'";
+                            $traerNombreProducto = $mysql->efectuarConsulta($consulta);
+                            $nombreProducto = mysqli_fetch_assoc($traerNombreProducto);
+                            echo '
+                            <div class="order-item">
+                                <span class="item-name">' . $nombreProducto["nombre"] . '</span>
+                                <span class="item-price">$' . number_format($producto["precio_unitario"], 0, ",", ".") . '</span>
+                                <span class="item-qty">X' . $producto["cantidad"] . '</span>
+                            </div>';
+                        };
 
                         echo '
-
-                    <!-- Card 1 -->
-                    <div class="col-md-6 col-lg-4 mb-4 animate-card">
-                        <div class="order-card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <div>ID Pedido: ' . $pedido["id"] . '</div>
-                                <span class="order-badge badge-pending">' . $pedido["estado"] . '</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="order-info">
-                                    <div class="label">Nombre del Cliente:</div>
-                                    <div class="value">' . $nombreUsuario["nombre"] . '</div>
-                                </div>
-                                <div class="order-info">
-                                    <div class="label">Fecha del Pedido:</div>
-                                    <div class="value">' . $fechaPedido . '</div>
-                                </div>
-                                <div class="order-info">
-                                    <div class="label">Resumen de Artículos:</div>
-                              ';
-                              while($producto = mysqli_fetch_assoc($traerProductos)){
-                                //Traer nombre del producto
-                                $consulta = "SELECT nombre FROM productos WHERE id = '" . $producto["producto_id"] . "'";
-                                $traerNombreProducto = $mysql->efectuarConsulta($consulta);
-                                $nombreProducto = mysqli_fetch_assoc($traerNombreProducto);
-                                echo '
-                                    <div class="order-item">
-                                        <span>' . $nombreProducto["nombre"] . '</span>
-                                        <span>$' . number_format($producto["precio_unitario"], 0, ",", ".") . '</span>
-                                        <span>X' . $producto["cantidad"] . '</span>
-                                    </div>';
-                              };
-                                echo '
-                                </div>
-                                <div class="order-total">
-                                    Total: $' . number_format($pedido["total"], 0, ",", ".") . '
-                                </div>
-                                <div class="order-actions">
-                                    <button class="btn btn-order-action btn-view">
-                                        <i class="fas fa-eye me-1"></i> Ver
-                                    </button>
-                                    <button class="btn btn-order-action btn-process">
-                                        <i class="fas fa-check me-1"></i> Procesar
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="order-total">
+                        <label>Total:</label>
+                        <span>$' . number_format($pedido["total"], 0, ",", ".") . '</span>
+                    </div>
                 
-                ';
+                <!-- Acciones siempre al final -->
+                <div class="order-actions">
+                
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1">Pendiente</option>
+                        <option value="2">Procesando</option>
+                        <option value="3">Enviado</option>
+                        <option value="4">Entregado</option>
+                    </select>
+                    <button class="btn btn-order-action btn-process">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+';
                     }
 
                     $mysql->desconectar();

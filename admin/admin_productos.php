@@ -11,12 +11,12 @@ FROM productos");
 
 //contar productos activos
 $consulta = "SELECT COUNT(*) AS productos_activos FROM productos WHERE Estado = 'ACTIVO'";
-$resultadoProductos = $mysql -> efectuarConsulta($consulta);
+$resultadoProductos = $mysql->efectuarConsulta($consulta);
 $cantidadProductosActivos = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_activos'] : "Error de extracción";
 
 //contar productos sin stock
 $consulta = "SELECT COUNT(*) AS productos_sin_stock FROM productos WHERE stock <= 0";
-$resultadoProductos = $mysql -> efectuarConsulta($consulta);
+$resultadoProductos = $mysql->efectuarConsulta($consulta);
 $cantidadProductosSinStock = ($fila = mysqli_fetch_assoc($resultadoProductos)) ? $fila['productos_sin_stock'] : "Error de extracción";
 $mysql->desconectar();
 ?>
@@ -104,7 +104,7 @@ $mysql->desconectar();
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-light" href="#">
                 <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
-                Leticche
+                Lenticche
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -200,7 +200,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Productos Activos</div>
-                            <h3 class="counter-value"><?php echo $cantidadProductosActivos?></h3>
+                            <h3 class="counter-value"><?php echo $cantidadProductosActivos ?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-check-circle fa-2x"></i>
@@ -213,7 +213,7 @@ $mysql->desconectar();
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="title">Sin Stock</div>
-                            <h3 class="counter-value"><?php echo $cantidadProductosSinStock?></h3>
+                            <h3 class="counter-value"><?php echo $cantidadProductosSinStock ?></h3>
                         </div>
                         <div class="icon">
                             <i class="fas fa-exclamation-circle fa-2x"></i>
@@ -273,14 +273,14 @@ $mysql->desconectar();
                                             </a>
                                             <?php if ($productos['Estado'] == 'ACTIVO'): ?>
                                                 <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');" class="btn btn-sm btn-outline-danger btn-action" title="Eliminar">
-                                                  <i class="fas fa-trash-alt"></i>
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             <?php else: ?>
-                                                <a href="../controllers/restaurarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Eliminar">
-                                                  <i class="fas fa-plus"></i>
+                                                <a href="../controllers/restaurarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Restaurar">
+                                                    <i class="fas fa-plus"></i>
                                                 </a>
                                             <?php endif; ?>
-                                            
+
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>

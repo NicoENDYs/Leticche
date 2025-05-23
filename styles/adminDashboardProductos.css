@@ -1,4 +1,4 @@
- :root {
+:root {
             --primary-color: #415824; /* Woodland - replacing the original green */
             --primary-light: #5a7836; /* Lighter shade of Woodland */
             --primary-dark: #2d3f18; /* Darker shade of Woodland */
@@ -696,138 +696,172 @@
                 margin-bottom: 5px;
             }
         }
+/* Estilos específicos para las tarjetas de pedidos */
+.order-card {
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    height: 100%;
+    /* Agregamos flexbox para distribuir el contenido */
+    display: flex;
+    flex-direction: column;
+}
 
-        /* Estilos específicos para las tarjetas de pedidos */
-        .order-card {
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
+.order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
 
-        .order-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
+.order-card .card-header {
+    background-color: var(--primary-color);
+    color: white;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: 15px 20px;
+    font-weight: 600;
+    /* El header mantiene su tamaño */
+    flex-shrink: 0;
+}
 
-        .order-card .card-header {
-            background-color: var(--primary-color);
-            color: white;
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            padding: 15px 20px;
-            font-weight: 600;
-        }
+.order-card .card-body {
+    padding: 20px;
+    /* El body ocupa todo el espacio disponible */
+    flex: 1;
+    /* Usamos flexbox para organizar el contenido */
+    display: flex;
+    flex-direction: column;
+}
 
-        .order-card .card-body {
-            padding: 20px;
-        }
+/* Contenedor principal del contenido (excluyendo las acciones) */
+.order-content {
+    /* Este div ocupará todo el espacio disponible excepto las acciones */
+    flex: 1;
+    margin-bottom: 15px;
+}
 
-        .order-info {
-            margin-bottom: 15px;
-        }
+.order-info {
+    margin-bottom: 15px;
+}
 
-        .order-info .label {
-            font-weight: 600;
-            color: var(--dark-color);
-            margin-bottom: 5px;
-        }
+.order-info .label {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
 
-        .order-info .value {
-            color: #555;
-        }
+.order-info .value {
+    color: #555;
+}
 
-        .order-items {
-            margin-bottom: 15px;
-        }
+.order-items {
+    margin-bottom: 15px;
+}
 
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed #eee;
-        }
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #eee;
+}
 
-        .order-item:last-child {
-            border-bottom: none;
-        }
+.order-item:last-child {
+    border-bottom: none;
+}
 
-        .order-total {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            margin-top: 15px;
-            text-align: right;
-        }
+.order-total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-top: 15px;
+    text-align: right;
+}
 
-        .order-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 15px;
-            gap: 10px;
-        }
+.order-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    /* Las acciones siempre estarán al final */
+    flex-shrink: 0;
+    margin-top: auto;
+}
 
-        .btn-order-action {
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-        }
+.btn-order-action {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
 
-        .btn-view {
-            background-color: var(--primary-light);
-            color: white;
-        }
+.btn-view {
+    background-color: var(--primary-light);
+    color: white;
+}
 
-        .btn-view:hover {
-            background-color: var(--primary-color);
-        }
+.btn-view:hover {
+    background-color: var(--primary-color);
+}
 
-        .btn-process {
-            background-color: var(--success-color);
-            color: white;
-        }
+.btn-process {
+    background-color: var(--success-color);
+    color: white;
+}
 
-        .btn-process:hover {
-            background-color: #b77b45; /* Darker Tussock */
-        }
+.btn-process:hover {
+    background-color: #b77b45; /* Darker Tussock */
+}
 
-        .btn-cancel {
-            background-color: var(--danger-color);
-            color: white;
-        }
+.btn-cancel {
+    background-color: var(--danger-color);
+    color: white;
+}
 
-        .btn-cancel:hover {
-            background-color: #5a3516; /* Darker Walnut */
-        }
+.btn-cancel:hover {
+    background-color: #5a3516; /* Darker Walnut */
+}
 
-        .order-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-left: 10px;
-        }
+.order-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-left: 10px;
+}
 
-        .badge-pending {
-            background-color: rgba(205, 142, 86, 0.1);
-            color: var(--warning-color);
-        }
+.badge-pending {
+    background-color: rgba(205, 142, 86, 0.1);
+    color: var(--warning-color);
+}
 
-        .badge-processing {
-            background-color: rgba(65, 88, 36, 0.1);
-            color: var(--primary-color);
-        }
+.badge-processing {
+    background-color: rgba(65, 88, 36, 0.1);
+    color: var(--primary-color);
+}
 
-        .badge-completed {
-            background-color: rgba(65, 88, 36, 0.1);
-            color: var(--primary-color);
-        }
+.badge-completed {
+    background-color: rgba(65, 88, 36, 0.1);
+    color: var(--primary-color);
+}
 
-        .badge-cancelled {
-            background-color: rgba(111, 65, 27, 0.1);
-            color: var(--danger-color);
-        }
+.badge-cancelled {
+    background-color: rgba(111, 65, 27, 0.1);
+    color: var(--danger-color);
+}
+
+/* Estilos adicionales para el select */
+.form-select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    flex: 1;
+    max-width: 150px;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(65, 88, 36, 0.25);
+}

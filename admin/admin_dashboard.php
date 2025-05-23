@@ -55,7 +55,7 @@ $mysql->desconectar();
     <div class="sidebar" id="sidebar">
         <div class="brand">
             <img src="../images/Logo_Lenteja.png" alt="Lenticche Logo">
-            <span class="d-block">Lenticchie</span>
+            <span class="d-block">Lenticche</span>
         </div>
         <ul class="nav flex-column px-3">
             <li class="nav-item" data-title="Inicio">
@@ -109,7 +109,7 @@ $mysql->desconectar();
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-light" href="#">
                 <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
-                Leticche
+                Lenticche
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -272,11 +272,11 @@ $mysql->desconectar();
                                         <td><?php echo $usuarios['correo']; ?> </td>
                                         <td>
                                             <?php
-                                            $tel = preg_replace('/\D/', '', $usuarios['telefono']); 
+                                            $tel = preg_replace('/\D/', '', $usuarios['telefono']);
                                             if (strlen($tel) === 10) {
                                                 echo substr($tel, 0, 3) . '-' . substr($tel, 3, 3) . '-' . substr($tel, 6);
                                             } else {
-                                                echo $usuarios['telefono']; 
+                                                echo $usuarios['telefono'];
                                             }
                                             ?>
                                         </td>

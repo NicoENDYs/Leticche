@@ -25,6 +25,11 @@
                 Ahora inicia sesión
             </div>
         <?php endif; ?>
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'acceso_denegado'): ?>
+            <div class="alert alert-info mt-3" role="alert">
+                Inicie Sesión de nuevo para acceder
+            </div>
+        <?php endif; ?>
 
         <?php if (isset($_GET['error']) && $_GET['error'] == '1'): ?>
             <div class="alert alert-danger mt-3" role="alert">

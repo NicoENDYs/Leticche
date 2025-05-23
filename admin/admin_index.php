@@ -56,9 +56,9 @@ $mysql->conectar();
                 <div class="col-md-4 mb-4">
                     <div class="menu-option">
                         <i class="fas fa-chart-line"></i>
-                        <h4>Estadísticas</h4>
-                        <p>Visualiza el rendimiento del sistema</p>
-                        <a href="javascript:void(0)" class="mt-3 w-100">
+                        <h4>Reportes</h4>
+                        <p>Permite sacar reportes de productos</p>
+                        <a href="./admin_reportes.php" class="mt-3 w-100">
                             <button type="button" class="btn btn-menu w-100 text-light">Acceder</button>
                         </a>
                     </div>

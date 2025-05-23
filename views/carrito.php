@@ -49,8 +49,6 @@ if (
                 <button class="close-btn" id="cerrarModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <img src="../images/Logo_Lenteja.png" alt="Logo de la Empresa" class="logo-empresa rounded">
-
                 <div class="factura-info">
                     <div class="factura-numero">Factura No: <strong>F-2025001</strong></div>
                     <div class="factura-fecha">Fecha: <strong id="fechaActual">19/05/2025</strong></div>
@@ -96,11 +94,6 @@ if (
                         <span>TOTAL:</span>
                         <span id="facturaTotal">$366.520</span>
                     </div>
-                </div>
-
-                <div class="factura-observaciones">
-                    <p><strong>Nota:</strong> Este es un resumen preliminar de tu compra. El recibo final se entregará
-                        una vez completado el pago.</p>
                 </div>
             </div>
             <div class="modal-footer">
