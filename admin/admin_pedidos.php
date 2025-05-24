@@ -73,13 +73,13 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                 </a>
             </li>
             <li class="nav-item" data-title="Productos">
-                <a href="./admin_productos.php" class="nav-link active">
+                <a href="./admin_productos.php" class="nav-link">
                     <i class="fas fa-box"></i>
                     <span>Productos</span>
                 </a>
             </li>
             <li class="nav-item" data-title="Pedidos">
-                <a href="./admin_pedidos.php" class="nav-link">
+                <a href="./admin_pedidos.php" class="nav-link active">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Pedidos</span>
                 </a>
@@ -133,13 +133,13 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./admin_productos.php" class="nav-link active">
+                        <a href="./admin_productos.php" class="nav-link">
                             <i class="fas fa-box"></i>
                             <span>Productos</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./admin_pedidos.php" class="nav-link">
+                        <a href="./admin_pedidos.php" class="nav-link active">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Pedidos</span>
                         </a>
