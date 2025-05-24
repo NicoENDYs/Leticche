@@ -5,15 +5,11 @@ $mysql = new MySQL;
 $mysql->conectar();
 
 $estadoFiltro = isset($_POST['estado']) ? $_POST['estado'] : '';
-$fechaFiltro = isset($_POST['fecha']) ? $_POST['fecha'] : '';
 
 $condiciones = [];
 
 if (!empty($estadoFiltro)) {
     $condiciones[] = "estado = '" . $estadoFiltro . "'";
-}
-if (!empty($fechaFiltro)) {
-    $condiciones[] = "DATE(fecha) = '" . $fechaFiltro . "'";
 }
 
 $where = !empty($condiciones) ? 'WHERE ' . implode(' AND ', $condiciones) : '';
