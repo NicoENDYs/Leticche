@@ -69,13 +69,6 @@ h1:after {
     margin-bottom: 2rem;
 }
 
-.btn {
-    border-radius: 8px;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    transition: all 0.3s ease;
-}
-
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -107,14 +100,6 @@ h1:after {
     left: 0;
 }
 
-.btn-danger {
-    background-color: var(--danger-color); /* Now Walnut */
-    border: none;
-}
-
-.btn-danger:hover {
-    background-color: #5a3415; /* Darker Walnut */
-}
 
 .menu-option {
     display: flex;
