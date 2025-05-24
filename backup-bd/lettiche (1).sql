@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2025 a las 23:09:19
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: May 24, 2025 at 02:02 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `lettiche`
+-- Database: `lettiche`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalles_pedido`
+-- Table structure for table `detalles_pedido`
 --
 
 CREATE TABLE `detalles_pedido` (
@@ -36,18 +36,25 @@ CREATE TABLE `detalles_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `detalles_pedido`
+-- Dumping data for table `detalles_pedido`
 --
 
 INSERT INTO `detalles_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio_unitario`) VALUES
 (8, 74, 3, 1, 3000.00),
 (9, 74, 2, 1, 12000.00),
-(10, 75, 1, 1, 10000.00);
+(10, 75, 1, 1, 10000.00),
+(11, 76, 2, 1, 12000.00),
+(12, 76, 1, 4, 10000.00),
+(13, 77, 2, 2, 12000.00),
+(14, 78, 2, 1, 12000.00),
+(15, 78, 3, 1, 3000.00),
+(16, 78, 4, 1, 12333.00),
+(17, 78, 1, 1, 10000.00);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedidos`
+-- Table structure for table `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -55,21 +62,25 @@ CREATE TABLE `pedidos` (
   `usuario_id` int(11) NOT NULL,
   `fecha` datetime DEFAULT current_timestamp(),
   `total` decimal(10,2) NOT NULL,
+  `direccion_envio` varchar(90) DEFAULT NULL,
   `estado` enum('pendiente','procesando','enviado','entregado') DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `pedidos`
+-- Dumping data for table `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `estado`) VALUES
-(74, 29, '2025-05-20 15:35:24', 17850.00, 'pendiente'),
-(75, 29, '2025-05-20 16:03:05', 11900.00, 'pendiente');
+INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `direccion_envio`, `estado`) VALUES
+(74, 29, '2025-05-20 15:35:24', 17850.00, '', 'pendiente'),
+(75, 29, '2025-05-20 16:03:05', 11900.00, '', 'pendiente'),
+(76, 4, '2025-05-20 18:18:05', 61880.00, NULL, 'pendiente'),
+(77, 4, '2025-05-23 15:24:28', 28560.00, NULL, 'pendiente'),
+(78, 4, '2025-05-23 18:15:21', 44426.27, NULL, 'pendiente');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -84,18 +95,19 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `fecha_creacion`, `Estado`) VALUES
 (1, 'Chorizo', 'un chorizo de carne de lentejas', 10000.00, 10, 'producto_68040c675dce4.jpg', '2025-04-15 17:03:05', 'ACTIVO'),
 (2, 'Carne de Lentejas', 'un kg de carne de lentejas', 12000.00, 10, 'producto_68040c6f482fb.jpg', '2025-04-15 17:12:03', 'ACTIVO'),
-(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 10, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'ACTIVO');
+(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 10, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'ACTIVO'),
+(4, 'Lentejas', 'lentejass', 12333.00, 21, 'producto_6830ffe17f436..jpg', '2025-05-23 18:08:17', 'ACTIVO');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `recuperacion`
+-- Table structure for table `recuperacion`
 --
 
 CREATE TABLE `recuperacion` (
@@ -106,7 +118,7 @@ CREATE TABLE `recuperacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `recuperacion`
+-- Dumping data for table `recuperacion`
 --
 
 INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
@@ -123,7 +135,7 @@ INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -138,13 +150,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Cargo`, `pass`, `Estado`) VALUES
-(1, 'Administrador', 'nicoend20537@gmail.com', 'Administrador', '1234567890', 'ADMIN', '', 'INACTIVO'),
+(1, 'Administrador', 'nicoend20537@gmail.com', 'Administrador', '1234567890', 'ADMIN', '', 'ACTIVO'),
 (2, 'Nicolas', 'guarinmolinan@gmail.coom', '', '3105986680', 'user', '$2y$10$3.fZ4VGc6w07Hp6/OpSOTumkiInsiKcaTcT01sBAkWOB.ngOZPUhu', 'ACTIVO'),
-(3, 'Maria', 'mari@gmail.com', '', '3110957284', 'user', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'ACTIVO'),
+(3, 'Maria', 'mari@gmail.com', '', '3110957284', 'user', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'INACTIVO'),
 (4, 'ENDYs', 'END@gmail.com', 'Administrador', '3100000000', 'ADMIN', '$2y$10$BFXqhejEmvdBkOnQY5Sc6urCU01YgrnRbGmwB77zjgMTZZSmYXAT.', 'ACTIVO'),
 (5, 'Jhonny', 'andres@gmail.com', '', '1234567899', 'user', '$2y$10$.gYVUWLrNOOH2onFZmJE8.m749HA4UPg0W20cueBhHAqXFw3SIszm', 'ACTIVO'),
 (6, 'Jhonny', 'user@domain.com', '', '1234567898', 'user', '$2y$10$SL2iCOQmVOBJm3SItbFm5OzE2tIGcVFdlo4ERZZqX4PcvtxSgy2B.', 'ACTIVO'),
@@ -153,11 +165,11 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Carg
 (29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', '', '9846164615', 'user', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `detalles_pedido`
+-- Indexes for table `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
   ADD PRIMARY KEY (`id`),
@@ -165,26 +177,26 @@ ALTER TABLE `detalles_pedido`
   ADD KEY `producto_id` (`producto_id`);
 
 --
--- Indices de la tabla `pedidos`
+-- Indexes for table `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `recuperacion`
+-- Indexes for table `recuperacion`
 --
 ALTER TABLE `recuperacion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -192,52 +204,52 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `unico_correo` (`correo`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `detalles_pedido`
+-- AUTO_INCREMENT for table `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT de la tabla `pedidos`
+-- AUTO_INCREMENT for table `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `recuperacion`
+-- AUTO_INCREMENT for table `recuperacion`
 --
 ALTER TABLE `recuperacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `detalles_pedido`
+-- Constraints for table `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
   ADD CONSTRAINT `detalles_pedido_ibfk_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   ADD CONSTRAINT `detalles_pedido_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 
 --
--- Filtros para la tabla `pedidos`
+-- Constraints for table `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
