@@ -12,15 +12,26 @@ $resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, carg
 $consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos";
 $traerPedidos = $mysql->efectuarConsulta($consulta);
 
-//total usuarios activo
-$consulta = "SELECT COUNT(*) AS total_usuarios_activos FROM usuarios WHERE Estado = 'ACTIVO'";
-$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
-$totalUsuariosActivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios_activos'] : "Error de extracción";
+//contar todos los pedidos
+$consulta = "SELECT COUNT(*) AS cantidad_pedidos FROM pedidos";
+$traerCantidadPedidos = $mysql -> efectuarConsulta($consulta);
+$cantidadPedidos = ($fila = mysqli_fetch_assoc($traerCantidadPedidos)) ? $fila['cantidad_pedidos'] : "Error de extracción";
 
-//total usuarios inactivo
-$consulta = "SELECT COUNT(*) AS total_usuarios_inactivos FROM usuarios WHERE Estado = 'INACTIVO'";
-$resultadoUsuarios = $mysql->efectuarConsulta($consulta);
-$totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fila['total_usuarios_inactivos'] : "Error de extracción";
+//contar todos los pedidos pendientes
+$consulta = "SELECT COUNT(*) AS cantidad_pendientes FROM pedidos WHERE estado = 'pendiente'";
+$traerPedidosPendientes = $mysql -> efectuarConsulta($consulta);
+$cantidadPedidosPendientes = ($fila = mysqli_fetch_assoc($traerPedidosPendientes)) ? $fila['cantidad_pendientes'] : "Error de extracción";
+
+//contar todos los pedidos completos
+$consulta = "SELECT COUNT(*) AS cantidad_completos FROM pedidos WHERE estado = 'entregado'";
+$traerPedidosCompletos = $mysql -> efectuarConsulta($consulta);
+$cantidadPedidosCompletos = ($fila = mysqli_fetch_assoc($traerPedidosCompletos)) ? $fila['cantidad_completos'] : "Error de extracción";
+
+//contar todos los pedidos cancelados
+$consulta = "SELECT COUNT(*) AS cantidad_cancelados FROM pedidos WHERE estado = 'cancelado'";
+$traerPedidosCancelados = $mysql -> efectuarConsulta($consulta);
+$cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados)) ? $fila['cantidad_cancelados'] : "Error de extracción";
+
 
 ?>
 <!DOCTYPE html>
@@ -100,7 +111,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-light" href="#">
                 <img src="../images/Logo_Lenteja.png" width="40" height="40" class="d-inline-block align-top" alt="">
-                Lenticche
+                Lenticchie
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -183,7 +194,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                                 <i class="fas fa-shopping-cart fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value">124</h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidos;?></h3>
                                 <div class="title">Total Pedidos</div>
                             </div>
                         </div>
@@ -196,7 +207,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                                 <i class="fas fa-clock fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value">28</h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosPendientes;?></h3>
                                 <div class="title">Pendientes</div>
                             </div>
                         </div>
@@ -209,7 +220,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                                 <i class="fas fa-check-circle fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value">82</h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosCompletos;?></h3>
                                 <div class="title">Completados</div>
                             </div>
                         </div>
@@ -222,7 +233,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                                 <i class="fas fa-ban fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value">14</h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosCancelados;?></h3>
                                 <div class="title">Cancelados</div>
                             </div>
                         </div>
