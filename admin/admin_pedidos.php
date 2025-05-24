@@ -57,7 +57,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
     <div class="sidebar" id="sidebar">
         <div class="brand">
             <img src="../images/Logo_Lenteja.png" alt="Lenticche Logo">
-            <span class="d-block">Lenticche</span>
+            <span class="d-block">Lenticchie</span>
         </div>
         <ul class="nav flex-column px-3">
             <li class="nav-item" data-title="Inicio">
@@ -378,18 +378,20 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                     </div>
                 
                 <!-- Acciones siempre al final -->
-                <div class="order-actions">
-                
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">Pendiente</option>
-                        <option value="2">Procesando</option>
-                        <option value="3">Enviado</option>
-                        <option value="4">Entregado</option>
-                    </select>
-                    <button class="btn btn-order-action btn-process">
-                        <i class="fas fa-check"></i>
-                    </button>
-                </div>
+                <form method="POST" action="../controllers/cambiarEstadoPedido.php">
+                    <div class="order-actions">
+                    <input type="hidden" name="id_pedido" value="' . $pedido["id"] . '">
+                        <select class="form-select" aria-label="Default select example" name="estado_pedido" required>
+                            <option value="" disabled selected>Cambiar Estado</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="procesando">Procesando</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                        <button class="btn btn-order-action btn-success">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
