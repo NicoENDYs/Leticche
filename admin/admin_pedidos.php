@@ -4,36 +4,38 @@ require_once '../models/MySQL.php';
 $mysql = new MySQL;
 $mysql->conectar();
 
+$estadoFiltro = isset($_POST['estado']) ? $_POST['estado'] : '';
+$fechaFiltro = isset($_POST['fecha']) ? $_POST['fecha'] : '';
 
-$resultado = $mysql->efectuarConsulta("SELECT id, nombre, correo, telefono, cargo, Estado
-    FROM usuarios");
+$condiciones = [];
 
-//todos los pedidos
-$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos";
+if (!empty($estadoFiltro)) {
+    $condiciones[] = "estado = '" . $estadoFiltro . "'";
+}
+if (!empty($fechaFiltro)) {
+    $condiciones[] = "DATE(fecha) = '" . $fechaFiltro . "'";
+}
+
+$where = !empty($condiciones) ? 'WHERE ' . implode(' AND ', $condiciones) : '';
+
+// Consulta con filtros aplicados
+$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos $where";
 $traerPedidos = $mysql->efectuarConsulta($consulta);
 
-//contar todos los pedidos
-$consulta = "SELECT COUNT(*) AS cantidad_pedidos FROM pedidos";
-$traerCantidadPedidos = $mysql->efectuarConsulta($consulta);
-$cantidadPedidos = ($fila = mysqli_fetch_assoc($traerCantidadPedidos)) ? $fila['cantidad_pedidos'] : "Error de extracción";
+// Contadores globales (sin filtros)
+$traerCantidadPedidos = $mysql->efectuarConsulta("SELECT COUNT(*) AS cantidad_pedidos FROM pedidos");
+$cantidadPedidos = ($fila = mysqli_fetch_assoc($traerCantidadPedidos)) ? $fila['cantidad_pedidos'] : "Error";
 
-//contar todos los pedidos pendientes
-$consulta = "SELECT COUNT(*) AS cantidad_pendientes FROM pedidos WHERE estado = 'pendiente'";
-$traerPedidosPendientes = $mysql->efectuarConsulta($consulta);
-$cantidadPedidosPendientes = ($fila = mysqli_fetch_assoc($traerPedidosPendientes)) ? $fila['cantidad_pendientes'] : "Error de extracción";
+$traerPedidosPendientes = $mysql->efectuarConsulta("SELECT COUNT(*) AS cantidad_pendientes FROM pedidos WHERE estado = 'pendiente'");
+$cantidadPedidosPendientes = ($fila = mysqli_fetch_assoc($traerPedidosPendientes)) ? $fila['cantidad_pendientes'] : "Error";
 
-//contar todos los pedidos completos
-$consulta = "SELECT COUNT(*) AS cantidad_completos FROM pedidos WHERE estado = 'entregado'";
-$traerPedidosCompletos = $mysql->efectuarConsulta($consulta);
-$cantidadPedidosCompletos = ($fila = mysqli_fetch_assoc($traerPedidosCompletos)) ? $fila['cantidad_completos'] : "Error de extracción";
+$traerPedidosCompletos = $mysql->efectuarConsulta("SELECT COUNT(*) AS cantidad_completos FROM pedidos WHERE estado = 'entregado'");
+$cantidadPedidosCompletos = ($fila = mysqli_fetch_assoc($traerPedidosCompletos)) ? $fila['cantidad_completos'] : "Error";
 
-//contar todos los pedidos cancelados
-$consulta = "SELECT COUNT(*) AS cantidad_cancelados FROM pedidos WHERE estado = 'cancelado'";
-$traerPedidosCancelados = $mysql->efectuarConsulta($consulta);
-$cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados)) ? $fila['cantidad_cancelados'] : "Error de extracción";
-
-
+$traerPedidosCancelados = $mysql->efectuarConsulta("SELECT COUNT(*) AS cantidad_cancelados FROM pedidos WHERE estado = 'cancelado'");
+$cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados)) ? $fila['cantidad_cancelados'] : "Error";
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -244,39 +246,30 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
             <!-- Filtros -->
             <div class="data-card mb-4">
                 <div class="card-body px-4">
-                    <div class="row g-3 align-items-end mb-4">
-                        <!-- Filtro Estado -->
-                        <div class="col-md-4">
-                            <label for="statusFilter" class="form-label">Estado</label>
-                            <select class="form-select" id="statusFilter">
-                                <option value="">Todos</option>
-                                <option value="pending">Pendiente</option>
-                                <option value="processing">Procesando</option>
-                                <option value="completed">Completado</option>
-                                <option value="cancelled">Cancelado</option>
-                            </select>
+                    <form method="POST" action="">
+                        <div class="row g-3 align-items-end mb-4">
+                            <!-- Filtro Estado -->
+                            <div class="col-md-4">
+                                <label for="statusFilter" class="form-label">Estado</label>
+                                <select class="form-select" id="statusFilter" name="estado">
+                                    <option value="">Todos</option>
+                                    <option value="pendiente" <?= ($estadoFiltro === 'pendiente') ? 'selected' : '' ?>>Pendiente</option>
+                                    <option value="procesando" <?= ($estadoFiltro === 'procesando') ? 'selected' : '' ?>>Procesando</option>
+                                    <option value="entregado" <?= ($estadoFiltro === 'entregado') ? 'selected' : '' ?>>Completado</option>
+                                    <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option>
+                                </select>
+                            </div>
+                            <!-- Botón Filtrar -->
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary w-100 mt-md-2">
+                                    <i class="fas fa-filter me-2"></i>Filtrar
+                                </button>
+                            </div>
                         </div>
-                        <!-- Filtro Fecha -->
-                        <div class="col-md-4">
-                            <label for="dateFilter" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="dateFilter">
-                        </div>
-                        <!-- Botón Filtrar -->
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary w-100 mt-md-2">
-                                <i class="fas fa-filter me-2"></i>Filtrar
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
-
-            <div class="text-center mb-5">
-                <button id="startOverBtn" class="btn btn-primary">
-                    <i class="fas fa-redo-alt me-2"></i>Recargar
-                </button>
-            </div>
             <!-- Cards Container -->
             <div id="ordersContainer">
                 <div class="row" id="orderCards">
@@ -311,7 +304,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $consulta = "SELECT id, nombre, correo, direccion FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
                         $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
                         $usuario = mysqli_fetch_assoc($resultadoUsuarios);
-                        $direccion = strlen(trim($usuario["direccion"])) > 0 ? $usuario["direccion"] : "Sin Dirección"; 
+                        $direccion = strlen(trim($usuario["direccion"])) > 0 ? $usuario["direccion"] : "Sin Dirección";
 
                         //todos los productos pedidos
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
