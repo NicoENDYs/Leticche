@@ -308,9 +308,10 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $fechaPedido = "$mes-$dia-$año ($hora)";
 
                         //traer información del cliente
-                        $consulta = "SELECT nombre FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
+                        $consulta = "SELECT id, nombre, correo, direccion FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
                         $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
-                        $nombreUsuario = mysqli_fetch_assoc($resultadoUsuarios);
+                        $usuario = mysqli_fetch_assoc($resultadoUsuarios);
+                        $direccion = strlen(trim($usuario["direccion"])) > 0 ? $usuario["direccion"] : "Sin Dirección"; 
 
                         //todos los productos pedidos
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
@@ -350,7 +351,13 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                 <!-- Contenedor para todo el contenido excepto las acciones -->
                 <div class="order-content">
                     <div class="order-info">
-                        <div><strong>Nombre del Cliente:</strong> ' . strtolower($nombreUsuario["nombre"]) . '</div>
+                        <div><strong>Nombre del Cliente:</strong> ' . strtolower($usuario["nombre"]) . ' (ID: ' . $usuario["id"] . ')</div>
+                    </div>
+                    <div class="order-info">
+                        <div><strong>Dirección:</strong> ' . strtolower($direccion) . '</div>
+                    </div>
+                    <div class="order-info">
+                        <div><strong>Correo:</strong> ' . strtolower($usuario["correo"]) . '</div>
                     </div>
                     <div class="order-info">
                         <div><strong>Fecha Pedido:</strong> ' . $fechaPedido . '</div>
