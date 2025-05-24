@@ -304,6 +304,18 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
                         //todos los productos pedidos
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
                         $traerProductos = $mysql->efectuarConsulta($consulta);
+
+                        switch($pedido["estado"]){
+                            case "pendiente":
+                                $estadoPedido = "badge-pending";
+                                break;
+                            case "entregado":
+                                $estadoPedido = "badge-success";
+                                break;
+                            case "procesando":
+                                $estadoPedido = "badge-info";
+                                break;
+                        }
                         ///////////////////////////////Colores//////////////////////////////////////////////
                         //badge-success  ///// ES PARA Entregado (VERDE CLARITO,FONDO GREEN GRISASEO)    ///
                         //badge-pending  ///// ES PARA PENDIENTE (NARANJA CLARITO,FONDO "YELLOW")//      ///
@@ -315,7 +327,7 @@ $totalUsuariosInactivos = ($fila = mysqli_fetch_assoc($resultadoUsuarios)) ? $fi
         <div class="order-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>ID Pedido: ' . $pedido["id"] . '</div>
-                <span class="order-badge badge-pending  ">' . $pedido["estado"] . '</span>
+                <span class="order-badge ' .  $estadoPedido . '">' . $pedido["estado"] . '</span>
             </div>
             <div class="card-body">
                 <!-- Contenedor para todo el contenido excepto las acciones -->

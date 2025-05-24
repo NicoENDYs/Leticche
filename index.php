@@ -19,7 +19,7 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lettiche</title>
+    <title>Lenticchie</title>
     
     <link rel="stylesheet" href="./styles/ecommerce.css">
     <!-- Font Awesome -->
@@ -53,7 +53,7 @@ $mysql->desconectar();
         <nav class="navbar">
             <div class="brand">
                 <img src="./images/Logo_Lenteja.png" alt="Lenticche Logo">
-                <a href="#" class="logo">Lenti<span>cche</span></a>
+                <a href="#" class="logo">Lenti<span>cchie</span></a>
             </div>
 
             <div class="nav-links">
