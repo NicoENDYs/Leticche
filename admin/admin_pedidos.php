@@ -14,22 +14,22 @@ $traerPedidos = $mysql->efectuarConsulta($consulta);
 
 //contar todos los pedidos
 $consulta = "SELECT COUNT(*) AS cantidad_pedidos FROM pedidos";
-$traerCantidadPedidos = $mysql -> efectuarConsulta($consulta);
+$traerCantidadPedidos = $mysql->efectuarConsulta($consulta);
 $cantidadPedidos = ($fila = mysqli_fetch_assoc($traerCantidadPedidos)) ? $fila['cantidad_pedidos'] : "Error de extracción";
 
 //contar todos los pedidos pendientes
 $consulta = "SELECT COUNT(*) AS cantidad_pendientes FROM pedidos WHERE estado = 'pendiente'";
-$traerPedidosPendientes = $mysql -> efectuarConsulta($consulta);
+$traerPedidosPendientes = $mysql->efectuarConsulta($consulta);
 $cantidadPedidosPendientes = ($fila = mysqli_fetch_assoc($traerPedidosPendientes)) ? $fila['cantidad_pendientes'] : "Error de extracción";
 
 //contar todos los pedidos completos
 $consulta = "SELECT COUNT(*) AS cantidad_completos FROM pedidos WHERE estado = 'entregado'";
-$traerPedidosCompletos = $mysql -> efectuarConsulta($consulta);
+$traerPedidosCompletos = $mysql->efectuarConsulta($consulta);
 $cantidadPedidosCompletos = ($fila = mysqli_fetch_assoc($traerPedidosCompletos)) ? $fila['cantidad_completos'] : "Error de extracción";
 
 //contar todos los pedidos cancelados
 $consulta = "SELECT COUNT(*) AS cantidad_cancelados FROM pedidos WHERE estado = 'cancelado'";
-$traerPedidosCancelados = $mysql -> efectuarConsulta($consulta);
+$traerPedidosCancelados = $mysql->efectuarConsulta($consulta);
 $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados)) ? $fila['cantidad_cancelados'] : "Error de extracción";
 
 
@@ -194,7 +194,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 <i class="fas fa-shopping-cart fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value"><?php echo $cantidadPedidos;?></h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidos; ?></h3>
                                 <div class="title">Total Pedidos</div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 <i class="fas fa-clock fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value"><?php echo $cantidadPedidosPendientes;?></h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosPendientes; ?></h3>
                                 <div class="title">Pendientes</div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 <i class="fas fa-check-circle fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value"><?php echo $cantidadPedidosCompletos;?></h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosCompletos; ?></h3>
                                 <div class="title">Completados</div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 <i class="fas fa-ban fa-lg"></i>
                             </div>
                             <div class="ms-auto text-end">
-                                <h3 class="counter-value"><?php echo $cantidadPedidosCancelados;?></h3>
+                                <h3 class="counter-value"><?php echo $cantidadPedidosCancelados; ?></h3>
                                 <div class="title">Cancelados</div>
                             </div>
                         </div>
@@ -316,7 +316,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
                         $traerProductos = $mysql->efectuarConsulta($consulta);
 
-                        switch($pedido["estado"]){
+                        switch ($pedido["estado"]) {
                             case "pendiente":
                                 $estadoPedido = "badge-pending";
                                 break;
@@ -327,6 +327,12 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 $estadoPedido = "badge-info";
                                 break;
                         }
+
+                        $estadoOpciones = [
+                            "pendiente" => '<option value="pendiente">Pendiente</option>',
+                            "procesando" => '<option value="procesando">Procesando</option>',
+                            "entregado" => '<option value="entregado">Entregado</option>'
+                        ];
                         ///////////////////////////////Colores//////////////////////////////////////////////
                         //badge-success  ///// ES PARA Entregado (VERDE CLARITO,FONDO GREEN GRISASEO)    ///
                         //badge-pending  ///// ES PARA PENDIENTE (NARANJA CLARITO,FONDO "YELLOW")//      ///
@@ -382,10 +388,14 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                     <div class="order-actions">
                     <input type="hidden" name="id_pedido" value="' . $pedido["id"] . '">
                         <select class="form-select" aria-label="Default select example" name="estado_pedido" required>
-                            <option value="" disabled selected>Cambiar Estado</option>
-                            <option value="pendiente">Pendiente</option>
-                            <option value="procesando">Procesando</option>
-                            <option value="entregado">Entregado</option>
+                            <option value="" disabled selected>Cambiar Estado</option>';
+                        foreach ($estadoOpciones as $clave => $opcionHtml) {
+                            if ($clave === $pedido['estado']) {
+                                continue; // Salta esta opción
+                            }
+                            echo $opcionHtml;
+                        }
+                        echo '
                         </select>
                         <button class="btn btn-order-action btn-success">
                             <i class="fas fa-check"></i>
