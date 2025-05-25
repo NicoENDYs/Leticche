@@ -1,21 +1,38 @@
 :root {
-    --primary-color: #415824; /* Woodland - replacing the original green */
-    --primary-light: #5a7836; /* Lighter shade of Woodland */
-    --primary-dark: #2d3f18; /* Darker shade of Woodland */
-    --secondary-color: #9A9B9B; /* Pewter */
-    --success-color: #CD8E56; /* Tussock - for successful actions */
-    --danger-color: #6F411B; /* Walnut - for dangerous actions */
-    --warning-color: #CD8E56; /* Tussock - for warnings */
-    --info-color: #9A9B9B; /* Pewter - for info */
-    --light-color: #F5E9D5; /* Albescent White */
-    --dark-color: #282317; /* Zeus */
+    --primary-color: #415824;
+    /* Woodland - replacing the original green */
+    --primary-light: #5a7836;
+    /* Lighter shade of Woodland */
+    --primary-dark: #2d3f18;
+    /* Darker shade of Woodland */
+    --secondary-color: #9A9B9B;
+    /* Pewter */
+    --success-color: #CD8E56;
+    /* Tussock - for successful actions */
+    --danger-color: #6F411B;
+    /* Walnut - for dangerous actions */
+    --warning-color: #CD8E56;
+    /* Tussock - for warnings */
+    --info-color: #9A9B9B;
+    /* Pewter - for info */
+    --light-color: #F5E9D5;
+    /* Albescent White */
+    --dark-color: #282317;
+    /* Zeus */
     --border-radius: 10px;
     --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     --transition-speed: 0.3s;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f5f4ef; /* Albescent White */
+    background-color: #f5f4ef !important;
+    /* Albescent White */
     font-family: 'Poppins', sans-serif;
     color: #495057;
     overflow-x: hidden;
@@ -44,31 +61,37 @@ body {
 
 /* Header Styles */
 .header {
-    background-color: white;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid rgba(65, 88, 36, 0.1);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 20px 30px;
     max-width: 1400px;
     margin: 0 auto;
 }
+
 .navbar .brand {
     display: flex;
     align-items: center;
-    gap: 10px; /* espacio entre logo y texto */
+    gap: 15px;
+    /* espacio entre logo y texto */
 }
 
 .navbar .brand img {
-    width: 65px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     transition: all var(--transition-speed) ease;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
 .logo {
@@ -77,7 +100,8 @@ body {
     color: var(--primary-dark);
     text-decoration: none;
     transition: all 0.3s ease;
-    line-height: 1; /* ayuda a evitar desalineaciones */
+    line-height: 1;
+    /* ayuda a evitar desalineaciones */
 }
 
 
@@ -112,33 +136,40 @@ body {
 
 .cart-icon {
     position: relative;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    padding: 15px !important;
+    background: var(--gradient-primary);
+    border-radius: 50% !important;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .cart-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: var(--primary-color);
+    top: -5px;
+    right: -5px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
     color: white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
 }
 
 /* Container for all sections */
 .container {
     max-width: 1400px;
-    margin: 30px auto;
-    padding: 0 20px;
+    margin: 40px auto;
+    padding: 0 30px;
 }
 
 /* Category Title */
@@ -202,15 +233,15 @@ body {
     position: relative;
     width: 280px;
     min-width: 280px;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
 }
 
 .product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-image img {
@@ -277,15 +308,46 @@ body {
     align-items: center;
 }
 
-.rating {
+/* Controles de cantidad mejorados */
+.product-controls {
     display: flex;
     align-items: center;
-    gap: 5px;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-.stars {
-    color: var(--warning-color);
-    letter-spacing: 2px;
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background: rgba(65, 88, 36, 0.1);
+    border-radius: 25px;
+    padding: 8px;
+    gap: 8px;
+}
+
+.quantity-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(65, 88, 36, 0.3);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
 }
 
 .rating-count {
@@ -331,17 +393,17 @@ body {
     .product-card {
         flex-direction: column;
     }
-    
+
     .product-image {
         width: 100%;
         height: 200px;
     }
-    
+
     /* Reset cascade for mobile */
     .product-card:nth-child(n) {
         transform: translateX(0);
     }
-    
+
     .product-card:hover {
         transform: translateY(-5px);
     }
@@ -351,15 +413,15 @@ body {
     .navbar {
         padding: 15px;
     }
-    
+
     .nav-item-text {
         display: none;
     }
-    
+
     .nav-links {
         gap: 10px;
     }
-    
+
     .container {
         padding: 0 15px;
     }

@@ -132,9 +132,12 @@ $mysql->desconectar();
                                     </a>
 
                                 <?php else: ?>
+                                    <div class="product-controls quantity-controls" data-id="<?= $producto['id'] ?>">
+                                        <div class="quantity-display cantidad-en-carrito">0</div>
+                                        <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1;
+                                                                                                        echo json_encode($producto); ?>)'>Añadir</button>
+                                    </div>
 
-                                    <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1;
-                                    echo json_encode($producto); ?>)'>Añadir</button>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -146,6 +149,25 @@ $mysql->desconectar();
             <?php endif; ?>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".product-controls").forEach(control => {
+                let id = control.getAttribute("data-id");
+                let producto = localStorage.getItem(id);
+                if (producto) {
+                    let obj = JSON.parse(producto);
+                    let cantidadDiv = control.querySelector(".cantidad-en-carrito");
+                    if (cantidadDiv) {
+                        cantidadDiv.textContent = obj.cantidad;
+                    }
+                }
+            });
+        });
+    </script>
 </body>
+
+</html>
+
+
 
 </html>
