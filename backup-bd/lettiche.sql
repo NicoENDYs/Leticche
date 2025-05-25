@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 24, 2025 at 02:02 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 25-05-2025 a las 07:13:01
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lettiche`
+-- Base de datos: `lettiche`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verificar_stock` (IN `id_producto` INT, IN `cantidad_solicitada` INT, OUT `estado_compra` BOOLEAN, OUT `existencia_producto` BOOLEAN)   BEGIN
+DECLARE stock_disponible INT;
+IF(EXISTS(SELECT 1 FROM productos WHERE id = id_producto)) THEN
+	SET existencia_producto = TRUE;
+ELSE
+	SET existencia_producto = FALSE;
+END IF;
+IF(existencia_producto) THEN
+	SELECT stock INTO stock_disponible FROM productos WHERE id = id_producto;
+    if(stock_disponible >= cantidad_solicitada) THEN
+    SET estado_compra = TRUE;
+    ELSE
+    SET estado_compra = FALSE;
+    END IF;
+END IF;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalles_pedido`
+-- Estructura de tabla para la tabla `detalles_pedido`
 --
 
 CREATE TABLE `detalles_pedido` (
@@ -36,7 +59,7 @@ CREATE TABLE `detalles_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `detalles_pedido`
+-- Volcado de datos para la tabla `detalles_pedido`
 --
 
 INSERT INTO `detalles_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio_unitario`) VALUES
@@ -49,12 +72,41 @@ INSERT INTO `detalles_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `pr
 (14, 78, 2, 1, 12000.00),
 (15, 78, 3, 1, 3000.00),
 (16, 78, 4, 1, 12333.00),
-(17, 78, 1, 1, 10000.00);
+(17, 78, 1, 1, 10000.00),
+(18, 79, 1, 2, 10000.00),
+(19, 79, 3, 1, 12000.00),
+(21, 81, 1, 2, 10000.00),
+(22, 82, 1, 5, 10000.00),
+(23, 83, 2, 1, 12000.00),
+(24, 83, 3, 2, 3000.00),
+(25, 83, 4, 11, 12333.00),
+(26, 83, 1, 2, 10000.00),
+(27, 84, 1, 3, 10000.00),
+(28, 85, 3, 3, 3000.00),
+(29, 85, 4, 10, 12333.00),
+(30, 85, 2, 4, 12000.00),
+(31, 86, 1, 1, 10000.00),
+(32, 87, 1, 1, 10000.00),
+(33, 88, 1, 1, 10000.00),
+(34, 89, 1, 4, 10000.00),
+(35, 90, 1, 1, 10000.00),
+(36, 91, 1, 1, 10000.00),
+(37, 94, 1, 2, 10000.00);
+
+--
+-- Disparadores `detalles_pedido`
+--
+DELIMITER $$
+CREATE TRIGGER `descontar_stock` AFTER INSERT ON `detalles_pedido` FOR EACH ROW BEGIN
+UPDATE productos SET stock = stock - NEW.cantidad WHERE id = NEW.producto_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedidos`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -67,20 +119,36 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pedidos`
+-- Volcado de datos para la tabla `pedidos`
 --
 
 INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `direccion_envio`, `estado`) VALUES
-(74, 29, '2025-05-20 15:35:24', 17850.00, '', 'pendiente'),
-(75, 29, '2025-05-20 16:03:05', 11900.00, '', 'pendiente'),
-(76, 4, '2025-05-20 18:18:05', 61880.00, NULL, 'pendiente'),
-(77, 4, '2025-05-23 15:24:28', 28560.00, NULL, 'pendiente'),
-(78, 4, '2025-05-23 18:15:21', 44426.27, NULL, 'pendiente');
+(74, 29, '2025-05-20 15:35:24', 17850.00, '', 'entregado'),
+(75, 29, '2025-05-20 16:03:05', 11900.00, '', 'entregado'),
+(76, 4, '2025-05-20 18:18:05', 61880.00, NULL, 'entregado'),
+(77, 4, '2025-05-23 15:24:28', 28560.00, NULL, 'entregado'),
+(78, 4, '2025-05-23 18:15:21', 44426.27, NULL, 'entregado'),
+(79, 29, '2025-05-24 22:02:12', 38080.00, NULL, 'entregado'),
+(80, 29, '2025-05-24 22:04:57', 29750.00, NULL, 'entregado'),
+(81, 29, '2025-05-24 22:07:42', 23800.00, NULL, 'entregado'),
+(82, 29, '2025-05-24 22:59:02', 59500.00, NULL, 'entregado'),
+(83, 29, '2025-05-24 23:10:36', 206658.97, NULL, 'entregado'),
+(84, 29, '2025-05-24 23:12:06', 35700.00, NULL, 'entregado'),
+(85, 29, '2025-05-24 23:38:47', 214592.70, NULL, 'pendiente'),
+(86, 29, '2025-05-24 23:47:17', 11900.00, NULL, 'pendiente'),
+(87, 29, '2025-05-24 23:49:47', 11900.00, NULL, 'pendiente'),
+(88, 29, '2025-05-24 23:51:48', 11900.00, NULL, 'pendiente'),
+(89, 29, '2025-05-24 23:54:40', 47600.00, 'perra', 'pendiente'),
+(90, 29, '2025-05-24 23:55:47', 11900.00, 'hlkjf', 'pendiente'),
+(91, 29, '2025-05-24 23:55:55', 11900.00, 'hlkjf', 'pendiente'),
+(92, 29, '2025-05-25 00:00:03', 23800.00, 'no jodan', 'pendiente'),
+(93, 29, '2025-05-25 00:00:45', 23800.00, 'no jodan', 'pendiente'),
+(94, 29, '2025-05-25 00:00:59', 23800.00, 'no jodan', 'pendiente');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
@@ -95,19 +163,31 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `fecha_creacion`, `Estado`) VALUES
-(1, 'Chorizo', 'un chorizo de carne de lentejas', 10000.00, 10, 'producto_68040c675dce4.jpg', '2025-04-15 17:03:05', 'ACTIVO'),
-(2, 'Carne de Lentejas', 'un kg de carne de lentejas', 12000.00, 10, 'producto_68040c6f482fb.jpg', '2025-04-15 17:12:03', 'ACTIVO'),
-(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 10, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'ACTIVO'),
-(4, 'Lentejas', 'lentejass', 12333.00, 21, 'producto_6830ffe17f436..jpg', '2025-05-23 18:08:17', 'ACTIVO');
+(1, 'Chorizo', 'un chorizo de carne de lentejas', 10000.00, 0, 'producto_68040c675dce4.jpg', '2025-04-15 17:03:05', 'INACTIVO'),
+(2, 'Carne de Lentejas', 'un kg de carne de lentejas', 12000.00, 0, 'producto_68040c6f482fb.jpg', '2025-04-15 17:12:03', 'INACTIVO'),
+(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 0, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'INACTIVO'),
+(4, 'Lentejas', 'lentejass', 12333.00, 0, 'producto_6830ffe17f436..jpg', '2025-05-23 18:08:17', 'INACTIVO');
+
+--
+-- Disparadores `productos`
+--
+DELIMITER $$
+CREATE TRIGGER `desactivar_productos_sin_stock` BEFORE UPDATE ON `productos` FOR EACH ROW BEGIN 
+    IF NEW.stock = 0 THEN
+        SET NEW.Estado = 'INACTIVO';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recuperacion`
+-- Estructura de tabla para la tabla `recuperacion`
 --
 
 CREATE TABLE `recuperacion` (
@@ -118,7 +198,7 @@ CREATE TABLE `recuperacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `recuperacion`
+-- Volcado de datos para la tabla `recuperacion`
 --
 
 INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
@@ -135,7 +215,7 @@ INSERT INTO `recuperacion` (`id`, `correo`, `codigo`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -150,7 +230,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Cargo`, `pass`, `Estado`) VALUES
@@ -158,18 +238,18 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Carg
 (2, 'Nicolas', 'guarinmolinan@gmail.coom', '', '3105986680', 'user', '$2y$10$3.fZ4VGc6w07Hp6/OpSOTumkiInsiKcaTcT01sBAkWOB.ngOZPUhu', 'ACTIVO'),
 (3, 'Maria', 'mari@gmail.com', '', '3110957284', 'user', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'INACTIVO'),
 (4, 'ENDYs', 'END@gmail.com', 'Administrador', '3100000000', 'ADMIN', '$2y$10$BFXqhejEmvdBkOnQY5Sc6urCU01YgrnRbGmwB77zjgMTZZSmYXAT.', 'ACTIVO'),
-(5, 'Jhonny', 'andres@gmail.com', '', '1234567899', 'user', '$2y$10$.gYVUWLrNOOH2onFZmJE8.m749HA4UPg0W20cueBhHAqXFw3SIszm', 'ACTIVO'),
+(5, 'Jhonny', 'andres@gmail.com', '', '1234567899', 'user', '$2y$10$.gYVUWLrNOOH2onFZmJE8.m749HA4UPg0W20cueBhHAqXFw3SIszm', 'INACTIVO'),
 (6, 'Jhonny', 'user@domain.com', '', '1234567898', 'user', '$2y$10$SL2iCOQmVOBJm3SItbFm5OzE2tIGcVFdlo4ERZZqX4PcvtxSgy2B.', 'ACTIVO'),
 (25, 'gaychocho', 'baloncestoentablon@gmail.com', 'la sexta', '3103849526', 'User', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'ACTIVO'),
 (28, 'Jhonny', 'jadiaz@iegabo.edu.co', '', '3103561843', 'user', '$2y$10$HRQ1F55ujPNjCaCMYz0Y4.OQSmgpVW1LUjuabuc5a6wAUu1jQolLe', 'ACTIVO'),
-(29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', '', '9846164615', 'user', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
+(29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', 'no jodan', '9846164615', 'ADMIN', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `detalles_pedido`
+-- Indices de la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
   ADD PRIMARY KEY (`id`),
@@ -177,26 +257,26 @@ ALTER TABLE `detalles_pedido`
   ADD KEY `producto_id` (`producto_id`);
 
 --
--- Indexes for table `pedidos`
+-- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `recuperacion`
+-- Indices de la tabla `recuperacion`
 --
 ALTER TABLE `recuperacion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -204,52 +284,52 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `unico_correo` (`correo`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `detalles_pedido`
+-- AUTO_INCREMENT de la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `pedidos`
+-- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `recuperacion`
+-- AUTO_INCREMENT de la tabla `recuperacion`
 --
 ALTER TABLE `recuperacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `detalles_pedido`
+-- Filtros para la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
   ADD CONSTRAINT `detalles_pedido_ibfk_1` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   ADD CONSTRAINT `detalles_pedido_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 
 --
--- Constraints for table `pedidos`
+-- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
