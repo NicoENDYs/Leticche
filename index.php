@@ -145,7 +145,7 @@ $mysql->desconectar();
 
                 <?php endwhile; ?>
             <?php else: ?>
-                <p class="text-center mt-5 text-black">No hay Usuarios registrados.</p>
+                <p class="text-center mt-5 text-black">No hay Productos.</p>
             <?php endif; ?>
         </div>
     </div>
