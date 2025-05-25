@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idUsuario = trim($_POST['usuario_id']);
         $totalPedido = trim($_POST['total_pedido']);
         $productos = json_decode($_POST['productos_ocultos']);
+        $direccion = trim($_POST['direccion_envio']);
 
-        if (empty($idUsuario) || empty($totalPedido) || empty(($productos))) {
+        if (empty($idUsuario) || empty($totalPedido) || empty(($productos)) || empty(($direccion))) {
             echo "Por favor, complete todos los campos.";
             header("Location: ../views/carrito.php?error=102");
             exit();
@@ -50,9 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //insertar en base de datos 
         $consulta = "INSERT INTO pedidos 
-            (usuario_id, fecha, total)
+            (usuario_id, fecha, total, direccion_envio)
             VALUES 
-            ('$idUsuario', NOW(), '$totalPedido')";
+            ('$idUsuario', NOW(), '$totalPedido', '$direccion')";
+        $mysql->efectuarConsulta($consulta);
+
+        //actualizar direccion del cliente
+        $consulta = "UPDATE usuarios SET direccion = '$direccion' WHERE id = $idUsuario";
         $mysql->efectuarConsulta($consulta);
 
         $consulta = "SELECT MAX(id) as ultimo_id FROM pedidos";
