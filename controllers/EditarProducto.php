@@ -20,6 +20,11 @@ if (
         exit;
     }
 
+    if($precio < 0 || $stock < 0){
+        echo "No se permiten números negativos.";
+        exit;
+    }
+
     //Consulta sin la imagen
     $consulta = "UPDATE productos SET 
     nombre = '$nombre', 
