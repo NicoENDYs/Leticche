@@ -56,7 +56,7 @@ if (
 
                 <div class="factura-cliente">
                     <h3>Información del Cliente</h3>
-                    <p id="nombreCliente">Cliente: <?php echo $_SESSION['nombre'] ?></p>
+                    <p id="nombreCliente">Cliente: <?php echo strtolower($_SESSION['nombre'] )?></p>
                     <div class="direccion-container">
                         <label for="direccionCliente" class="form-label">Direccion a enviar:</label>
                         <input type="text" name="direccion" id="direccionCliente" placeholder="Ingrese Dirección"

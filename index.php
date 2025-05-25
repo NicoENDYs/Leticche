@@ -105,7 +105,7 @@ $mysql->desconectar();
                 <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
                     <div class="product-card" id='<?php echo $producto['id'] ?>'>
                         <div class="product-image">
-                            <img src="./img/<?php echo $producto['imagen']; ?>" alt="Hamburguesa Clásica">
+                            <img src="./img/<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>">
                         </div>
                         <div class="product-info">
                             <h3 class="product-title"><?php echo $producto['nombre']; ?></h3>

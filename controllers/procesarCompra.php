@@ -21,6 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
+        //confirmar el stock y la existencia del producto antes de insertar
+        foreach ($productos as $producto) {
+            $idProducto = $producto->id;
+            $cantidad = $producto->cantidad;
+
+            $procedure = "CALL verificar_stock($idProducto, $cantidad, @estado_compra, @existencia_producto)";
+            $mysql->efectuarConsulta($procedure);
+
+            $respuesta = $mysql->efectuarConsulta("SELECT @estado_compra AS estado, @existencia_producto AS existe");
+            $verificacion = mysqli_fetch_assoc($respuesta);
+
+            if (!$verificacion['existe']) {
+                // Producto no existe
+                $mysql->desconectar();
+                header("Location: ../views/carrito.php?error=Producto no existe (ID $idProducto)");
+                exit();
+            }
+
+            if (!$verificacion['estado']) {
+                // Stock insuficiente
+                $mysql->desconectar();
+                header("Location: ../views/carrito.php?error=Stock insuficiente para producto ID $idProducto");
+                exit();
+            }
+        }
+
+
         //insertar en base de datos 
         $consulta = "INSERT INTO pedidos 
             (usuario_id, fecha, total)
@@ -42,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             (pedido_id, producto_id, cantidad, precio_unitario)
             VALUES 
             ('$idPedido', '$idProducto', '$cantidad', '$precio')";
-            
+
             $mysql->efectuarConsulta($consulta);
         }
 
@@ -58,4 +85,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: ../views/carrito.php?error=102");
     exit();
 }
-?>
