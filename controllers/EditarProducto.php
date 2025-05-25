@@ -15,7 +15,7 @@ if (
     $stock = trim(filter_input(INPUT_POST, 'stock', FILTER_VALIDATE_INT));
     $estado = trim(filter_input(INPUT_POST, 'Estado', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
-    if (empty($nombre) || empty($descripcion) || empty($precio) || empty($stock)) {
+    if (empty($nombre) || empty($descripcion) || empty($precio) || (empty($stock) && $stock != 0)) {
         echo "Por favor, complete todos los campos.";
         exit;
     }
