@@ -15,7 +15,7 @@ if (!empty($estadoFiltro)) {
 $where = !empty($condiciones) ? 'WHERE ' . implode(' AND ', $condiciones) : '';
 
 // Consulta con filtros aplicados
-$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos $where";
+$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos $where ORDER BY id DESC";
 $traerPedidos = $mysql->efectuarConsulta($consulta);
 
 // Contadores globales (sin filtros)
