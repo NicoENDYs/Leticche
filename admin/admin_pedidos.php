@@ -185,7 +185,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
 
             <!-- Estadisticas -->
             <div class="row">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="stat-card users animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -198,7 +198,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="stat-card active animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -211,7 +211,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="stat-card inactive animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -224,7 +224,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <!-- <div class="col-md-6 col-lg-3">
                     <div class="stat-card users animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -236,7 +236,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- Filtros -->
@@ -252,7 +252,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                     <option value="pendiente" <?= ($estadoFiltro === 'pendiente') ? 'selected' : '' ?>>Pendiente</option>
                                     <option value="procesando" <?= ($estadoFiltro === 'procesando') ? 'selected' : '' ?>>Procesando</option>
                                     <option value="entregado" <?= ($estadoFiltro === 'entregado') ? 'selected' : '' ?>>Completado</option>
-                                    <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option>
+                                    <!-- <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option> -->
                                 </select>
                             </div>
                             <!-- Botón Filtrar -->
@@ -297,7 +297,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $fechaPedido = "$mes-$dia-$año ($hora)";
 
                         //traer información del cliente
-                        $consulta = "SELECT id, nombre, correo, direccion FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
+                        $consulta = "SELECT id, nombre, correo, telefono, direccion FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
                         $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
                         $usuario = mysqli_fetch_assoc($resultadoUsuarios);
                         $direccion = strlen(trim($usuario["direccion"])) > 0 ? $usuario["direccion"] : "Sin Dirección";
@@ -347,6 +347,9 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                     </div>
                     <div class="order-info">
                         <div><strong>Correo:</strong> ' . strtolower($usuario["correo"]) . '</div>
+                    </div>
+                    <div class="order-info">
+                        <div><strong>Telefono:</strong> ' . strtolower($usuario["telefono"]) . '</div>
                     </div>
                     <div class="order-info">
                         <div><strong>Fecha Pedido:</strong> ' . $fechaPedido . '</div>

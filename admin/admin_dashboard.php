@@ -187,11 +187,6 @@ $mysql->desconectar();
                     <h2>Gestión de Usuarios</h2>
                     <p class="text-muted mb-0">Administre los usuarios registrados en el sistema y sus permisos.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="./admin_index.php" class="btn btn-outline-secondary me-2">
-                        <i class="fas fa-arrow-left me-1"></i> Volver
-                    </a>
-                </div>
             </div>
         </div>
 

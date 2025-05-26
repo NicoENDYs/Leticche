@@ -21,17 +21,44 @@ require_once '../controllers/check_session.php';
 <body>
 
     <div class="form-container">
-    
+
         <h2 class="text-center mb-3">añadir producto</h2>
         <?php if (isset($_GET['error']) && $_GET['error'] == '99'): ?>
             <div class="alert alert-danger mt-3" role="alert">
                 Rellene todos los campos
             </div>
         <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'nombre_vacio'): ?>
+            <div class="alert alert-info mt-3" role="alert">
+                Rellene el campo nombre
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'descripcion_vacio'): ?>
+            <div class="alert alert-info mt-3" role="alert">
+                Rellene el campo descripcion
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'precio_vacio'): ?>
+            <div class="alert alert-info mt-3" role="alert">
+                Rellene el campo precio o un valor mayor a 0
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'stock_vacio'): ?>
+            <div class="alert alert-info mt-3" role="alert">
+                Rellene el campo stock o un valor mayor a 0
+            </div>
+        <?php endif; ?>
+
+
+
+
         <form id="productoForm" action="../controllers/NuevoProducto.php" method="POST" enctype="multipart/form-data" novalidate>
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Producto</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre"
+                    value="<?php echo htmlspecialchars($_GET['nombre'] ?? ''); ?>" required>
                 <div class="invalid-feedback">
                     Por favor, introduce el nombre del producto.
                 </div>
@@ -39,7 +66,7 @@ require_once '../controllers/check_session.php';
 
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?php echo htmlspecialchars($_GET['descripcion'] ?? ''); ?></textarea>
                 <div class="invalid-feedback">
                     Por favor, introduce una descripción del producto.
                 </div>
@@ -47,7 +74,8 @@ require_once '../controllers/check_session.php';
 
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
-                <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01" required>
+                <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01"
+                    value="<?php echo htmlspecialchars($_GET['precio'] ?? ''); ?>" required>
                 <div class="invalid-feedback">
                     Por favor, introduce un precio válido (mayor o igual a 0).
                 </div>
@@ -55,29 +83,30 @@ require_once '../controllers/check_session.php';
 
             <div class="mb-3">
                 <label for="stock" class="form-label">Stock</label>
-                <input type="number" class="form-control" id="stock" name="stock" min="0" step="1" required>
+                <input type="number" class="form-control" id="stock" name="stock" min="0" step="1"
+                    value="<?php echo htmlspecialchars($_GET['stock'] ?? ''); ?>" required>
                 <div class="invalid-feedback">
                     Por favor, introduce una cantidad válida de stock.
                 </div>
             </div>
 
             <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
-            <div class="alert alert-danger mt-3" role="alert">
-                Solo imagenes JPG y PNG
-            </div>
-        <?php endif; ?>
+                <div class="alert alert-danger mt-3" role="alert">
+                    Solo imagenes JPG y PNG
+                </div>
+            <?php endif; ?>
 
-        <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
-            <div class="alert alert-danger mt-3" role="alert">
-                error al guardar la imagen, veifique la imagen
-            </div>
-        <?php endif; ?>
+            <?php if (isset($_GET['error']) && $_GET['error'] == '86'): ?>
+                <div class="alert alert-danger mt-3" role="alert">
+                    No se ha enviado ninguna imagen, por favor, suba una imagen del producto.
+                </div>
+            <?php endif; ?>
 
-        <?php if (isset($_GET['error']) && $_GET['error'] == '88'): ?>
-            <div class="alert alert-danger mt-3" role="alert">
-                Imagen invalida, asegurese de que sea JPG o PNG
-            </div>
-        <?php endif; ?>
+            <?php if (isset($_GET['error']) && $_GET['error'] == '87'): ?>
+                <div class="alert alert-danger mt-3" role="alert">
+                    Imagen invalida, asegurese de que sea JPG o PNG
+                </div>
+            <?php endif; ?>
             <div class="mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
                 <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
@@ -92,14 +121,14 @@ require_once '../controllers/check_session.php';
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" name="Enviar" id="Enviar"  class="btn btn-primary w-100 mb-3">
+            <button type="submit" id="submitBtn" name="Enviar" id="Enviar" class="btn btn-primary w-100 mb-3">
                 <span id="btnText">Añadir Producto</span>
                 <span id="btnSpinner" class="" role="status" aria-hidden="true"></span>
             </button>
         </form>
         <a href="./admin_productos.php" class="btn btn-outline-secondary me-2">
-                        <i class="fas fa-arrow-left me-1"></i> Volver
-                    </a>
+            <i class="fas fa-arrow-left me-1"></i> Volver
+        </a>
     </div>
 
     <div class="toast-container">

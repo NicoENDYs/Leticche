@@ -35,9 +35,10 @@ $mysql->desconectar();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
-
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../styles/adminDashboardProductos.css">
     <title>Admin Productos</title>
@@ -179,12 +180,6 @@ $mysql->desconectar();
                     <p class="text-muted mb-0">Administre los productos disponibles en el sistema.</p>
                 </div>
 
-                <div class="col-md-6 text-md-end">
-                    <a href="./admin_index.php" class="btn btn-outline-secondary me-2">
-                        <i class="fas fa-arrow-left me-1"></i> Volver
-                    </a>
-                </div>
-
                 <div class="col-md-12 text-md-end">
                     <a href="../admin/NuevoProducto.php" class="btn btn-outline-secondary me-2">
                         <i class="fas fa-plus me-1"></i> Agregar Producto
@@ -271,16 +266,17 @@ $mysql->desconectar();
                                             <a href="EditarProducto.php?id=<?php echo $productos['id']; ?>" class="btn btn-sm btn-outline-info btn-action" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                            
                                             <?php if ($productos['Estado'] == 'ACTIVO'): ?>
-                                                <a href="../controllers/EliminarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este Producto?');" class="btn btn-sm btn-outline-danger btn-action" title="Eliminar">
+                                                <button onclick="eliminarProducto(<?php echo $productos['id']; ?>)" class="btn btn-sm btn-outline-danger btn-action" title="Eliminar">
                                                     <i class="fas fa-trash-alt"></i>
-                                                </a>
+                                                </button>
                                             <?php else: ?>
-                                                <a href="../controllers/restaurarProducto.php?id=<?php echo $productos['id']; ?>" onclick="return confirm('¿Estás seguro de que deseas restaurar este Producto?');" class="btn btn-sm btn-outline-success btn-action" title="Restaurar">
+                                                <button onclick="restaurarProducto(<?php echo $productos['id']; ?>)" class="btn btn-sm btn-outline-success btn-action" title="Restaurar">
                                                     <i class="fas fa-plus"></i>
-                                                </a>
-                                            <?php endif; ?>
+                                                </button>
 
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -303,6 +299,10 @@ $mysql->desconectar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="../js/adminProductos.js"></script>
+
+    <script>
+
+    </script>
 </body>
 
 </html>
