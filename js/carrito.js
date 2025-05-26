@@ -99,7 +99,6 @@ function disminuirCantidad(producto) {
         `#cantidadProducto${producto.id}`
     );
     let productoAlmacenado = localStorage.getItem(producto.id);
-
     if (cantidadProducto.textContent >= 1) {
         if (productoAlmacenado) {
             let existente = JSON.parse(productoAlmacenado);
@@ -111,8 +110,27 @@ function disminuirCantidad(producto) {
                 producto.cantidad,
                 producto.precio
             );
+            if(producto.cantidad === 0){
+                quitarProducto(producto);
+            }
         }
     }
+}
+function quitarProducto(producto){
+    Swal.fire({
+            icon: "warning",
+            title: "¿Quieres Eliminar El Producto",
+            text: `Pusiste la cantidad del producto en 0, por lo que se eliminara de la lista de productos, ¿estas seguro de eliminar '${producto.nombre}' de la lista?`,
+            showCancelButton: true,
+            confirmButtonText: "Eliminar Producto",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                eliminarProducto(producto.id);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                aumentarCantidad(producto);
+            }
+        });
 }
 
 function formatearPrecio(idTotalProducto, cantidadProducto, precioProducto) {
@@ -249,7 +267,7 @@ document.getElementById('verFacturaBtn').addEventListener('click', function (eve
             text: "Debes agregar productos para continuar con la compra"
         });
     }
-    else{
+    else {
         document.getElementById('modalFactura').style.display = 'flex';
     }
 });
