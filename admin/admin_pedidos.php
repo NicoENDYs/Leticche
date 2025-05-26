@@ -46,7 +46,8 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../styles/pedidos.css">
 
@@ -180,7 +181,8 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                 <div class="row">
                     <div class="col-lg-8">
                         <h2>Gestión de Pedidos</h2>
-                        <p class="text-muted">Aquí puedes ver y administrar todos los pedidos realizados en la tienda.</p>
+                        <p class="text-muted">Aquí puedes ver y administrar todos los pedidos realizados en la tienda.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -251,9 +253,12 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 <label for="statusFilter" class="form-label">Estado</label>
                                 <select class="form-select" id="statusFilter" name="estado">
                                     <option value="">Todos</option>
-                                    <option value="pendiente" <?= ($estadoFiltro === 'pendiente') ? 'selected' : '' ?>>Pendiente</option>
-                                    <option value="procesando" <?= ($estadoFiltro === 'procesando') ? 'selected' : '' ?>>Procesando</option>
-                                    <option value="entregado" <?= ($estadoFiltro === 'entregado') ? 'selected' : '' ?>>Completado</option>
+                                    <option value="pendiente" <?= ($estadoFiltro === 'pendiente') ? 'selected' : '' ?>>
+                                        Pendiente</option>
+                                    <option value="procesando"
+                                        <?= ($estadoFiltro === 'procesando') ? 'selected' : '' ?>>Procesando</option>
+                                    <option value="entregado" <?= ($estadoFiltro === 'entregado') ? 'selected' : '' ?>>
+                                        Completado</option>
                                     <!-- <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option> -->
                                 </select>
                             </div>
@@ -336,8 +341,8 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
     <div class="col-md-6 col-lg-4 mb-4 animate-card">
         <div class="order-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div>ID Pedido: ' . $pedido["id"] . '</div>
-                <span class="order-badge ' .  $estadoPedido . '">' . $pedido["estado"] . '</span>
+                <div>ID Pedido: ' . htmlspecialchars($pedido["id"]) . '</div>
+                <span class="order-badge ' .  htmlspecialchars($estadoPedido) . '">' . htmlspecialchars($pedido["estado"]) . '</span>
             </div>
             <div class="card-body">
                 <!-- Contenedor para todo el contenido excepto las acciones -->
