@@ -336,23 +336,23 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
     <div class="col-md-6 col-lg-4 mb-4 animate-card">
         <div class="order-card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <div>ID Pedido: ' . $pedido["id"] . '</div>
-                <span class="order-badge ' .  $estadoPedido . '">' . $pedido["estado"] . '</span>
+                <div>ID Pedido: ' . htmlspecialchars($pedido["id"]) . '</div>
+                <span class="order-badge ' .  htmlspecialchars($estadoPedido) . '">' . htmlspecialchars($pedido["estado"]) . '</span>
             </div>
             <div class="card-body">
                 <!-- Contenedor para todo el contenido excepto las acciones -->
                 <div class="order-content">
                     <div class="order-info">
-                        <div><strong>Nombre del Cliente:</strong> ' . strtolower($usuario["nombre"]) . ' (ID: ' . $usuario["id"] . ')</div>
+                        <div><strong>Nombre del Cliente:</strong> ' . htmlspecialchars(strtolower($usuario["nombre"])) . ' (ID: ' . htmlspecialchars($usuario["id"]) . ')</div>
                     </div>
                     <div class="order-info">
-                        <div><strong>Dirección:</strong> ' . strtolower($direccion) . '</div>
+                        <div><strong>Dirección:</strong> ' . htmlspecialchars(strtolower($direccion)) . '</div>
                     </div>
                     <div class="order-info">
-                        <div><strong>Correo:</strong> ' . strtolower($usuario["correo"]) . '</div>
+                        <div><strong>Correo:</strong> ' . htmlspecialchars(strtolower($usuario["correo"])) . '</div>
                     </div>
                     <div class="order-info">
-                        <div><strong>Fecha Pedido:</strong> ' . $fechaPedido . '</div>
+                        <div><strong>Fecha Pedido:</strong> ' . htmlspecialchars($fechaPedido) . '</div>
                     </div>
                     <div class="order-info">
                         <div class="label">Resumen de Artículos:</div>

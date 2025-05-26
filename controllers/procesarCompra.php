@@ -11,10 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['usuario_id'], $_POST['total_pedido'], $_POST['productos_ocultos'])) {
 
         //obtenemos los datos del formulario antes de validar o sanitizar
+        // Sanitizar y validar idUsuario (números enteros positivos)
         $idUsuario = trim($_POST['usuario_id']);
+        if (!preg_match('/^\d+$/', $idUsuario)) {
+            die("ID de usuario no válido");
+        }
+
+        // Sanitizar y validar totalPedido (número decimal con 2 decimales opcionales)
         $totalPedido = trim($_POST['total_pedido']);
-        $productos = json_decode($_POST['productos_ocultos']);
+        if (!preg_match('/^\d+(\.\d{1,2})?$/', $totalPedido)) {
+            die("Total del pedido no válido");
+        }
+
+        // Sanitizar y validar productos (debe ser un JSON válido y un array)
+        $productosRaw = $_POST['productos_ocultos'];
+        $productos = json_decode($productosRaw);
+        if (!is_array($productos)) {
+            die("Formato de productos no válido");
+        }
+
+        // Sanitizar y validar dirección (solo letras, números, espacios y ciertos símbolos)
         $direccion = trim($_POST['direccion_envio']);
+        if (!preg_match('/^[\p{L}\d\s\-,.#]+$/u', $direccion)) {
+            die("Dirección de envío no válida");
+        }
 
         if (empty($idUsuario) || empty($totalPedido) || empty(($productos)) || empty(($direccion))) {
             echo "Por favor, complete todos los campos.";
