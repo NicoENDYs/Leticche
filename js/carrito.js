@@ -2,6 +2,7 @@ let totalCarrito = document.querySelector("#total-carrito");
 let totalOculto = document.querySelector("#totalOculto");
 let inputProductosOcultos = document.querySelector("#productos_ocultos");
 let productosOcultos = [];
+
 document.addEventListener("DOMContentLoaded", function () {
     cargarCarrito();
     document
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             window.location.href = "productos.html";
         });
-        localStorage.removeItem("Console")
+    localStorage.removeItem("Console")
 });
 
 function cargarCarrito() {
@@ -131,8 +132,18 @@ function calcularTotal() {
         let subtotal = producto.precio * producto.cantidad;
         total += subtotal;
     });
-
     totalCarrito.textContent = `${nomenclaturaPrecio(total)}`;
+}
+
+function calcularTotalModal() {
+    let total = 0;
+    let productos = Object.values(localStorage);
+    productos.forEach((producto) => {
+        producto = JSON.parse(producto);
+        let subtotal = producto.precio * producto.cantidad;
+        total += subtotal;
+    });
+    return total;
 }
 
 function eliminarProducto(idProducto) {
@@ -144,15 +155,15 @@ function nomenclaturaPrecio(precio) {
     return `$${parseFloat(precio).toLocaleString("es-CL")}`;
 }
 
-function finalizarCompra(){
+function finalizarCompra() {
     const direccionCliente = document.getElementById('direccionCliente').value.trim();
     document.getElementById('direccion_envio').value = direccionCliente;
-    
+
     if (!direccionCliente) {
         Swal.fire({
-        title: "Falta un campo!",
-        text: "Llena el campo de dirección",
-        icon: "error"
+            title: "Falta un campo!",
+            text: "Llena el campo de dirección",
+            icon: "error"
         });
         return;
     }
@@ -190,8 +201,8 @@ function cargarProductosFactura() {
                     <td class="precio">${formatoPrecio(producto.precio)}</td>
                     <td class="subtotal">${formatoPrecio(producto.precio * producto.cantidad)}</td>
                 `;
-        facturaItems.appendChild(tr);
-        subtotal += producto.precio * producto.cantidad;
+            facturaItems.appendChild(tr);
+            subtotal += producto.precio * producto.cantidad;
         }
     });
     inputProductosOcultos.value = JSON.stringify(productosOcultos);
@@ -211,11 +222,6 @@ function cargarProductosFactura() {
     document.getElementById('fechaActual').textContent = hoy.toLocaleDateString('es-CO');
 }
 
-// Eventos para abrir y cerrar el modal
-document.getElementById('verFacturaBtn').addEventListener('click', function () {
-    cargarProductosFactura();
-    document.getElementById('modalFactura').style.display = 'flex';
-});
 
 document.getElementById('cerrarModalBtn').addEventListener('click', function () {
     document.getElementById('modalFactura').style.display = 'none';
@@ -232,4 +238,18 @@ document.getElementById('confirmarBtn').addEventListener('click', function () {
 // Inicializar
 window.addEventListener('load', function () {
     cargarProductosFactura();
+});
+document.getElementById('verFacturaBtn').addEventListener('click', function (event) {
+    let precio = calcularTotalModal();
+    if (!precio || isNaN(precio) || Number(precio) <= 0) {
+        event.preventDefault(); // Detiene la acción de abrir el modal
+        Swal.fire({
+            icon: "error",
+            title: "No hay productos",
+            text: "Debes agregar productos para continuar con la compra"
+        });
+    }
+    else{
+        document.getElementById('modalFactura').style.display = 'flex';
+    }
 });
