@@ -348,13 +348,13 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                 <!-- Contenedor para todo el contenido excepto las acciones -->
                 <div class="order-content">
                     <div class="order-info">
-                        <div><strong>Nombre del Cliente:</strong> ' . strtolower($usuario["nombre"]) . ' (ID: ' . $usuario["id"] . ')</div>
+                        <div><strong>Nombre del Cliente:</strong> ' . htmlspecialchars(strtolower($usuario["nombre"])) . ' (ID: ' . htmlspecialchars($usuario["id"]) . ')</div>
                     </div>
                     <div class="order-info">
-                        <div><strong>Dirección:</strong> ' . strtolower($direccion) . '</div>
+                        <div><strong>Dirección:</strong> ' . htmlspecialchars(strtolower($direccion)) . '</div>
                     </div>
                     <div class="order-info">
-                        <div><strong>Correo:</strong> ' . strtolower($usuario["correo"]) . '</div>
+                        <div><strong>Correo:</strong> ' . htmlspecialchars(strtolower($usuario["correo"])) . '</div>
                     </div>
                     <div class="order-info">
                         <div><strong>Telefono:</strong> ' . strtolower($usuario["telefono"]) . '</div>
