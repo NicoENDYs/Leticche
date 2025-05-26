@@ -31,20 +31,6 @@ $mysql->desconectar();
         rel="stylesheet">
 
     <script defer src="./js/productosStorage.js"></script>
-    <script>
-        function nomenclaturaPrecio(precio) {
-            return `$${parseFloat(precio).toLocaleString("es-CL")}`;
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const precios = document.querySelectorAll('.current-price');
-
-            precios.forEach(span => {
-                const rawPrecio = span.dataset.precio;
-                span.innerText = nomenclaturaPrecio(rawPrecio);
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -133,7 +119,7 @@ $mysql->desconectar();
 
                                 <?php else: ?>
                                     <div class="product-controls quantity-controls" data-id="<?= $producto['id'] ?>">
-                                        <div class="quantity-display cantidad-en-carrito">0</div>
+                                        <div class="quantity-display cantidad-en-carrito" id="cantidad-en-carrito<?php echo $producto['id']?>">0</div>
                                         <button class="add-to-cart" onclick='almacenarProductoStorage(<?php $producto["cantidad"] = 1;
                                                                                                         echo json_encode($producto); ?>)'>Añadir</button>
                                     </div>
@@ -150,19 +136,7 @@ $mysql->desconectar();
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".product-controls").forEach(control => {
-                let id = control.getAttribute("data-id");
-                let producto = localStorage.getItem(id);
-                if (producto) {
-                    let obj = JSON.parse(producto);
-                    let cantidadDiv = control.querySelector(".cantidad-en-carrito");
-                    if (cantidadDiv) {
-                        cantidadDiv.textContent = obj.cantidad;
-                    }
-                }
-            });
-        });
+        
     </script>
 </body>
 

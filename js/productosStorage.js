@@ -13,7 +13,7 @@ if (iniciarSesion != null) {
   }
 }
 else {
-  contadorCarrito.textContent =  totalCarrito;
+  contadorCarrito.textContent = totalCarrito;
 }
 
 
@@ -21,6 +21,7 @@ else {
 function almacenarProductoStorage(producto) {
   //si el producto ya existe en el localStorage, obtenemos su cantidad y la aumentamos
   let productoAlmacenado = localStorage.getItem(producto.id);
+  let cantidadProducto = document.getElementById(`cantidad-en-carrito${producto.id}`);
   if (productoAlmacenado) {
     let existente = JSON.parse(productoAlmacenado);
     producto.cantidad = existente.cantidad + 1;
@@ -31,4 +32,32 @@ function almacenarProductoStorage(producto) {
 
   //aumentamos el contador del carrito:
   contadorCarrito.textContent = parseInt(localStorage.length);
+  cantidadProducto.textContent = parseInt(cantidadProducto.textContent) + 1;
 }
+
+function nomenclaturaPrecio(precio) {
+  return `$${parseFloat(precio).toLocaleString("es-CL")}`;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const precios = document.querySelectorAll('.current-price');
+
+  precios.forEach(span => {
+    const rawPrecio = span.dataset.precio;
+    span.innerText = nomenclaturaPrecio(rawPrecio);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".product-controls").forEach(control => {
+    let id = control.getAttribute("data-id");
+    let producto = localStorage.getItem(id);
+    if (producto) {
+      let obj = JSON.parse(producto);
+      let cantidadDiv = control.querySelector(".cantidad-en-carrito");
+      if (cantidadDiv) {
+        cantidadDiv.textContent = obj.cantidad;
+      }
+    }
+  });
+});
