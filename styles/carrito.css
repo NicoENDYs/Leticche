@@ -215,7 +215,9 @@ body {
 .btn-comprar:hover {
     background-color: var(--primary-dark);
 }
-
+a{
+    text-decoration: none;
+}
 .btn-seguir-comprando {
     display: block;
     width: 100%;

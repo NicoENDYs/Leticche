@@ -38,6 +38,7 @@ if (
                 <span id="total-carrito">$0.00</span>
             </div>
             <button class="open-modal-btn btn-comprar" id="verFacturaBtn">Resumen De Compra</button>
+            <button></button>
             <a href="../index.php"><button class="btn-seguir-comprando">Seguir Comprando</button></a>
         </div>
     </div>
@@ -50,7 +51,6 @@ if (
             </div>
             <div class="modal-body">
                 <div class="factura-info">
-                    <div class="factura-numero">Factura No: <strong>F-2025001</strong></div>
                     <div class="factura-fecha">Fecha: <strong id="fechaActual">19/05/2025</strong></div>
                 </div>
 
@@ -88,7 +88,7 @@ if (
                     </div>
                     <div class="resumen-fila">
                         <span>Envio:</span>
-                        <span id="facturaImpuesto">$58.520</span>
+                        <span id="facturaImpuesto">$2000</span>
                     </div>
                     <div class="total-fila">
                         <span>TOTAL:</span>
@@ -104,13 +104,15 @@ if (
         </div>
     </div>
 
-    <!-- Formulario oculto para procesar los datos -->
-    <form id="formFactura" action="../controllers/procesarCompra.php" method="POST" style="display: none;">
+    <div>
+        <form id="formFactura" action="../controllers/procesarCompra.php" method="POST" style="display: none;">
         <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?>">
         <input type="hidden" name="productos_ocultos" id="productos_ocultos" value="">
         <input type="hidden" name="direccion_envio" id="direccion_envio" value="">
         <input type=" hidden" name="total_pedido" id="totalOculto">
     </form>
+    </div>
+    
 </body>
 
 </html>
