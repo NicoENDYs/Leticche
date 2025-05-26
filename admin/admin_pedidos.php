@@ -15,8 +15,10 @@ if (!empty($estadoFiltro)) {
 $where = !empty($condiciones) ? 'WHERE ' . implode(' AND ', $condiciones) : '';
 
 // Consulta con filtros aplicados
-$consulta = "SELECT id, usuario_id, fecha, total, estado FROM pedidos $where ORDER BY id DESC";
+$consulta = "SELECT id, usuario_id, fecha, total, estado, direccion_envio FROM pedidos $where ORDER BY id DESC";
 $traerPedidos = $mysql->efectuarConsulta($consulta);
+
+// Consulta con filtros aplicados
 
 // Contadores globales (sin filtros)
 $traerCantidadPedidos = $mysql->efectuarConsulta("SELECT COUNT(*) AS cantidad_pedidos FROM pedidos");
@@ -300,7 +302,8 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $consulta = "SELECT id, nombre, correo, direccion FROM usuarios WHERE id = '" . $pedido["usuario_id"] . "'";
                         $resultadoUsuarios = $mysql->efectuarConsulta($consulta);
                         $usuario = mysqli_fetch_assoc($resultadoUsuarios);
-                        $direccion = strlen(trim($usuario["direccion"])) > 0 ? $usuario["direccion"] : "Sin Dirección";
+                        $direccion = strlen(trim($pedido["direccion_envio"])) > 0 ? $pedido["direccion_envio"] : "Sin Dirección";
+
 
                         //todos los productos pedidos
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
