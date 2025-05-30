@@ -46,7 +46,7 @@ class Correo
             }
 
             // Remitente
-            $this->mail->setFrom('jadiazosorio1@gmail.com', 'Prueba de correo');
+            $this->mail->setFrom('jadiazosorio1@gmail.com', 'Recuperacion de Contrasena');
             // Destinatario
             $this->mail->addAddress($destinatario);
 
@@ -57,8 +57,7 @@ class Correo
 
             // Enviar el correo
             $this->mail->send();
-            echo 'El mensaje ha sido enviado.';
-            header('refresh:3;url=../views/Login.php');
+            header('Location: ../views/Login.php?mensaje=Correo_enviado');
         } catch (Exception $e) {
             echo "Error al enviar el correo: {$this->mail->ErrorInfo}";
         }
@@ -95,8 +94,8 @@ class Correo
         $enlace = "http://localhost/leticche/controllers/recuperar.php?codigo=" . $codigo . "&correo=" . urlencode($correo);
 
         // Enviar el correo con el enlace de recuperación
-        $asunto = 'Recuperación de Contraseña';
-        $mensaje = "Haz clic en el siguiente enlace para recuperar tu contraseña: <a href='" . $enlace . "'>Recuperar Contraseña</a>";
+        $asunto = 'Recuperacion de Contrasena';
+        $mensaje = "Haz clic en el siguiente enlace para recuperar tu contraseña: <a href='" . $enlace . "'>Recuperar Contrasena</a>";
 
         // Llamar a la función de enviarCorreo
         $this->enviarCorreo($correo, $asunto, $mensaje);

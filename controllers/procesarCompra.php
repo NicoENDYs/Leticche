@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Sanitizar y validar dirección (solo letras, números, espacios y ciertos símbolos)
         $direccion = trim($_POST['direccion_envio']);
         if (!preg_match('/^[\p{L}\d\s\-,.#]+$/u', $direccion)) {
-            die("Dirección de envío no válida");
+            header("Location: ../views/carrito.php?error=Dirección no valida");
+            exit;
         }
 
         if (empty($idUsuario) || empty($totalPedido) || empty(($productos)) || empty(($direccion))) {
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $mysql->desconectar();
-        header("Location: ../index.php");
+        header("refresh:2; url= ../index.php");
         exit();
     } else {
         header("Location: ../views/carrito.php?error=102");

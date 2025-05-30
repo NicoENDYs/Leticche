@@ -37,22 +37,140 @@ if (isset($_GET['codigo']) && isset($_GET['correo'])) {
                 $stmt->execute();
 
                 // Mostrar un mensaje de éxito y evitar que se muestre el formulario nuevamente
-                header('refresh:3;url=../views/Login.php');
-                echo 'Contraseña cambiada con éxito.';
+                echo '
+            <html>
+            <head>
+                <style>
+                    .loader-container {
+                        position: fixed;    
+                        top: 0;
+                        left: 0;
+                        width: 100vw;   
+                        height: 100vh;        
+                        display: flex;   
+                        justify-content: center; 
+                        align-items: center;     
+                        background: rgba(255, 255, 255, 0.8); 
+                        z-index: 9999;         
+}
+
+
+                    .loader {
+                        --dim: 3rem;
+                        width: var(--dim);
+                        height: var(--dim);
+                        position: relative;
+                        animation: spin988 2s linear infinite;
+                        }
+
+                    .loader .circle {
+                        --color: #333;
+                        --dim: 1.2rem;
+                        width: var(--dim);
+                        height: var(--dim);
+                        background-color: var(--color);
+                        border-radius: 50%;
+                        position: absolute;
+                        }
+
+                    .loader .circle:nth-child(1) {
+                        top: 0;
+                        left: 0;
+                        }
+
+                    .loader .circle:nth-child(2) {
+                        top: 0;
+                        right: 0;
+                        }
+
+                    .loader .circle:nth-child(3) {
+                        bottom: 0;
+                        left: 0;
+                        }
+
+                    .loader .circle:nth-child(4) {
+                        bottom: 0;
+                        right: 0;
+                        }
+            
+                    @keyframes spin988 {
+                        0% {
+                            transform: scale(1) rotate(0);
+                        }
+
+                        20%, 25% {
+                            transform: scale(1.3) rotate(90deg);
+                        }
+
+                        45%, 50% {
+                            transform: scale(1) rotate(180deg);
+                        }
+
+                        70%, 75% {
+                            transform: scale(1.3) rotate(270deg);
+                        }
+
+                        95%, 100% {
+                            transform: scale(1) rotate(360deg);
+                        }
+                        }
+                </style>
+            </head>
+            <body>
+                <div class="loader-container">
+                    <div class="loader">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </body>
+            </html>
+            ';
+                header('refresh:3;url=../views/Login.php?mensaje=Contrasena_cambiada');
             } else {
                 echo 'Por favor, ingrese una nueva contraseña.';
             }
         } else {
             // Mostrar el formulario para cambiar la contraseña
-            echo '<form method="post">
-                    <label for="nueva_contraseña">Nueva Contraseña:</label>
-                    <input type="password" id="nueva_contraseña" name="nueva_contraseña" required>
-                    <button type="submit">Cambiar Contraseña</button>
-                  </form>';
+            echo '
+            <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Envío de Correo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/LoginRegis.css">
+
+</head>
+
+<body>
+    <div class="form-container">
+        <h2 class="text-center mb-3">Formulario de Envío de Correo</h2>
+        <form method="post">
+            <div class="mb-3">
+                <label for="nueva_contraseña" class="form-label">Nueva Contraseña:</label>
+                <input type="password" class="form-control" id="nueva_contraseña" name="nueva_contraseña" required>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-primary w-100">Cambiar Contraseña</button>
+        </form>
+    </div>
+</body>
+
+</html>
+        ';
         }
     } else {
+        
         // Si el código o el correo no existen, mostrar un mensaje de error
-        echo 'El código de recuperación no existe o ha expirado.';
+        header('refresh:3;url=../views/Login.php?mensaje=Codigo_invalido');
     }
 }
 

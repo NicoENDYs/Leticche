@@ -169,8 +169,8 @@
                                 </a>
                             </div>
                         </div>
-
-                        <!-- Segunda tarjeta -->
+<!-- 
+                        
                         <div class="col-lg-6 col-md-6 mb-4">
                             <div class="menu-option">
                                 <i class="fas fa-users"></i>
@@ -182,7 +182,6 @@
                             </div>
                         </div>
 
-                        <!-- Tercera tarjeta -->
                         <div class="col-lg-6 col-md-6 mb-4">
                             <div class="menu-option">
                                 <i class="fas fa-chart-line"></i>
@@ -192,7 +191,8 @@
                                     <button type="button" class="btn btn-menu w-100 text-light">Acceder</button>
                                 </a>
                             </div>
-                        </div>
+                        </div> 
+-->
                     </div>
                 </div>
             </div>

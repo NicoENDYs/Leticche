@@ -18,7 +18,23 @@
                 Inicie Sesión para Añadir Productos
             </div>
         <?php endif; ?>
-
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'Correo_enviado'): ?>
+            <div class="alert alert-success mt-3" role="alert">
+                Correo enviado con éxito. <br>
+                Revise su bandeja de entrada o carpeta de spam para restablecer su contraseña.
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'Contrasena_cambiada'): ?>
+            <div class="alert alert-success mt-3" role="alert">
+                Contraseña cambiada con éxito. <br>
+                Ahora puede iniciar sesión con su nueva contraseña.
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'Codigo_invalido'): ?>
+            <div class="alert alert-warning mt-3" role="alert">
+                expiro el tiempo de espera del codigo o el codigo es invalido, por favor solicite un nuevo codigo   
+            </div>
+        <?php endif; ?>
         <?php if (isset($_GET['info']) && $_GET['info'] == '111'): ?>
             <div class="alert alert-success mt-3" role="alert">
                 Usuario creado con Exito. <br>

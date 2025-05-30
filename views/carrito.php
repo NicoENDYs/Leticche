@@ -31,7 +31,7 @@ if (
         <div id="contenedor-carrito">
             <!-- Aquí se cargarán dinámicamente los productos del carrito -->
         </div>
-
+        
         <div class="carrito-resumen">
             <div class="carrito-total">
                 <span>Total:</span>

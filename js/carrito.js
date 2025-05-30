@@ -5,14 +5,13 @@ let productosOcultos = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     cargarCarrito();
-    document
-        .querySelector(".btn-comprar")
+    document.querySelector(".btn-comprar");
     document
         .querySelector(".btn-seguir-comprando")
         .addEventListener("click", function () {
             window.location.href = "productos.html";
         });
-    localStorage.removeItem("Console")
+    localStorage.removeItem("Console");
 });
 
 function cargarCarrito() {
@@ -49,7 +48,8 @@ function cargarCarrito() {
                 }">${nomenclaturaPrecio(producto.precio)}</p>
                                 <div class="carrito-item-acciones">
                                     <div class="cantidad-control">
-                                        <button class="cantidad-btn btn-disminuir" id="btnDisminuir${producto.id}" onclick='disminuirCantidad(${JSON.stringify(
+                                        <button class="cantidad-btn btn-disminuir" id="btnDisminuir${producto.id
+                }" onclick='disminuirCantidad(${JSON.stringify(
                     producto
                 )})' data-id="${producto.id}">-</button>
                                         <p class="cantidad-numero" id="cantidadProducto${producto.id
@@ -59,7 +59,8 @@ function cargarCarrito() {
                 )})' data-id="${producto.id}">+</button>
                                     </div>
                                     <button class="eliminar-btn" onclick="eliminarProducto(${producto.id
-                })" data-id="${producto.id}">Eliminar</button>
+                })" data-id="${producto.id
+                }">Eliminar</button>
                                 </div>
                             </div>
                             <div class="carrito-item-subtotal" id="idTotalProducto${producto.id
@@ -110,27 +111,27 @@ function disminuirCantidad(producto) {
                 producto.cantidad,
                 producto.precio
             );
-            if(producto.cantidad === 0){
+            if (producto.cantidad === 0) {
                 quitarProducto(producto);
             }
         }
     }
 }
-function quitarProducto(producto){
+function quitarProducto(producto) {
     Swal.fire({
-            icon: "warning",
-            title: "¿Quieres Eliminar El Producto",
-            text: `Pusiste la cantidad del producto en 0, por lo que se eliminara de la lista de productos, ¿estas seguro de eliminar '${producto.nombre}' de la lista?`,
-            showCancelButton: true,
-            confirmButtonText: "Eliminar Producto",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                eliminarProducto(producto.id);
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                aumentarCantidad(producto);
-            }
-        });
+        icon: "warning",
+        title: "¿Quieres Eliminar El Producto",
+        text: `Pusiste la cantidad del producto en 0, por lo que se eliminara de la lista de productos, ¿estas seguro de eliminar '${producto.nombre}' de la lista?`,
+        showCancelButton: true,
+        confirmButtonText: "Eliminar Producto",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarProducto(producto.id);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            aumentarCantidad(producto);
+        }
+    });
 }
 
 function formatearPrecio(idTotalProducto, cantidadProducto, precioProducto) {
@@ -174,50 +175,80 @@ function nomenclaturaPrecio(precio) {
 }
 
 function finalizarCompra() {
-    const direccionCliente = document.getElementById('direccionCliente').value.trim();
-    document.getElementById('direccion_envio').value = direccionCliente;
+    const direccionCliente = document
+        .getElementById("direccionCliente")
+        .value.trim();
+    document.getElementById("direccion_envio").value = direccionCliente;
 
     if (!direccionCliente) {
         Swal.fire({
             title: "Falta un campo!",
             text: "Llena el campo de dirección",
-            icon: "error"
+            icon: "error",
         });
         return;
     }
+
+    // Validación para dirección con al menos 5 caracteres
+    if (direccionCliente.length < 5) {
+        Swal.fire({
+            title: "Dirección no válida!",
+            text: "La dirección debe tener al menos 5 caracteres",
+            icon: "error",
+        });
+        return;
+    }
+    // Validación para caracteres no permitidos
+    else if (!/^[a-zA-ZÀ-ÿ0-9\s\-,.#°ª]+$/.test(direccionCliente)) {
+        Swal.fire({
+            title: "Dirección no válida!",
+            text: "La dirección contiene caracteres no permitidos",
+            icon: "error",
+        });
+        return;
+    }    
+    // Solo si pasa todas las validaciones
+    Swal.fire({
+        title: "¡Pedido exitoso!",
+        text: "Tu pedido ha sido procesado correctamente",
+        icon: "success",
+    });
     localStorage.clear();
     document.querySelector("#formFactura").submit();
 }
 
 // Función para formatear números como moneda
 function formatoPrecio(value) {
-    return '$' + new Intl.NumberFormat('es-CO').format(value);
+    return "$" + new Intl.NumberFormat("es-CO").format(value);
 }
 
 // Función para cargar los productos en la factura
 function cargarProductosFactura() {
     let productosCarrito = Object.values(localStorage);
     let facturaCarrito = [];
-    productosCarrito.forEach(productoJson => {
+    productosCarrito.forEach((productoJson) => {
         let producto = JSON.parse(productoJson);
         facturaCarrito.push(producto);
-    })
-    const facturaItems = document.getElementById('facturaItems');
-    facturaItems.innerHTML = '';
+    });
+    const facturaItems = document.getElementById("facturaItems");
+    facturaItems.innerHTML = "";
 
     let subtotal = 0;
 
-    productosCarrito.forEach(producto => {
+    productosCarrito.forEach((producto) => {
         producto = JSON.parse(producto);
-        const tr = document.createElement('tr');
+        const tr = document.createElement("tr");
         if (producto.cantidad > 0) {
             productosOcultos.push(producto);
             tr.innerHTML = `
-                    <td><img src="../img/${producto.imagen}" alt="${producto.nombre}" class="producto-imagen"></td>
+                    <td><img src="../img/${producto.imagen}" alt="${producto.nombre
+                }" class="producto-imagen"></td>
                     <td class="producto-nombre">${producto.nombre}</td>
                     <td class="cantidad">${producto.cantidad}</td>
                     <td class="precio">${formatoPrecio(producto.precio)}</td>
-                    <td class="subtotal">${formatoPrecio(producto.precio * producto.cantidad)}</td>
+                    <td class="subtotal">${formatoPrecio(
+                    producto.precio * producto.cantidad
+                )}</td>
                 `;
             facturaItems.appendChild(tr);
             subtotal += producto.precio * producto.cantidad;
@@ -226,48 +257,53 @@ function cargarProductosFactura() {
     inputProductosOcultos.value = JSON.stringify(productosOcultos);
     productosOcultos = [];
 
-    const impuesto = subtotal * 0.19;
+    const impuesto = 2000; // Valor fijo del impuesto
     const total = subtotal + impuesto;
 
     totalOculto.value = total;
 
-    document.getElementById('facturaSubtotal').textContent = formatoPrecio(subtotal);
-    document.getElementById('facturaImpuesto').textContent = formatoPrecio(impuesto);
-    document.getElementById('facturaTotal').textContent = formatoPrecio(total);
+    document.getElementById("facturaSubtotal").textContent =
+        formatoPrecio(subtotal);
+    document.getElementById("facturaImpuesto").textContent =
+        formatoPrecio(impuesto);
+    document.getElementById("facturaTotal").textContent = formatoPrecio(total);
 
     // Actualizar fecha actual
     const hoy = new Date();
-    document.getElementById('fechaActual').textContent = hoy.toLocaleDateString('es-CO');
+    document.getElementById("fechaActual").textContent =
+        hoy.toLocaleDateString("es-CO");
 }
 
+document
+    .getElementById("cerrarModalBtn")
+    .addEventListener("click", function () {
+        document.getElementById("modalFactura").style.display = "none";
+    });
 
-document.getElementById('cerrarModalBtn').addEventListener('click', function () {
-    document.getElementById('modalFactura').style.display = 'none';
+document.getElementById("volverBtn").addEventListener("click", function () {
+    document.getElementById("modalFactura").style.display = "none";
 });
 
-document.getElementById('volverBtn').addEventListener('click', function () {
-    document.getElementById('modalFactura').style.display = 'none';
-});
-
-document.getElementById('confirmarBtn').addEventListener('click', function () {
+document.getElementById("confirmarBtn").addEventListener("click", function () {
     finalizarCompra();
 });
 
 // Inicializar
-window.addEventListener('load', function () {
+window.addEventListener("load", function () {
     cargarProductosFactura();
 });
-document.getElementById('verFacturaBtn').addEventListener('click', function (event) {
-    let precio = calcularTotalModal();
-    if (!precio || isNaN(precio) || Number(precio) <= 0) {
-        event.preventDefault(); // Detiene la acción de abrir el modal
-        Swal.fire({
-            icon: "error",
-            title: "No hay productos",
-            text: "Debes agregar productos para continuar con la compra"
-        });
-    }
-    else {
-        document.getElementById('modalFactura').style.display = 'flex';
-    }
-});
+document
+    .getElementById("verFacturaBtn")
+    .addEventListener("click", function (event) {
+        let precio = calcularTotalModal();
+        if (!precio || isNaN(precio) || Number(precio) <= 0) {
+            event.preventDefault(); // Detiene la acción de abrir el modal
+            Swal.fire({
+                icon: "error",
+                title: "No hay productos",
+                text: "Debes agregar productos para continuar con la compra",
+            });
+        } else {
+            document.getElementById("modalFactura").style.display = "flex";
+        }
+    });

@@ -49,7 +49,7 @@
                 $valorCampo = urldecode($matches[2]);
                 $mensaje = "El campo <strong>" . htmlspecialchars($nombreCampo) . "</strong> con valor <strong>" . htmlspecialchars($valorCampo) . "</strong> es inválido.";
             } else {
-                $mensaje = "Error desconocido.";
+    $mensaje = "Error desconocido: " . htmlspecialchars($error);
             }
         ?>
             <div class="alert alert-danger mt-3" role="alert">
@@ -62,15 +62,17 @@
         <form action="../controllers/procesarRegistro.php" method="POST">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre completo</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <input type="text" class="form-control" id="nombre" name="nombre"
+                value="<?php echo htmlspecialchars($_GET['nombre'] ?? ''); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="correo" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" name="correo" required>
+                <input type="email" class="form-control" id="correo" name="correo" 
+                value="<?php echo htmlspecialchars($_GET['correo'] ?? ''); ?>"required>
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                <input type="tel" class="form-control" id="telefono" name="telefono"
+                value="<?php echo htmlspecialchars($_GET['telefono'] ?? ''); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="contrasena" class="form-label">Contraseña</label>

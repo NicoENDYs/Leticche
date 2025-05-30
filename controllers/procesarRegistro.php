@@ -21,17 +21,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $contrasena = trim($_POST['contrasena']);
         $confirmar_contrasena = trim($_POST['confirmar_contrasena']);
 
+        $datos_url = http_build_query([
+            'nombre' => $nombre,
+            'correo' => $correo,
+            'telefono' => $telefono
+        ]);
+
+        // Validación de campos vacíos
         if (empty($nombre) || empty($correo) ||
             empty($telefono) || empty($contrasena) ||
             empty($confirmar_contrasena)) {
-            echo "Por favor, complete todos los campos.";
-            exit;
+            
+            $errorCode = "100_campos_vacios";
+            header("Location: ../views/Registro.php?error=$errorCode&$datos_url");
+            exit();
         }
 
-        function validar($nombreCampo, $valorCampo, $validar){
+         // Función de validación mejorada (recibe $datos_url como parámetro)
+        function validar($nombreCampo, $valorCampo, $validar, $datos_url){
             if($validar === "invalido"){
                 $errorCode = "120_" . urlencode($nombreCampo) . "_" . urlencode($valorCampo);
-                header("Location: ../views/Registro.php?error=$errorCode");
+                header("Location: ../views/Registro.php?error=$errorCode&$datos_url");
                 exit();
             }
         }
@@ -41,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $patronValidoTelefono = '/^\d{10}$/'; //permite los numeros del 0 al 9 con un limite de 10 digitos
 
         //validaciones
-        $nombre = preg_match($patronValidoTexto, $nombre) ? $nombre : validar("nombre", $nombre, "invalido");
-        $correo = filter_var($correo, FILTER_VALIDATE_EMAIL) ? $correo : validar("correo", $correo, "invalido");
-        $telefono = preg_match($patronValidoTelefono, $telefono) ? $telefono : validar("telefono", $telefono, "invalido");
+        $nombre = preg_match($patronValidoTexto, $nombre) ? $nombre : validar("nombre", $nombre, "invalido", $datos_url);
+        $correo = filter_var($correo, FILTER_VALIDATE_EMAIL) ? $correo : validar("correo", $correo, "invalido", $datos_url);
+        $telefono = preg_match($patronValidoTelefono, $telefono) ? $telefono : validar("telefono", $telefono, "invalido", $datos_url);
         $contrasena = $_POST['contrasena'];
         $confirmar_contrasena = $_POST['confirmar_contrasena'];
 
         if ($contrasena !== $confirmar_contrasena) {
-            header("Location: ../views/Registro.php?error=99");
+            header("Location: ../views/Registro.php?error=99&$datos_url");
             exit();
         } else {
             $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
@@ -59,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
 
         if ($resultado && $resultado->num_rows > 0) {
-            header("Location: ../views/Registro.php?error=100");
+            header("Location: ../views/Registro.php?error=100&$datos_url");
             exit();
         }
         //////////////////////////////////VALIDACION CORREO NO SE REPITA/////////////////////////////////////////////////
@@ -69,11 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
         $resultado = $mysql->efectuarConsulta($consulta_verificacion);
 
         if ($resultado && $resultado->num_rows > 0) {
-            header("Location: ../views/Registro.php?error=101");
+            header("Location: ../views/Registro.php?error=101&$datos_url");
             exit();
         }
-        //////////////////////////////////VALIDACION telefono NO SE REPITA/////////////////////////////////////////////////    
-        
+        //////////////////////////////////VALIDACION telefono NO SE REPITA/////////////////////////////////////////////////
 
 
 
