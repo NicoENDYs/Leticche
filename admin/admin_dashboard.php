@@ -41,10 +41,11 @@ $mysql->desconectar();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
-
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../styles/adminDashboardProductos.css">
     <title>Admin Dashboard</title>
 </head>
@@ -290,17 +291,17 @@ $mysql->desconectar();
                                         <td class="text-center">
 
                                             <?php if ($usuarios['Estado'] == 'ACTIVO'): ?>
-                                                <a href="../controllers/EliminarUsuario.php?id=<?php echo $usuarios['id']; ?>"
-                                                    class="btn btn-sm btn-outline-danger btn-action"
-                                                    title="Eliminar"
-                                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                                                    <i class="fas fa-user-slash "></i>
+                                                <a href="#"
+                                                    class="btn btn-sm btn-outline-danger btn-action eliminar-usuario"
+                                                    data-id="<?php echo $usuarios['id']; ?>"
+                                                    title="Eliminar">
+                                                    <i class="fas fa-user-slash"></i>
                                                 </a>
                                             <?php else: ?>
-                                                <a href="../controllers/ActivarUsuario.php?id=<?php echo $usuarios['id']; ?>"
-                                                    class="btn btn-sm btn-outline-success btn-action"
-                                                    title="Activar"
-                                                    onclick="return confirm('¿Estás seguro de que deseas Activar este usuario?');">
+                                                <a href="#"
+                                                    class="btn btn-sm btn-outline-success btn-action activar-usuario"
+                                                    data-id="<?php echo $usuarios['id']; ?>"
+                                                    title="Activar">
                                                     <i class="fas fa-user"></i>
                                                 </a>
                                             <?php endif; ?>
@@ -329,5 +330,51 @@ $mysql->desconectar();
     <!-- CountUp.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
     <!-- Custom JS -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Eliminar usuario
+        document.querySelectorAll('.eliminar-usuario').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡Este usuario será eliminado!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `../controllers/EliminarUsuario.php?id=${userId}`;
+                    }
+                });
+            });
+        });
 
+        // Activar usuario
+        document.querySelectorAll('.activar-usuario').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const userId = this.getAttribute('data-id');
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Este usuario será activado.",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Sí, activar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `../controllers/ActivarUsuario.php?id=${userId}`;
+                    }
+                });
+            });
+        });
+    });
+</script>
 </html>
