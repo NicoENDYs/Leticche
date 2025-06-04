@@ -19,9 +19,24 @@ else {
 
 // obtenemos el producto en formato de objeto
 function almacenarProductoStorage(producto) {
+  let stock = parseInt(document.getElementById(`stock${producto.id}`).textContent);
   //si el producto ya existe en el localStorage, obtenemos su cantidad y la aumentamos
   let productoAlmacenado = localStorage.getItem(producto.id);
   let cantidadProducto = document.getElementById(`cantidad-en-carrito${producto.id}`);
+  let obtenerCantidad = parseInt(cantidadProducto.textContent);
+  if (obtenerCantidad == stock) {
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Stock limitado alcanzado',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+    console.log("No se puede agregar más productos, el stock es limitado.");
+    return;
+  }
   if (productoAlmacenado) {
     let existente = JSON.parse(productoAlmacenado);
     producto.cantidad = existente.cantidad + 1;

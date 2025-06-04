@@ -36,26 +36,7 @@
             </div>
         <?php endif; ?>
 
-        <?php
-        if (isset($_GET['error'])) {
-            $error = $_GET['error'];
-            $mensaje = '';
-
-            if ($error === '99') {
-                $mensaje = "Las contraseñas no coinciden";
-            } elseif (preg_match('/^120_([^_]+)_(.+)$/', $error, $matches)) {
-                // Extraemos nombreCampo y valorCampo del error
-                $nombreCampo = urldecode($matches[1]);
-                $valorCampo = urldecode($matches[2]);
-                $mensaje = "El campo <strong>" . htmlspecialchars($nombreCampo) . "</strong> con valor <strong>" . htmlspecialchars($valorCampo) . "</strong> es inválido.";
-            } else {
-    $mensaje = "Error desconocido: " . htmlspecialchars($error);
-            }
-        ?>
-            <div class="alert alert-danger mt-3" role="alert">
-                <?= $mensaje ?>
-            </div>
-        <?php } ?>
+        
 
 
         <h2 class="text-center mb-3">Registro</h2>

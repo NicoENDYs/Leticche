@@ -189,7 +189,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
 
             <!-- Estadisticas -->
             <div class="row">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <div class="stat-card users animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -202,7 +202,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <div class="stat-card active animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -215,7 +215,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-3">
                     <div class="stat-card inactive animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -228,7 +228,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3">
                     <div class="stat-card users animate-card">
                         <div class="d-flex align-items-center">
                             <div class="icon">
@@ -240,8 +240,9 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
+
 
             <!-- Filtros -->
             <div class="data-card mb-4">
@@ -259,7 +260,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                         <?= ($estadoFiltro === 'procesando') ? 'selected' : '' ?>>Procesando</option>
                                     <option value="entregado" <?= ($estadoFiltro === 'entregado') ? 'selected' : '' ?>>
                                         Completado</option>
-                                    <!-- <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option> -->
+                                    <option value="cancelado" <?= ($estadoFiltro === 'cancelado') ? 'selected' : '' ?>>Cancelado</option>
                                 </select>
                             </div>
                             <!-- Botón Filtrar -->
@@ -272,6 +273,9 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                     </form>
                 </div>
             </div>
+
+
+
 
             <!-- Cards Container -->
             <div id="ordersContainer">
@@ -324,17 +328,22 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                             case "procesando":
                                 $estadoPedido = "badge-info";
                                 break;
+                            case "cancelado":
+                                $estadoPedido = "badge-danger";
+                                break;
                         }
 
                         $estadoOpciones = [
                             "pendiente" => '<option value="pendiente">Pendiente</option>',
                             "procesando" => '<option value="procesando">Procesando</option>',
-                            "entregado" => '<option value="entregado">Entregado</option>'
+                            "entregado" => '<option value="entregado">Entregado</option>',
+                            "cancelado" => '<option value="cancelado">Cancelado</option>'
                         ];
                         ///////////////////////////////Colores//////////////////////////////////////////////
                         //badge-success  ///// ES PARA Entregado (VERDE CLARITO,FONDO GREEN GRISASEO)    ///
                         //badge-pending  ///// ES PARA PENDIENTE (NARANJA CLARITO,FONDO "YELLOW")//      ///
-                        //badge-info       ///// ES PARA PROCESANDO (AZUL CLARITO,FONDO "LIGHTBLUE")     ///
+                        //badge-info       ///// ES PARA PROCESANDO (AZUL CLARITO,FONDO "LIGHTBLUE")  
+                        //badge-danger     ///// ES PARA CANCELADO (ROJO CLARITO,FONDO "LIGHTRED")        ///
                         ////////////////////////////////////////////////////////////////////////////////////
                         echo '
     <!-- Card -->

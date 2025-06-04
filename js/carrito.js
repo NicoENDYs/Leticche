@@ -44,6 +44,10 @@ function cargarCarrito() {
                             <div class="carrito-item-detalles">
                                 <h3 class="carrito-item-nombre">${producto.nombre
                 }</h3>
+                                <label class="carrito-item-stock">Stock:</label>
+                                <p class="carrito-item-descripcion" id="stockProducto${producto.id
+                }">${producto.stock
+                }</p>
                                 <p class="carrito-item-precio" id="precioProducto${producto.id
                 }">${nomenclaturaPrecio(producto.precio)}</p>
                                 <div class="carrito-item-acciones">
@@ -77,10 +81,32 @@ function cargarCarrito() {
 }
 
 function aumentarCantidad(producto) {
+    let stockProducto = document.getElementById(`stockProducto${producto.id}`);
+    let stock = parseInt(stockProducto.textContent);
     let cantidadProducto = document.querySelector(
         `#cantidadProducto${producto.id}`
     );
     let productoAlmacenado = localStorage.getItem(producto.id);
+    if(cantidadProducto.textContent >= stock) {
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    
+    Toast.fire({
+        icon: 'warning',
+        title: 'Stock limitado alcanzado'
+    });
+        console.log("No se puede agregar más productos, el stock es limitado.");
+        return;
+    }
     if (productoAlmacenado) {
         let existente = JSON.parse(productoAlmacenado);
         producto.cantidad = existente.cantidad + 1;
@@ -206,7 +232,7 @@ function finalizarCompra() {
             icon: "error",
         });
         return;
-    }    
+    }
     // Solo si pasa todas las validaciones
     Swal.fire({
         title: "¡Pedido exitoso!",

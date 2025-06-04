@@ -14,7 +14,7 @@ $resultado = $mysql->efectuarConsulta("SELECT id, nombre, descripcion, precio, s
 $mysql->desconectar();
 ?>
 <!DOCTYPE html>
-<html lang="es">
+    <html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -27,8 +27,9 @@ $mysql->desconectar();
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script defer src="./js/productosStorage.js"></script>
 </head>
@@ -97,6 +98,8 @@ $mysql->desconectar();
                             <h3 class="product-title"><?php echo $producto['nombre']; ?></h3>
                             <p class="product-description"><?php echo $producto['descripcion']; ?></p>
                             <div class="product-price">
+                                <label  for="">Stock: </label>
+                            <p class="product-description" id="stock<?php echo $producto['id'] ?>"><?php echo $producto['stock']; ?> </p>
                                 <span class="current-price" data-precio="<?php echo $producto['precio']; ?>"></span>
                             </div>
                             <div class="product-footer">
