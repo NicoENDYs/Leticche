@@ -403,19 +403,24 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                 <form method="POST" action="../controllers/cambiarEstadoPedido.php">
                     <div class="order-actions">
                     <input type="hidden" name="id_pedido" value="' . $pedido["id"] . '">
-                        <select class="form-select" aria-label="Default select example" name="estado_pedido" required>
+                        ';
+                        if ($pedido['estado'] !== "cancelado") {
+                            echo '
+                            <select class="form-select" aria-label="Default select example" name="estado_pedido" required>
                             <option value="" disabled selected>Cambiar Estado</option>';
-                        foreach ($estadoOpciones as $clave => $opcionHtml) {
-                            if ($clave === $pedido['estado']) {
-                                continue; // Salta esta opción
+                            foreach ($estadoOpciones as $clave => $opcionHtml) {
+                                if ($clave === $pedido['estado']) {
+                                    continue; // Salta esta opción
+                                }
+                                echo $opcionHtml;
                             }
-                            echo $opcionHtml;
+                            echo ' </select>
+                                <button class="btn btn-order-action btn-success">
+                                    <i class="fas fa-check"></i>
+                                </button>';
                         }
                         echo '
-                        </select>
-                        <button class="btn btn-order-action btn-success">
-                            <i class="fas fa-check"></i>
-                        </button>
+    
                     </div>
                 </form>
             </div>
