@@ -314,10 +314,7 @@ document.getElementById("confirmarBtn").addEventListener("click", function () {
     finalizarCompra();
 });
 
-// Inicializar
-window.addEventListener("load", function () {
-    cargarProductosFactura();
-});
+
 document
     .getElementById("verFacturaBtn")
     .addEventListener("click", function (event) {
@@ -330,6 +327,7 @@ document
                 text: "Debes agregar productos para continuar con la compra",
             });
         } else {
+            cargarProductosFactura();
             document.getElementById("modalFactura").style.display = "flex";
         }
     });
