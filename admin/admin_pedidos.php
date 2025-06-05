@@ -319,6 +319,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                         $consulta = "SELECT producto_id, cantidad, precio_unitario FROM detalles_pedido WHERE pedido_id = '" . $pedido["id"] . "'";
                         $traerProductos = $mysql->efectuarConsulta($consulta);
 
+                        $pedido["estado"] = empty($pedido["estado"]) ? "pendiente" : $pedido["estado"];
                         switch ($pedido["estado"]) {
                             case "pendiente":
                                 $estadoPedido = "badge-pending";
@@ -340,6 +341,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                             "entregado" => '<option value="entregado">Entregado</option>',
                             "cancelado" => '<option value="cancelado">Cancelado</option>'
                         ];
+                        
                         ///////////////////////////////Colores//////////////////////////////////////////////
                         //badge-success  ///// ES PARA Entregado (VERDE CLARITO,FONDO GREEN GRISASEO)    ///
                         //badge-pending  ///// ES PARA PENDIENTE (NARANJA CLARITO,FONDO "YELLOW")//      ///
