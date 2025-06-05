@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2025 a las 07:13:01
+-- Tiempo de generación: 05-06-2025 a las 08:22:02
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -91,7 +91,18 @@ INSERT INTO `detalles_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `pr
 (34, 89, 1, 4, 10000.00),
 (35, 90, 1, 1, 10000.00),
 (36, 91, 1, 1, 10000.00),
-(37, 94, 1, 2, 10000.00);
+(37, 94, 1, 2, 10000.00),
+(38, 95, 1, 5, 10000.00),
+(39, 96, 2, 2, 12000.00),
+(40, 97, 2, 1, 12000.00),
+(41, 98, 2, 1, 12000.00),
+(42, 99, 3, 2, 3000.00),
+(43, 100, 3, 1, 3000.00),
+(44, 100, 4, 3, 12333.00),
+(45, 100, 2, 1, 12000.00),
+(46, 101, 3, 2, 3000.00),
+(47, 102, 3, 2, 3000.00),
+(48, 103, 2, 1, 12000.00);
 
 --
 -- Disparadores `detalles_pedido`
@@ -115,7 +126,7 @@ CREATE TABLE `pedidos` (
   `fecha` datetime DEFAULT current_timestamp(),
   `total` decimal(10,2) NOT NULL,
   `direccion_envio` varchar(90) DEFAULT NULL,
-  `estado` enum('pendiente','procesando','enviado','entregado') DEFAULT 'pendiente'
+  `estado` enum('pendiente','procesando','enviado','entregado','cancelado') DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -137,13 +148,35 @@ INSERT INTO `pedidos` (`id`, `usuario_id`, `fecha`, `total`, `direccion_envio`, 
 (85, 29, '2025-05-24 23:38:47', 214592.70, NULL, 'pendiente'),
 (86, 29, '2025-05-24 23:47:17', 11900.00, NULL, 'pendiente'),
 (87, 29, '2025-05-24 23:49:47', 11900.00, NULL, 'pendiente'),
-(88, 29, '2025-05-24 23:51:48', 11900.00, NULL, 'pendiente'),
-(89, 29, '2025-05-24 23:54:40', 47600.00, 'perra', 'pendiente'),
-(90, 29, '2025-05-24 23:55:47', 11900.00, 'hlkjf', 'pendiente'),
-(91, 29, '2025-05-24 23:55:55', 11900.00, 'hlkjf', 'pendiente'),
-(92, 29, '2025-05-25 00:00:03', 23800.00, 'no jodan', 'pendiente'),
-(93, 29, '2025-05-25 00:00:45', 23800.00, 'no jodan', 'pendiente'),
-(94, 29, '2025-05-25 00:00:59', 23800.00, 'no jodan', 'pendiente');
+(88, 29, '2025-05-24 23:51:48', 11900.00, NULL, 'procesando'),
+(89, 29, '2025-05-24 23:54:40', 47600.00, 'perra', 'entregado'),
+(90, 29, '2025-05-24 23:55:47', 11900.00, 'hlkjf', 'cancelado'),
+(91, 29, '2025-05-24 23:55:55', 11900.00, 'hlkjf', 'cancelado'),
+(92, 29, '2025-05-25 00:00:03', 23800.00, 'no jodan', 'cancelado'),
+(93, 29, '2025-05-25 00:00:45', 23800.00, 'no jodan', 'cancelado'),
+(94, 29, '2025-05-25 00:00:59', 23800.00, 'no jodan', 'cancelado'),
+(95, 29, '2025-06-05 00:29:24', 52000.00, 'hola #1', 'pendiente'),
+(96, 29, '2025-06-05 00:29:42', 26000.00, 'hola droga', 'pendiente'),
+(97, 29, '2025-06-05 00:30:20', 14000.00, 'hola droga', 'cancelado'),
+(98, 29, '2025-06-05 00:31:00', 14000.00, 'hola droga', 'pendiente'),
+(99, 29, '2025-06-05 00:32:36', 8000.00, 'hola #1', 'cancelado'),
+(100, 29, '2025-06-05 00:35:49', 53999.00, 'hola #1', 'entregado'),
+(101, 29, '2025-06-05 00:58:08', 8000.00, 'hola #1', 'cancelado'),
+(102, 29, '2025-06-05 01:01:02', 8000.00, 'hola 1', 'cancelado'),
+(103, 29, '2025-06-05 01:21:14', 14000.00, 'hola 1', 'pendiente');
+
+--
+-- Disparadores `pedidos`
+--
+DELIMITER $$
+CREATE TRIGGER `retornar_stock_cancelado` BEFORE UPDATE ON `pedidos` FOR EACH ROW BEGIN
+if(new.estado = 'cancelado') THEN
+UPDATE productos JOIN detalles_pedido ON detalles_pedido.producto_id = productos.id
+SET productos.stock = productos.stock + detalles_pedido.cantidad, Estado = 'ACTIVO' WHERE detalles_pedido.pedido_id = old.id;
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -169,8 +202,8 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `fecha_creacion`, `Estado`) VALUES
 (1, 'Chorizo', 'un chorizo de carne de lentejas', 10000.00, 0, 'producto_68040c675dce4.jpg', '2025-04-15 17:03:05', 'INACTIVO'),
 (2, 'Carne de Lentejas', 'un kg de carne de lentejas', 12000.00, 0, 'producto_68040c6f482fb.jpg', '2025-04-15 17:12:03', 'INACTIVO'),
-(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 0, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'INACTIVO'),
-(4, 'Lentejas', 'lentejass', 12333.00, 0, 'producto_6830ffe17f436..jpg', '2025-05-23 18:08:17', 'INACTIVO');
+(3, 'Empanada', 'Empanada cuyo ingrediente principal son lentejas', 3000.00, 4, 'producto_68040c77e32a5.jpg', '2025-04-16 15:45:46', 'ACTIVO'),
+(4, 'Lentejas', 'lentejass', 12333.00, 2, 'producto_6830ffe17f436..jpg', '2025-05-23 18:08:17', 'ACTIVO');
 
 --
 -- Disparadores `productos`
@@ -242,7 +275,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `direccion`, `telefono`, `Carg
 (6, 'Jhonny', 'user@domain.com', '', '1234567898', 'user', '$2y$10$SL2iCOQmVOBJm3SItbFm5OzE2tIGcVFdlo4ERZZqX4PcvtxSgy2B.', 'ACTIVO'),
 (25, 'gaychocho', 'baloncestoentablon@gmail.com', 'la sexta', '3103849526', 'User', '$2y$10$KeOeDlLYgoAvnE/tpsdcB.wWp2d9vjV4Q.eOJvO8bB1RiJvbIsGUa', 'ACTIVO'),
 (28, 'Jhonny', 'jadiaz@iegabo.edu.co', '', '3103561843', 'user', '$2y$10$HRQ1F55ujPNjCaCMYz0Y4.OQSmgpVW1LUjuabuc5a6wAUu1jQolLe', 'ACTIVO'),
-(29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', 'no jodan', '9846164615', 'ADMIN', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
+(29, 'Jhonny dÍAZ', 'jhonnydiaz@gmail.com', 'hola 1', '9846164615', 'ADMIN', '$2y$10$UzJXqrEekj5/XPQoV5bdQOPFDHmpbbUfRnS00ropmTUF8K.P/Xn6q', 'ACTIVO');
 
 --
 -- Índices para tablas volcadas
@@ -291,13 +324,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
