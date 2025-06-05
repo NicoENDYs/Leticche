@@ -50,7 +50,8 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
         rel="stylesheet">
 
     <link rel="stylesheet" href="../styles/pedidos.css">
-
+    <script defer src="../js/adminPedidos.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -400,13 +401,13 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                     </div>
                 
                 <!-- Acciones siempre al final -->
-                <form method="POST" action="../controllers/cambiarEstadoPedido.php">
+                <form id="formularioEstado" method="POST" action="../controllers/cambiarEstadoPedido.php">
                     <div class="order-actions">
                     <input type="hidden" name="id_pedido" value="' . $pedido["id"] . '">
                         ';
                         if ($pedido['estado'] !== "cancelado") {
                             echo '
-                            <select class="form-select" aria-label="Default select example" name="estado_pedido" required>
+                            <select class="form-select" aria-label="Default select example" id="estado_pedido' . $pedido["id"] . '" name="estado_pedido" required>
                             <option value="" disabled selected>Cambiar Estado</option>';
                             foreach ($estadoOpciones as $clave => $opcionHtml) {
                                 if ($clave === $pedido['estado']) {
@@ -415,7 +416,7 @@ $cantidadPedidosCancelados = ($fila = mysqli_fetch_assoc($traerPedidosCancelados
                                 echo $opcionHtml;
                             }
                             echo ' </select>
-                                <button class="btn btn-order-action btn-success">
+                                <button id="btnCambiarEstado" data-id="' . $pedido["id"] . '" class="btn btn-order-action btn-success">
                                     <i class="fas fa-check"></i>
                                 </button>';
                         }
