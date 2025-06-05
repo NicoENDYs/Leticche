@@ -47,6 +47,7 @@
                 value="<?php echo htmlspecialchars($_GET['nombre'] ?? ''); ?>" required>
             </div>
             <div class="mb-3">
+                <label for="correo" class="form-label">Correo</label>
                 <input type="email" class="form-control" id="correo" name="correo" 
                 value="<?php echo htmlspecialchars($_GET['correo'] ?? ''); ?>"required>
             </div>
