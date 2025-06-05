@@ -146,19 +146,23 @@ function disminuirCantidad(producto) {
 function quitarProducto(producto) {
     Swal.fire({
         icon: "warning",
-        title: "¿Quieres Eliminar El Producto",
-        text: `Pusiste la cantidad del producto en 0, por lo que se eliminara de la lista de productos, ¿estas seguro de eliminar '${producto.nombre}' de la lista?`,
+        title: "¿Quieres Eliminar El Producto?",
+        text: `Pusiste la cantidad del producto en 0, por lo que se eliminará de la lista de productos. ¿Estás seguro de eliminar '${producto.nombre}' de la lista?`,
         showCancelButton: true,
         confirmButtonText: "Eliminar Producto",
         cancelButtonText: "Cancelar",
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+        allowClose: true
     }).then((result) => {
         if (result.isConfirmed) {
             eliminarProducto(producto.id);
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
+        } else {
             aumentarCantidad(producto);
         }
     });
 }
+
 
 function formatearPrecio(idTotalProducto, cantidadProducto, precioProducto) {
     let subtotalProducto = document.querySelector(`#${idTotalProducto}`);
