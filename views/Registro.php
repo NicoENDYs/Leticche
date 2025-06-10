@@ -29,6 +29,11 @@
                 El telefono ya esta registrado por otro usuario
             </div>
         <?php endif; ?>
+        <?php if (isset($_GET['error']) && $_GET['error'] == '120_telefono_invalido'): ?>
+            <div class="alert alert-danger mt-3" role="alert">
+                El telefono no es valido (10 digitos)
+            </div>
+        <?php endif; ?>
 
         <?php if (isset($_GET['error']) && $_GET['error'] == '102'): ?>
             <div class="alert alert-danger mt-3" role="alert">

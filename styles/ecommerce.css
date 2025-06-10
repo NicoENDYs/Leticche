@@ -5,17 +5,17 @@
     /* Lighter shade of Woodland */
     --primary-dark: #2d3f18;
     /* Darker shade of Woodland */
-    --secondary-color: #9A9B9B;
+    --secondary-color: #9a9b9b;
     /* Pewter */
-    --success-color: #CD8E56;
+    --success-color: #cd8e56;
     /* Tussock - for successful actions */
-    --danger-color: #6F411B;
+    --danger-color: #6f411b;
     /* Walnut - for dangerous actions */
-    --warning-color: #CD8E56;
+    --warning-color: #cd8e56;
     /* Tussock - for warnings */
-    --info-color: #9A9B9B;
+    --info-color: #9a9b9b;
     /* Pewter - for info */
-    --light-color: #F5E9D5;
+    --light-color: #f5e9d5;
     /* Albescent White */
     --dark-color: #282317;
     /* Zeus */
@@ -33,7 +33,7 @@
 body {
     background-color: #f5f4ef !important;
     /* Albescent White */
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #495057;
     overflow-x: hidden;
     transition: all var(--transition-speed) ease;
@@ -61,7 +61,9 @@ body {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(248, 249, 250, 0.95) 100%);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     position: sticky;
@@ -87,8 +89,8 @@ body {
 }
 
 .navbar .brand img {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 10%;
     transition: all var(--transition-speed) ease;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
@@ -103,7 +105,6 @@ body {
     line-height: 1;
     /* ayuda a evitar desalineaciones */
 }
-
 
 .logo:hover {
     transform: scale(1.05);
@@ -145,7 +146,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .cart-count {
@@ -183,7 +183,7 @@ body {
 }
 
 .category-title::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -221,8 +221,6 @@ body {
     margin-left: 0;
 }
 
-
-
 .product-card:hover {
     transform: translateY(-5px) translateX(0);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -238,10 +236,10 @@ body {
 }
 
 .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-image img {
@@ -261,6 +259,8 @@ body {
     z-index: 1;
 }
 
+
+/* Modifica el product-info para usar flexbox correctamente */
 .product-info {
     padding: 20px;
     flex-grow: 1;
@@ -280,11 +280,32 @@ body {
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 15px;
-    flex-grow: 1;
+    flex-grow: 1; /* Esto hace que la descripción tome el espacio disponible */
 }
 
-.product-price {
+
+.product-stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;   
     margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+}
+.product-stock label {
+    font-weight: 500;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* AGREGAR ESTA LÍNEA */
+}
+
+/* El precio al final sin margen inferior */
+.product-price {
+    margin-bottom: 0; /* CAMBIAR de 15px a 0 */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -370,7 +391,6 @@ body {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
 }
-
 
 .add-login {
     background-color: var(--primary-color);

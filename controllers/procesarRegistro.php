@@ -37,7 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Enviar'])) {
             exit();
         }
 
-         // Función de validación mejorada (recibe $datos_url como parámetro)
+        if(strlen($telefono) < 10 || strlen($telefono) > 10){
+            $errorCode = "120_telefono_invalido";
+            header("Location: ../views/Registro.php?error=$errorCode&$datos_url");
+            exit();
+        }
+
+        // Función de validación mejorada (recibe $datos_url como parámetro)
         function validar($nombreCampo, $valorCampo, $validar, $datos_url){
             if($validar === "invalido"){
                 $errorCode = "120_" . urlencode($nombreCampo) . "_" . urlencode($valorCampo);
